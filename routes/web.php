@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoicesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,8 @@ Route::middleware([
     //     return view('index');
     // })->name("dashboard.index");     // this is to don't open index page until make register or login and make authentication 
 });
+
+Route::resource("invoices", InvoicesController::class);
 
 // Route::get('/{page}', [AdminController::class, "index"]);
 Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
