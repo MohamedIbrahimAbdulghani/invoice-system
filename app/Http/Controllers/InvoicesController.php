@@ -16,7 +16,6 @@ class InvoicesController extends Controller
     {
         return view("invoices/invoice");
     }
-
     /**
      * Show the form for creating a new resource.
      *
