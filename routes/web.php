@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('/', function () {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified', 
+    'verified',
 ])->group(function () {
 //     Route::get('/dashboard', function () {
 //         return view('dashboard');
@@ -32,13 +33,18 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
-    // Route::get('/index', function () {
-    //     return view('index');
-    // })->name("dashboard.index");     // this is to don't open index page until make register or login and make authentication 
-});
+
 
 Route::resource("invoices", InvoicesController::class);
+Route::resource("section", SectionController::class);
+
+    // Route::get('/index', function () {
+    //     return view('index');
+    // })->name("dashboard.index");     // this is to don't open index page until make register or login and make authentication
+});
+
+
+
 
 // Route::get('/{page}', [AdminController::class, "index"]);
 Route::get('/{page}', 'App\Http\Controllers\AdminController@index');

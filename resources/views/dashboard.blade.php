@@ -5,6 +5,9 @@
 <!-- Maps css -->
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 @endsection
+@section("title")
+    لوحة التحكم - برنامج الفواتير
+@stop
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
@@ -459,5 +462,5 @@
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->
 <script src="{{URL::asset('assets/js/index.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>	
+<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>
 @endsection

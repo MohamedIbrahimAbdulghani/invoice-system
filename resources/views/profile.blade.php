@@ -50,7 +50,7 @@
 										</div>
 										<div class="d-flex justify-content-between mg-b-20">
 											<div>
-												<h5 class="main-profile-name">Petey Cruiser</h5>
+												<h5 class="main-profile-name">{{auth()->user()->name}}</h5>
 												<p class="main-profile-name-text">Web Designer</p>
 											</div>
 										</div>
