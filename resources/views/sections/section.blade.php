@@ -32,18 +32,17 @@
                 <!-- start show message for validation -->
 
                     @if(session()->has("Add"))
-                        <div class="alert alert-success alert-dismissible fade show" style="width: 180px;" role="alert">
-                            <strong style="margin-right: 40px">{{session()->get("Add")}}</strong>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{session()->get("Add")}}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                     @endif
 
-
                     @if(session()->has("Error"))
-                        <div class="alert alert-danger alert-dismissible fade show " style="width: 180px;" role="alert">
-                            <strong style="margin-right: 40px">{{session()->get("Error")}}</strong>
+                        <div class="alert alert-danger alert-dismissible fade show "  role="alert">
+                            <strong>{{session()->get("Error")}}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -104,15 +103,18 @@
 											</tr>
 										</thead>
 										<tbody>
+                                            <?php $counter = 1 ?>
+                                            @foreach($sections as $section)
 											<tr>
-												<td>Tiger Nixon</td>
-												<td>System Architect</td>
-												<td>Edinburgh</td>
+												<td>{{$counter++}}</td>
+												<td>{{$section->section_name}}</td>
+												<td>{{$section->description}}</td>
 												<td>
                                                     <button type="submit" class="btn btn-success">تعديل</button>
                                                     <button type="submit" class="btn btn-danger">حذف</button>
                                                 </td>
 											</tr>
+                                            @endforeach
 										</tbody>
 									</table>
 								</div>
