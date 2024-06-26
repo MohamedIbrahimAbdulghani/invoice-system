@@ -50,6 +50,20 @@ class SectionController extends Controller
             session()->flash("Add", "تم إضافة القسم بنجاح");
             return redirect("/section");
         }
+
+
+        // $validated = $request->validate([
+        //     'section_name' => 'required|unique:sections|max:255',
+        //     'description' => 'required',
+        // ]);
+
+        //     Section::create([
+        //         "section_name" => $request->section_name,
+        //         "description" => $request->description,
+        //         "created_by" => (auth()->user()->name)
+        //     ]);
+        //     session()->flash("Add", "تم إضافة القسم بنجاح");
+        //     return redirect("/section");
     }
 
     /**

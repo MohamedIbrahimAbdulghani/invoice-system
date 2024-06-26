@@ -32,7 +32,7 @@
                 <!-- start show message for validation -->
 
                     @if(session()->has("Add"))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show " role="alert">
                             <strong>{{session()->get("Add")}}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -73,11 +73,11 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">اسم القسم</label>
-                                                    <input type="text" class="form-control" name="section_name" id="section_name" required >
+                                                    <input type="text" class="form-control" name="section_name" id="section_name"  >
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea">ملاحظات</label>
-                                                    <textarea class="form-control" rows="3" name="description" id=""></textarea>
+                                                    <textarea class="form-control" rows="3" name="description"></textarea>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
