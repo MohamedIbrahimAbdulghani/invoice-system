@@ -56,8 +56,8 @@
 						<div class="card mg-b-20">
 							<div class="card-header pb-0">
 
-                                <div class="col-sm-6 col-md-4 col-xl-3">
-										<a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo">إضافة قسم</a>
+                                <div class="col-sm-6 col-md-4 col-xl-3 d-inline">
+										<a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo" >إضافة قسم</a>
 									</div>
 
                                 <!-- Basic modal -->
