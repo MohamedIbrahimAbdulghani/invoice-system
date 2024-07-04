@@ -18296,7 +18296,7 @@ pre {
     font-weight: 700;
     color: #242f48;
     margin-bottom: 3px;
-    font-size: 16px;
+    /* font-size: 16px; */
     color: #fff; }
   .main-header-profile span {
     display: block;

@@ -31,16 +31,18 @@
 
                 <!-- start show message for validation -->
 
-                    @if(session()->has("Add"))
-                        <div class="alert alert-success alert-dismissible fade show " role="alert">
-                            <strong>{{session()->get("Add")}}</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                    <!-- start validation success message -->
+                        @if(session()->has("Add"))
+                            <div class="alert alert-success alert-dismissible fade show " role="alert">
+                                <strong>{{session()->get("Add")}}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                    <!-- end validation success message -->
 
-
+                    <!-- start validation error message -->
                     @if(session()->has("Error"))
                         <div class="alert alert-danger alert-dismissible fade show " role="alert">
                             <strong>{{session()->get("Error")}}</strong>
@@ -49,6 +51,7 @@
                             </button>
                         </div>
                     @endif
+                    <!-- end validation error message -->
 
                 <!-- end show message for validation -->
 
