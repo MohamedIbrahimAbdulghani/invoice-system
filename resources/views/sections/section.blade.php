@@ -29,29 +29,46 @@
 				<!-- row opened -->
 				<div class="row row-sm">
 
+
                 <!-- start show message for validation -->
 
                     <!-- start validation success message -->
-                        @if(session()->has("Add"))
-                            <div class="alert alert-success alert-dismissible fade show " role="alert">
+                        <!-- @if(session()->has("Add"))
+                            <div class="alert alert-success alert-dismissible fade show " style="width:100%" role="alert">
                                 <strong>{{session()->get("Add")}}</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                        @endif
+                        @endif -->
                     <!-- end validation success message -->
 
                     <!-- start validation error message -->
-                    @if(session()->has("Error"))
-                        <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <!-- @if(session()->has("Error"))
+                        <div class="alert alert-danger alert-dismissible fade show " style="width:100%" role="alert">
                             <strong>{{session()->get("Error")}}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    @endif
+                    @endif -->
                     <!-- end validation error message -->
+
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger"style="width:100%">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+
+                            </ul>
+                        </div>
+                    @endif
+
 
                 <!-- end show message for validation -->
 
@@ -132,6 +149,7 @@
 		</div>
 		<!-- main-content closed -->
 @endsection
+
 @section('js')
 <!-- Internal Data tables -->
 <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

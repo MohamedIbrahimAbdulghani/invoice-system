@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidationRequest;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -34,36 +35,48 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidationRequest $request)
     {
-        $input = $request->all();
-        $b_exists = Section::where("section_name", "=", $input["section_name"])->exists();  // للتاكيد اذا كان القسم متسجل قبل كدا ولا لا
-        if($b_exists) {
-            session()->flash("Error", "خطأ القسم مسجل سابقآ");
-            return redirect("/section");
-        } else {
-            Section::create([
-                "section_name" => $request->section_name,
-                "description" => $request->description,
-                "created_by" => (auth()->user()->name)
-            ]);
-            session()->flash("Add", "تم إضافة القسم بنجاح");
-            return redirect("/section");
-        }
+        /***************************************************************************
+         *
+         * this is first type for make a validation
+                $input = $request->all();
+                $b_exists = Section::where("section_name", "=", $input["section_name"])->exists();  // للتاكيد اذا كان القسم متسجل قبل كدا ولا لا
+                if($b_exists) {
+                    session()->flash("Error", "خطأ القسم مسجل سابقآ");
+                    return redirect("/section");
+                } else {
+                    Section::create([
+                        "section_name" => $request->section_name,
+                        "description" => $request->description,
+                        "created_by" => (auth()->user()->name)
+                    ]);
+                    session()->flash("Add", "تم إضافة القسم بنجاح");
+                    return redirect("/section");
+                }
+
+        ***************************************************************************/
 
 
-        // $validated = $request->validate([
+        // this is second type for make a validation
+
+        // $validation = $request->validate([
         //     'section_name' => 'required|unique:sections|max:255',
         //     'description' => 'required',
+        // ] ,[
+        //     'section_name.required'=>'يرجي ادخال اسم القسم',
+        //     'section_name.unique'=>' اسم القسم مسجل مسبقا ',
+        //     'description.required'=>'يرجي ادخال الملاحظات ',
         // ]);
 
-        //     Section::create([
-        //         "section_name" => $request->section_name,
-        //         "description" => $request->description,
-        //         "created_by" => (auth()->user()->name)
-        //     ]);
-        //     session()->flash("Add", "تم إضافة القسم بنجاح");
-        //     return redirect("/section");
+        $validated = $request->validated();
+        Section::create([
+            "section_name" => $request->section_name,
+            "description" => $request->description,
+            "created_by" => (auth()->user()->name)
+        ]);
+        session()->flash("Add", "تم إضافة القسم بنجاح");
+        return redirect("/section");
     }
 
     /**
