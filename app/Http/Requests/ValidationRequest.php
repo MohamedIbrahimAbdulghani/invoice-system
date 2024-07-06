@@ -24,7 +24,8 @@ class ValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'section_name' => 'required|unique:sections|max:255',
+            'section_name' => 'required|max:255',
+            'section_name' => 'unique:sections',
             'description' => 'required',
         ];
     }

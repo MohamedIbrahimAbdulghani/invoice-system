@@ -108,9 +108,15 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request)
     {
-        //
+        $section = Section::findOrFail($request->id);
+        $section->update([
+            "section_name" => $request->section_name,
+            "description" => $request->description
+        ]);
+        session()->flash("Edit", "تم تعديل القسم بنجاح");
+        return redirect("/section");
     }
 
     /**
@@ -119,8 +125,11 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy(Request $request)
     {
-        //
+        $section = Section::findOrFail($request->id);
+        $section->delete();
+        session()->flash("Delete", "تم حذف القسم بنجاح");
+        return redirect("/section");
     }
 }
