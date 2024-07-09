@@ -15,8 +15,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Section::all();
-        return view("products/product", compact("products"));
+        $sections = Section::all();
+        $products = Products::all();
+        return view("products/product", compact("sections", "products"));
     }
 
     /**
@@ -37,7 +38,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Products::create([
+            "product_name" => $request->product_name,
+            "description" => $request->description,
+            "section_id" => $request->section_id,
+        ]);
+        return redirect("/products");
     }
 
     /**
@@ -48,7 +54,7 @@ class ProductsController extends Controller
      */
     public function show(Products $products)
     {
-        //
+        
     }
 
     /**

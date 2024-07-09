@@ -45,14 +45,14 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">اسم المنتج</label>
-                                                    <input type="text" class="form-control" name="section_name" id="section_name"  >
+                                                    <input type="text" class="form-control" name="product_name" id="product_name"  >
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">اسم القسم</label>
-                                                    <select name="section_name" class="form-control">
+                                                    <select name="section_id" id="section_id" class="form-control">
                                                     <option value="" selected disabled>__ حدد القسم __</option>
-                                                        @foreach($products as $product)
-                                                        <option value="{{$product->id}}">{{$product->section_name}}</option>
+                                                        @foreach($sections as $section)
+                                                        <option value="{{$section->id}}">{{$section->section_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -89,13 +89,20 @@
 											</tr>
 										</thead>
 										<tbody>
+                                            <?php $counter = 1 ?>
+                                        @foreach($products as $product)
 											<tr>
-												<td>Tiger Nixon</td>
-												<td>System Architect</td>
-												<td>Edinburgh</td>
-												<td>61</td>
-												<td>2011/04/25</td>
+                                                <td>{{$counter++}}</td>
+												<td>{{$product->product_name}}</td>
+												<td>{{$product->section_name}}</td>
+												<td>{{$product->description}}</td>
+												<td>
+                                                    <a href="#EditModal" class="model-effect btn btn-sm btn-info" data-effect="effect-scale" data-id="{{ $product->id }}" data-product_name="{{ $product->product_name }}" data-description="{{ $product->description }}" data-toggle="modal" title="تعديل"><i class="las la-pen"></i></a>
+
+                                                    <a href="#DeleteModal" class="model-effect btn btn-sm btn-danger" data-effect="effect-scale" data-id="{{ $product->id }}" data-product_name="{{ $product->product_name }}" data-description="{{ $product->description }}" data-toggle="modal" title="حذف"><i class="las la-trash"></i></a>
+                                                </td>
 											</tr>
+                                            @endforeach
 										</tbody>
 									</table>
 								</div>
@@ -103,6 +110,69 @@
 						</div>
 					</div>
 					<!--/div-->
+
+
+                    
+                        <!-- edit -->
+                        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">تعديل القسم</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="products/update" method="post" autocomplete="off">
+                                            {{method_field('patch')}}
+                                            {{csrf_field()}}
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" id="id">
+                                                <label for="recipient-name" class="col-form-label">اسم المنتج:</label>
+                                                <input class="form-control" name="product_name"  id="product_name" type="text" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">ملاحظات:</label>
+                                                <textarea class="form-control" id="description" name="description"></textarea>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">تاكيد</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- delete -->
+                    <div class="modal" id="DeleteModal">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content modal-content-demo">
+                                <div class="modal-header">
+                                    <h6 class="modal-title">حذف المنتج</h6>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <form action="products/destroy" method="post">
+                                    {{method_field('delete')}}
+                                    {{csrf_field()}}
+                                    <div class="modal-body">
+                                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                                        <input type="hidden" name="id" id="id" value="">
+                                        <input class="form-control" name="product_name" id="product_name" type="text" readonly>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
 
 
 				</div>
@@ -135,6 +205,33 @@
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 <!-- Internal Modal js-->
 <script src="{{URL::asset('assets/js/modal.js')}}"></script>
+<!-- this is script by javascript to get old data in input -->
+<script>
+    $("#EditModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data("id")
+        var product_name = button.data("product_name")
+        var description = button.data("description")
+        var modal = $(this)
 
+        modal.find(".modal-body #id").val(id)
+        modal.find(".modal-body #product_name").val(product_name)
+        modal.find(".modal-body #description").val(description)
+    });
+</script>
+
+
+<!-- this is script by javascript to delete data -->
+<script>
+    $("#DeleteModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data("id")
+        var product_name = button.data("product_name")
+        var modal = $(this)
+
+        modal.find(".modal-body #id").val(id)
+        modal.find(".modal-body #product_name").val(product_name)
+    });
+</script>
 
 @endsection
