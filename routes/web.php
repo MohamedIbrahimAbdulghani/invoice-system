@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,8 @@ Route::middleware([
 
 
 Route::resource("invoices", InvoicesController::class);
-Route::resource("section", SectionController::class);
+Route::resource("sections", SectionController::class);
+Route::resource("products", ProductsController::class);
 
     // Route::get('/index', function () {
     //     return view('index');
