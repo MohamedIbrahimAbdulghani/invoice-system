@@ -45,7 +45,7 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">اسم المنتج</label>
-                                                    <input type="text" class="form-control" name="product_name" id="product_name"  >
+                                                    <input type="text" class="form-control" name="product_name" id="product_name" autocomplete="off" >
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">اسم القسم</label>
@@ -94,7 +94,7 @@
 											<tr>
                                                 <td>{{$counter++}}</td>
 												<td>{{$product->product_name}}</td>
-												<td>{{$product->section_name}}</td>
+												<td>{{$product->section->section_name}}</td>
 												<td>{{$product->description}}</td>
 												<td>
                                                     <a href="#EditModal" class="model-effect btn btn-sm btn-info" data-effect="effect-scale" data-id="{{ $product->id }}" data-product_name="{{ $product->product_name }}" data-description="{{ $product->description }}" data-toggle="modal" title="تعديل"><i class="las la-pen"></i></a>
