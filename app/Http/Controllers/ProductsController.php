@@ -43,7 +43,8 @@ class ProductsController extends Controller
             "description" => $request->description,
             "section_id" => $request->section_id,
         ]);
-        return redirect("/products");
+        session()->flash("Add", "تم إضافة المنتج بنجاح");
+        return back();
     }
 
     /**
@@ -75,9 +76,15 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request)
     {
-        //
+        $product = Products::findOrFail($request->id);
+        $product->update([
+            "product_name" => $request->product_name,
+            "description" => $request->description,
+        ]);
+        session()->flash("Edit", "تم تعديل المنتج بنجاح");
+        return back();
     }
 
     /**
@@ -86,8 +93,11 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Request $request)
     {
-        //
+        $product = Products::findOrFail($request->id);
+        $product->delete();
+        session()->flash("Delete", "تم حذف المنتج بنجاح");
+        return back();
     }
 }
