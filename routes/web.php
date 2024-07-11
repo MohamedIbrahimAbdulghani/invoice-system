@@ -34,6 +34,7 @@ Route::middleware([
 
 
 Route::resource("invoices", InvoicesController::class);
+Route::get("section/{id}", [InvoicesController::class, "getProductById"]);   // this route to get id Product
 Route::resource("sections", SectionController::class);
 Route::resource("products", ProductsController::class);
 

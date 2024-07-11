@@ -55,7 +55,7 @@ class ProductsController extends Controller
      */
     public function show(Products $products)
     {
-        
+
     }
 
     /**

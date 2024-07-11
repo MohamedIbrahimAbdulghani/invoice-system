@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoices;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InvoicesController extends Controller
 {
@@ -82,5 +83,9 @@ class InvoicesController extends Controller
     public function destroy(Invoices $invoices)
     {
         //
+    }
+    public function getProductById($id) {
+        $products = DB::table("products")->where("section_id", $id)->pluck("id", "product_name");
+        return json_encode($products);
     }
 }
