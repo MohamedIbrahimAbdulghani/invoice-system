@@ -31,7 +31,7 @@
                                 <div class="d-flex justify-content-between">
                                     <button class="modal-effect btn btn-primary " data-effect="effect-scale" data-toggle="modal" href="#modaldemo" > <a><i class="fas fa-plus" >إضافة منتج</i></a></button>
 
-                                    
+
 
                                     <!-- start validation -->
 
@@ -104,7 +104,7 @@
                                 <!-- End Basic modal -->
 
 
-                                
+
                                 </div>
 
 							</div>
@@ -145,7 +145,7 @@
 					<!--/div-->
 
 
-                    
+
                         <!-- edit -->
                         <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -158,7 +158,7 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <form action="{{route('products.update', $product->id)}}" method="POST">
+                                        <form action="{{route('products.update', $section->id)}}" method="POST">
                                             {{method_field('patch')}}
                                             {{csrf_field()}}
                                             <div class="form-group">
@@ -196,7 +196,7 @@
                                     <h6 class="modal-title">حذف المنتج</h6>
                                     <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                                 </div>
-                                <form action="{{{route('products.destroy', $product->id)}}}" method="post">
+                                <form action="{{{route('products.destroy', $section->id)}}}" method="post">
                                     {{method_field('delete')}}
                                     {{csrf_field()}}
                                     <div class="modal-body">
