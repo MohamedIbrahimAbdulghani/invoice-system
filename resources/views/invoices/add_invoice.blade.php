@@ -65,7 +65,7 @@
                             <div class="col">
                                 <label>تاريخ الاستحقاق</label>
                                 <input class="form-control fc-datepicker" name="Due_date" placeholder="YYYY-MM-DD"
-                                    type="text" required>
+                                    type="text"  required >
                             </div>
 
                         </div>
@@ -212,6 +212,8 @@
 
     </script>
 
+
+        <!-- this js code to get product from section id -->
     <script>
         $(document).ready(function() {
             $('select[name="Section"]').on('change', function() {
@@ -239,6 +241,8 @@
 
     </script>
 
+
+        <!-- this js code to calc amount discount and value -->
 
     <script>
         function myFunction() {

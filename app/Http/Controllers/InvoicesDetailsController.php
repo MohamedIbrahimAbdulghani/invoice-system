@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoices;
-use App\Models\Section;
+use App\Models\invoices_details;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class InvoicesController extends Controller
+class InvoicesDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,9 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        return view("invoices/invoice");
+        //
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,8 +24,7 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        $sections = Section::all();
-        return view("invoices/add_invoice", compact("sections"));
+        //
     }
 
     /**
@@ -43,10 +41,10 @@ class InvoicesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Invoices  $invoices
+     * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoices $invoices)
+    public function show(invoices_details $invoices_details)
     {
         //
     }
@@ -54,10 +52,10 @@ class InvoicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Invoices  $invoices
+     * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoices $invoices)
+    public function edit(invoices_details $invoices_details)
     {
         //
     }
@@ -66,10 +64,10 @@ class InvoicesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Invoices  $invoices
+     * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoices $invoices)
+    public function update(Request $request, invoices_details $invoices_details)
     {
         //
     }
@@ -77,15 +75,11 @@ class InvoicesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Invoices  $invoices
+     * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoices $invoices)
+    public function destroy(invoices_details $invoices_details)
     {
         //
-    }
-    public function getProductById($id) {
-        $products = DB::table("products")->where("section_id", $id)->pluck("product_name", "id");
-        return json_encode($products);
     }
 }
