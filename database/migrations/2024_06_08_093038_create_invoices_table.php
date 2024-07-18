@@ -14,20 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->bigincrements("id");
+            $table->bigIncrements("id");
             $table->string("invoice_number");
-            $table->date("invoice_Date");
-            $table->date("due_date");  // تاريخ الاستحقاق
+            $table->date("invoice_Date")->nullable();
+            $table->date("due_date")->nullable();  // تاريخ الاستحقاق
             $table->string("product");
-            $table->string("section");
-            $table->string("discount");
-            $table->string("rate_vat"); // نسبة الضريبة
+            $table->foreignId("section_id")->references("id")->on("sections")->cascadeOnDelete();
+            $table->decimal("amount_collection", 8, 2)->nullable();
+            $table->decimal("amount_commission", 8, 2);
+            $table->decimal("discount", 8, 2);
             $table->decimal("value_vat", 8, 2); // قيمة الضريبة
+            $table->string("rate_vat"); // نسبة الضريبة
             $table->decimal("total", 8, 2);
             $table->string("status", 50);
             $table->integer("value_status");
             $table->text("note")->nullable();
-            $table->string("user");
+            $table->date("payment_date")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
