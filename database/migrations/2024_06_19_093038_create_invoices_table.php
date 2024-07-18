@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("invoice_number");
-            $table->date("invoice_Date")->nullable();
+            $table->date("invoice_date")->nullable();
             $table->date("due_date")->nullable();  // تاريخ الاستحقاق
             $table->string("product");
             $table->foreignId("section_id")->references("id")->on("sections")->cascadeOnDelete();
