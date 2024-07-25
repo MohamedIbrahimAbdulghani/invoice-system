@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoices;
 use App\Models\invoices_details;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class InvoicesDetailsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -55,9 +56,10 @@ class InvoicesDetailsController extends Controller
      * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function edit(invoices_details $invoices_details)
+    public function edit($id)
     {
-        //
+        $invoices = Invoices::where("id", $id)->get();
+        return view("invoices/invoice_details", compact("invoices"));
     }
 
     /**

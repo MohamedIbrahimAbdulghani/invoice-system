@@ -19,7 +19,8 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        return view("invoices/invoice");
+        $invoices = Invoices::all();
+        return view("invoices/invoice", compact("invoices"));
     }
     /**
      * Show the form for creating a new resource.
@@ -141,5 +142,9 @@ class InvoicesController extends Controller
     public function getProductById($id) {
         $products = DB::table("products")->where("section_id", $id)->pluck("product_name", "id");
         return json_encode($products);
+    }
+
+    public function invoice_details() {
+        return view("invoices/invoice_details");
     }
 }

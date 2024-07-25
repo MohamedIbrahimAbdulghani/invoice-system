@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
@@ -34,9 +35,11 @@ Route::middleware([
 
 
 Route::resource("invoices", InvoicesController::class);
-Route::get("section/{id}", [InvoicesController::class, "getProductById"]);   // this route to get id Product
 Route::resource("sections", SectionController::class);
+Route::get("section/{id}", [InvoicesController::class, "getProductById"]);   // this route to get id Product
 Route::resource("products", ProductsController::class);
+Route::get("invoice_details/{id}", [InvoicesDetailsController::class, "edit"]);
+
 
     // Route::get('/index', function () {
     //     return view('index');
