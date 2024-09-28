@@ -482,16 +482,16 @@
   }
 }
 
-.nav .nav-item .dropdown-menu {
   .dropdown-item.dropdown-header {
     background: #1b2d8f;
     height: 85px;
     color: $white;
   }
 
+  .nav .nav-item .dropdown-menu {
   top: 46px;
   border-radius: 6px;
-  min-width: 245px;
+  min-width: 295px ;
   -webkit-box-shadow: 0px 0px 15px 1px rgba(69, 65, 78, 0.2);
   box-shadow: 0px 0px 15px 1px rgba(69, 65, 78, 0.2);
 }
