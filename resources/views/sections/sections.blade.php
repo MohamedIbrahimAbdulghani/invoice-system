@@ -78,14 +78,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $counter = 1; ?>
                             @foreach ($sections as $section)
                             <tr>
-                                <td>{{ $section->id }}</td>
+                                <td>{{ $counter++ }}</td>
                                 <td>{{ $section->section_name }}</td>
                                 <td>{{ $section->description }}</td>
                                 <td>
-                                    <button class="btn btn-secondary">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <a href="{{route('sections.edit', $section->id)}}" style="color: white"><button
+                                            class="btn btn-secondary">تعديل</button></a>
+
+                                    <!-- <a href="{{route('sections.destroy', $section->id)}}" style="color: white"><button
+                                            class="btn btn-danger">Delete</button></a> -->
+                                    <button class="btn btn-danger">
+                                        <form action="{{ route('sections.destroy', $section->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            حذف
+                                        </form>
+                                    </button>
+
                                 </td>
                             </tr>
                             @endforeach

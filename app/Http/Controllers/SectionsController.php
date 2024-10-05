@@ -74,7 +74,7 @@ class SectionsController extends Controller
      */
     public function edit(sections $sections)
     {
-        //
+        return "edit function";
     }
 
     /**
@@ -97,6 +97,6 @@ class SectionsController extends Controller
      */
     public function destroy(sections $sections)
     {
-        //
+        return $sections;
     }
 }
