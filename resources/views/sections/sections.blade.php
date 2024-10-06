@@ -30,37 +30,37 @@
 <!-- breadcrumb -->
 @endsection
 @section('content')
+
+<!-- start messages validation -->
+@if(session()->has("Add"))
+<div class="alert alert-success alert-dismissible fade show">
+    <strong>{{ session()->get("Add") }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
+@if(session()->has("Error"))
+<div class="alert alert-danger alert-dismissible fade show">
+    <strong>{{ session()->get("Error") }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
+
+
 <!-- row -->
 <div class="row row-sm">
-
-
-    <!-- start messages validation -->
-    @if(session()->has("Add"))
-    <div class="alert alert-success alert-dismissible fade show">
-        <strong>{{ session()->get("Add") }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-
-    @if(session()->has("Error"))
-    <div class="alert alert-danger alert-dismissible fade show">
-        <strong>{{ session()->get("Error") }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-    <!-- end messages validation -->
-
     <!--div-->
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
                     <button class="modal-effect btn btn btn-primary btn-block " data-effect="effect-scale"
-                        data-toggle="modal" href="#modaldemo8">إضافة
+                        data-toggle="modal" href="#AddSectionModal">إضافة
                         قسم</button>
                 </div>
 
@@ -74,7 +74,6 @@
                                 <th class="border-bottom-0">اسم القسم</th>
                                 <th class="border-bottom-0">الوصف</th>
                                 <th class="border-bottom-0">العمليات</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -85,18 +84,6 @@
                                 <td>{{ $section->section_name }}</td>
                                 <td>{{ $section->description }}</td>
                                 <td>
-                                    <a href="{{route('sections.edit', $section->id)}}" style="color: white"><button
-                                            class="btn btn-secondary">تعديل</button></a>
-
-                                    <!-- <a href="{{route('sections.destroy', $section->id)}}" style="color: white"><button
-                                            class="btn btn-danger">Delete</button></a> -->
-                                    <button class="btn btn-danger">
-                                        <form action="{{ route('sections.destroy', $section->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            حذف
-                                        </form>
-                                    </button>
 
                                 </td>
                             </tr>
@@ -113,7 +100,7 @@
 <!-- row closed -->
 
 <!-- Basic modal -->
-<div class="modal" id="modaldemo8">
+<div class="modal" id="AddSectionModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
@@ -125,11 +112,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>اسم القسم</label>
-                        <input type="text" class="form-control" id="section_name" name="section_name" required>
+                        <input type="text" class="form-control" id="section_name" name="section_name">
                     </div>
                     <div class="form-group">
                         <label>ملاحظات</label>
-                        <textarea class="form-control" name="description" id="description" require></textarea>
+                        <textarea class="form-control" name="description" id="description"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button class="btn ripple btn-success" type="submit" name="add">إضافة</button>
@@ -145,6 +132,21 @@
 <!-- Container closed -->
 </div>
 <!-- main-content closed -->
+<div class="modal-body">
+    <form action="" method="post">
+        {{method_field('patch')}}
+        {{csrf_field()}}
+        <div class="form-group">
+            <input type="hidden" name="cases_id" id="cases_id" value="">
+            <label for="recipient-name" class="col-form-label">:اسم المنتج</label>
+            <input type="text" class="form-control" name="name" id="name">
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">:ملاحظات</label>
+            <textarea class="form-control" name="note" id="note"></textarea>
+        </div>
+</div>
+</form>
 @endsection
 @section('js')
 <!-- Internal Data tables -->

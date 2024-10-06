@@ -37,6 +37,9 @@ class SectionsController extends Controller
      */
     public function store(Request $request)
     {
+        /* **********************   this is first type to make validation  ************
+
+        */
         $input = $request->all();
         $check_section_exist = sections::where("section_name","=",$input["section_name"])->exists();
         if($check_section_exist):
@@ -51,7 +54,7 @@ class SectionsController extends Controller
             session()->flash("Add", "تم إضافة القسم بنجاح");
             return redirect("sections");
         endif;
-
+        
 
     }
 
@@ -74,7 +77,7 @@ class SectionsController extends Controller
      */
     public function edit(sections $sections)
     {
-        return "edit function";
+
     }
 
     /**
@@ -86,7 +89,7 @@ class SectionsController extends Controller
      */
     public function update(Request $request, sections $sections)
     {
-        //
+        
     }
 
     /**
@@ -97,6 +100,6 @@ class SectionsController extends Controller
      */
     public function destroy(sections $sections)
     {
-        return $sections;
+        
     }
 }
