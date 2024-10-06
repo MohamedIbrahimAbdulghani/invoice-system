@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SectionsValidate extends FormRequest
+class AddedSectionValidation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +27,15 @@ class SectionsValidate extends FormRequest
             "section_name"=>"required|unique:sections|max:255",
             "description"=>"required",
         ];
+    
     }
+
+
     public function Messages()
     {
         return [
             "section_name.required"=>"يرجي إدخال اسم القسم ",
-            "section_name.unique"=>"خطأ اسم القسم مسجل من قبل",
+            "section_name.unique"=>" اسم القسم مسجل مسبقآ ",
             "description.required"=>"يرجي إدخال الوصف",
         ];
     }

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SectionsValidate;
+use App\Http\Requests\AddedSectionValidation;
+use App\Http\Requests\UpdatedSectionValidation;
 use App\Models\sections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,47 +37,14 @@ class SectionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SectionsValidate $request)
+    public function store(AddedSectionValidation $request)
     {
-        /* **********************   this is first type to make validation  ************
-
-        $input = $request->all();
-        $check_section_exist = sections::where("section_name","=",$input["section_name"])->exists();
-        if($check_section_exist):
-            session()->flash("Error", "خطأ القسم موجود مسبقآ");
-            return redirect("sections");
-        else:
-            sections::create([
-                "section_name"=>$request->section_name,
-                "description"=>$request->description,
-                "created_by"=>Auth::user()->name
-            ]);
-            session()->flash("Add", "تم إضافة القسم بنجاح");
-            return redirect("sections");
-        endif;
-
-        */
-
-        /* **********************   this is second type to make validation  ************
-
-        $validation = $request->validate([
-            "section_name"=>"required|unique:sections|max:255",
-            "description"=>"required",
-        ],[
-            "section_name.required"=>"يرجي إدخال اسم القسم ",
-            "description.required"=>"يرجي إدخال الوصف",
-        ]);
-
         sections::create([
             "section_name"=>$request->section_name,
             "description"=>$request->description,
             "created_by"=>Auth::user()->name
         ]);
-        session()->flash("Add", "تم إضافة القسم بنجاح");
-        return redirect("sections");
-
-        */
-        $validation = $request->validate();
+        session()->flash('Add','تم إضافة القسم بنجاج');
         return redirect("sections");
     }
 
@@ -109,9 +77,17 @@ class SectionsController extends Controller
      * @param  \App\Models\sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, sections $sections)
+    public function update(UpdatedSectionValidation $request)
     {
-        
+        $id = $request->id;
+        $sections = sections::findOrFail($id);
+        $sections->update([
+            'section_name' => $request->section_name,
+            'description' => $request->description,
+        ]);
+
+        session()->flash('Edit','تم تعديل القسم بنجاج');
+        return redirect('sections');
     }
 
     /**
@@ -120,8 +96,11 @@ class SectionsController extends Controller
      * @param  \App\Models\sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function destroy(sections $sections)
+    public function destroy(Request $request)
     {
-        
+        $id = $request->id;
+        sections::findOrFail($id)->delete();
+        session()->flash('Delete', 'تم حذف المنتج بنجاح');
+        return redirect("sections");
     }
 }
