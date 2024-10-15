@@ -176,12 +176,6 @@
                 <form action="{{ route('sections.update', $section->id) }}" method="post" autocomplete="off">
                     @csrf
                     @method('PUT')
-                    <!-- <div class="form-group">
-                        <input type="hidden" name="id" id="id" value="{{$section->id}}">
-                        <label for="recipient-name" class="col-form-label">اسم القسم:</label>
-                        <input class="form-control" name="section_name" id="section_name" type="text"
-                            value="{{$section->section_name}}">
-                    </div> -->
                     <div class="form-group">
                         <input type="hidden" name="id" id="id" value="{{$section->id}}">
                         <label for="recipient-name" class="col-form-label">اسم القسم:</label>
