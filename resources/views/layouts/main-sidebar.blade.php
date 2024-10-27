@@ -114,7 +114,7 @@
                         class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ url('/' . $page='sections') }}">إضافة قسم</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . $page='editprofile') }}">إضافة منتج</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='products') }}">إضافة منتج</a></li>
                 </ul>
             </li>
         </ul>
