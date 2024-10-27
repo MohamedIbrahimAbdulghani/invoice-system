@@ -80,8 +80,8 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <button class="modal-effect btn btn btn-primary btn-block " data-effect="effect-scale"
-                        data-toggle="modal" href="#AddSectionModal">إضافة
+                    <button class="modal-effect btn btn btn-primary  " data-effect="effect-scale" data-toggle="modal"
+                        href="#AddModal">إضافة
                         قسم</button>
                 </div>
 
@@ -131,7 +131,7 @@
 <!-- row closed -->
 
 <!-- Basic modal -->
-<div class="modal" id="AddSectionModal">
+<div class="modal" id="AddModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">

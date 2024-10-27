@@ -4,8 +4,9 @@ $(function() {
 	$('.modal-effect').on('click', function(e) {
 		e.preventDefault();
 		var effect = $(this).attr('data-effect');
-		$('#AddSectionModal').addClass(effect);
+		$('#AddModal').addClass(effect);
 	});
+	
 	// hide modal with effect
 	$('#AddSectionModal').on('hidden.bs.modal', function(e) {
 		$(this).removeClass(function(index, className) {
