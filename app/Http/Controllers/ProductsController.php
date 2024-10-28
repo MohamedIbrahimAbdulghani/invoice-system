@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddedProductValidation;
 use App\Models\Products;
+use App\Models\sections;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -14,7 +16,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products/products');
+        $sections = sections::all();
+        $products = Products::all();
+        return view("products.products", compact("sections", "products"));
     }
 
     /**
@@ -33,9 +37,16 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddedProductValidation $request)
     {
-        //
+        Products::create([
+            "product_name"=>$request->product_name,
+            "description"=>$request->description,
+            "section_id"=>$request->section_id,
+        ]);
+        session()->flash('Add','تم إضافة المنتج بنجاج');
+        return redirect("products");
+        
     }
 
     /**

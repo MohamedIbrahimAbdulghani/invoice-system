@@ -80,7 +80,7 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <button class="modal-effect btn btn btn-success " data-effect="effect-scale" data-toggle="modal"
+                    <button class="modal-effect btn btn btn-primary  " data-effect="effect-scale" data-toggle="modal"
                         href="#AddModal">إضافة
                         منتج</button>
                 </div>
@@ -100,9 +100,19 @@
                         </thead>
                         <tbody>
                             <?php $counter = 1; ?>
+                            @foreach($products as $product)
                             <tr>
+                                <td><?php echo $counter++; ?></td>
+                                <td>{{ $product->product_name }}</td>
+                                <td>{{ $product->section_id }}</td>
+                                <td>{{ $product->description }}</td>
+                                <td>
 
+                                </td>
                             </tr>
+                            @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
@@ -122,7 +132,7 @@
                 <h6 class="modal-title"> إضافة منتج</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form action="{{ route('sections.store') }}" method="POST">
+            <form action="{{ route('products.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -131,7 +141,12 @@
                     </div>
                     <div class="form-group">
                         <label>اسم القسم</label>
-                        <input type="text" class="form-control" name="section_name" id="section_name">
+                        <select name="section_id" id="section_id" class="form-control">
+                            <option value="" disabled selected>--حدد القسم--</option>
+                            @foreach($sections as $section)
+                            <option value="{{$section->id}}">{{$section->section_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>ملاحظات</label>
@@ -154,22 +169,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">تعديل المنتج</h5>
+                <h5 class="modal-title" id="exampleModalLabel">تعديل القسم</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form action="" method="post" autocomplete="off">
+                <form action=" " method="post" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <input type="hidden" name="id" id="id" value=" ">
-                        <label for="recipient-name" class="col-form-label">اسم المنتج:</label>
-                        <input class="form-control" name="product_name" id="product_name" type="text" value=" ">
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="id" id="id" value=" ">
+                        <input type="hidden" name="id" id="id" value="">
                         <label for="recipient-name" class="col-form-label">اسم القسم:</label>
                         <input class="form-control" name="section_name" id="section_name" type="text" value=" ">
                     </div>
@@ -198,8 +208,7 @@
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <form action=" " method="post">
-                {{method_field('delete')}}
-                {{csrf_field()}}
+                @csrf
                 <div class="modal-body">
                     <p>هل انت متاكد من عملية الحذف ؟</p><br>
                     <input type="hidden" name="id" id="id" value="">
