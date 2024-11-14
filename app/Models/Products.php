@@ -13,4 +13,7 @@ class Products extends Model
         "description"
     ];
     use HasFactory;
+    public function sections() {
+        return $this->belongsTo(sections::class, 'section_id');
+    }
 }

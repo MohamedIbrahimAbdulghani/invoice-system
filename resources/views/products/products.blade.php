@@ -104,15 +104,24 @@
                             <tr>
                                 <td><?php echo $counter++; ?></td>
                                 <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->section_id }}</td>
+                                <td>{{ $product->sections->section_name }}</td>
                                 <td>{{ $product->description }}</td>
                                 <td>
+                                    <a href="#EditModal" class="modal-effect btn btn-sm btn-info"
+                                        data-effect="effect-scale" data-product_id="{{ $product->id }}"
+                                        data-product_name="{{ $product->product_name }}"
+                                        data-section_name="{{ $product->sections->section_name }}"
+                                        data-description="{{ $product->description }}" data-toggle="modal"
+                                        title="تعديل"><i class="las la-pen"></i></a>
 
+                                    <a href="#DeleteModal" class="modal-effect btn btn-sm btn-danger"
+                                        data-effect="effect-scale" data-product_id="{{ $product->id }}"
+                                        data-product_name="{{ $product->product_name }}"
+                                        data-description="{{ $product->description }}" data-toggle="modal"
+                                        title="حذف"><i class="las la-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
@@ -135,6 +144,7 @@
             <form action="{{ route('products.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
+
                     <div class="form-group">
                         <label>اسم المنتج</label>
                         <input type="text" class="form-control" id="product_name" name="product_name">
@@ -176,13 +186,25 @@
             </div>
             <div class="modal-body">
 
-                <form action=" " method="post" autocomplete="off">
+                <form action="{{route('products.update', $product->id)}}" method="post" autocomplete="off">
                     @csrf
+                    @method('PATCH')
                     <div class="form-group">
-                        <input type="hidden" name="id" id="id" value="">
-                        <label for="recipient-name" class="col-form-label">اسم القسم:</label>
-                        <input class="form-control" name="section_name" id="section_name" type="text" value=" ">
+                        <input type="hidden" name="product_id" id="product_id" value="">
+                        <label for="recipient-name" class="col-form-label">اسم المنتج:</label>
+                        <input class="form-control" name="product_name" id="product_name" type="text"
+                            value="{{ $product->product_name }}">
                     </div>
+                    <div class="form-group">
+                        <label>اسم القسم</label>
+                        <select name="section_id" id="section_id" class="form-control">
+                            <option value="" disabled selected>--حدد القسم--</option>
+                            @foreach($sections as $section)
+                            <option value="{{$section->id}}">{{$section->section_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">ملاحظات:</label>
                         <textarea class="form-control" id="description" name="description" value=" "></textarea>
@@ -207,12 +229,13 @@
                 <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form action=" " method="post">
+            <form action="{{route('products.destroy', $product->id)}}" method="post">
                 @csrf
+                @method('DELETE')
                 <div class="modal-body">
                     <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                    <input type="hidden" name="id" id="id" value="">
-                    <input class="form-control" name="section_name" id="section_name" type="text" readonly>
+                    <input type="hidden" name="product_id" id="product_id" value="">
+                    <input class="form-control" name="product_name" id="product_name" type="text" readonly>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -256,11 +279,13 @@
 <script>
 $('#EditModal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
-    var id = button.data('id')
+    var product_id = button.data('product_id')
+    var product_name = button.data('product_name')
     var section_name = button.data('section_name')
     var description = button.data('description')
     var modal = $(this)
-    modal.find('.modal-body #id').val(id);
+    modal.find('.modal-body #product_id').val(product_id);
+    modal.find('.modal-body #product_name').val(product_name);
     modal.find('.modal-body #section_name').val(section_name);
     modal.find('.modal-body #description').val(description);
 })
@@ -269,11 +294,11 @@ $('#EditModal').on('show.bs.modal', function(event) {
 <script>
 $('#DeleteModal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var section_name = button.data('section_name')
+    var product_id = button.data('product_id')
+    var product_name = button.data('product_name')
     var modal = $(this)
-    modal.find('.modal-body #id').val(id);
-    modal.find('.modal-body #section_name').val(section_name);
+    modal.find('.modal-body #product_id').val(product_id);
+    modal.find('.modal-body #product_name').val(product_name);
 })
 </script>
 

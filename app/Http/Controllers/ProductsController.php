@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddedProductValidation;
+use App\Http\Requests\UpdatedSectionValidation;
 use App\Models\Products;
 use App\Models\sections;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class ProductsController extends Controller
         ]);
         session()->flash('Add','تم إضافة المنتج بنجاج');
         return redirect("products");
-        
+
     }
 
     /**
@@ -80,7 +81,14 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Products $products)
     {
-        //
+        $products = Products::findOrFail($request->product_id);
+        $products->update([
+            'product_name'=>$request->product_name,
+            'description'=>$request->description,
+            'product_id'=>$request->product_id
+        ]);
+        session()->flash('Edit', 'تم تحديث البيانات بنجاح');
+        return redirect('products');
     }
 
     /**
@@ -89,8 +97,10 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Request $request)
     {
-        //
+        Products::findOrFail($request->product_id)->delete();
+        session()->flash('Delete', 'تم حذف المنتج بنجاح');
+        return redirect('products');
     }
 }
