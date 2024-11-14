@@ -104,12 +104,13 @@
                             <tr>
                                 <td><?php echo $counter++; ?></td>
                                 <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->sections->section_name }}</td>
+                                <td>{{$product->sections->section_name}}</td>
                                 <td>{{ $product->description }}</td>
                                 <td>
                                     <a href="#EditModal" class="modal-effect btn btn-sm btn-info"
                                         data-effect="effect-scale" data-product_id="{{ $product->id }}"
                                         data-product_name="{{ $product->product_name }}"
+                                        data-section_id="{{ $product->section_id }}"
                                         data-section_name="{{ $product->sections->section_name }}"
                                         data-description="{{ $product->description }}" data-toggle="modal"
                                         title="تعديل"><i class="las la-pen"></i></a>
@@ -190,15 +191,15 @@
                     @csrf
                     @method('PATCH')
                     <div class="form-group">
-                        <input type="hidden" name="product_id" id="product_id" value="">
+                        <input type="text" name="product_id" id="product_id" value="">
                         <label for="recipient-name" class="col-form-label">اسم المنتج:</label>
                         <input class="form-control" name="product_name" id="product_name" type="text"
                             value="{{ $product->product_name }}">
                     </div>
+
                     <div class="form-group">
                         <label>اسم القسم</label>
                         <select name="section_id" id="section_id" class="form-control">
-                            <option value="" disabled selected>--حدد القسم--</option>
                             @foreach($sections as $section)
                             <option value="{{$section->id}}">{{$section->section_name}}</option>
                             @endforeach
@@ -282,10 +283,12 @@ $('#EditModal').on('show.bs.modal', function(event) {
     var product_id = button.data('product_id')
     var product_name = button.data('product_name')
     var section_name = button.data('section_name')
+    var section_id = button.data('section_id')
     var description = button.data('description')
     var modal = $(this)
     modal.find('.modal-body #product_id').val(product_id);
     modal.find('.modal-body #product_name').val(product_name);
+    modal.find('.modal-body #section_id').val(section_id);
     modal.find('.modal-body #section_name').val(section_name);
     modal.find('.modal-body #description').val(description);
 })

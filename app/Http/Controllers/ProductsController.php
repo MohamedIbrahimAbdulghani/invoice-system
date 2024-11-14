@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddedProductValidation;
-use App\Http\Requests\UpdatedSectionValidation;
+use App\Http\Requests\UpdateProductValidation;
 use App\Models\Products;
 use App\Models\sections;
 use Illuminate\Http\Request;
@@ -79,13 +79,14 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(UpdateProductValidation $request, Products $products)
     {
         $products = Products::findOrFail($request->product_id);
+
         $products->update([
             'product_name'=>$request->product_name,
+            'section_id'=>$request->section_id,
             'description'=>$request->description,
-            'product_id'=>$request->product_id
         ]);
         session()->flash('Edit', 'تم تحديث البيانات بنجاح');
         return redirect('products');
