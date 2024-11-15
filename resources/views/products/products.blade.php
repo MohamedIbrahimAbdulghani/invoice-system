@@ -191,7 +191,7 @@
                     @csrf
                     @method('PATCH')
                     <div class="form-group">
-                        <input type="text" name="product_id" id="product_id" value="">
+                        <input type="hidden" name="product_id" id="product_id" value="">
                         <label for="recipient-name" class="col-form-label">اسم المنتج:</label>
                         <input class="form-control" name="product_name" id="product_name" type="text"
                             value="{{ $product->product_name }}">
