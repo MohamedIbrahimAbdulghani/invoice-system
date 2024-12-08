@@ -74,7 +74,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="inputName" class="control-label">القسم</label>
-                            <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
+                            <select name="Section" class="form-control SelectBox" onclick="console.log($(this).val())"
                                 onchange="console.log('change is firing')">
                                 <!--placeholder-->
                                 <option value="" selected disabled>حدد القسم</option>
@@ -83,7 +83,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                         <div class="col">
                             <label for="inputName" class="control-label">المنتج</label>
                             <select id="product" name="product" class="form-control">
