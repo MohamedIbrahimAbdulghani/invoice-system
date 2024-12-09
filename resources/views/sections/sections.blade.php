@@ -98,6 +98,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <?php $counter = 1; ?>
                             @foreach ($sections as $section)
                             <tr>
@@ -172,7 +173,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form action="{{ route('sections.update', $section->id) }}" method="post" autocomplete="off">
                     @csrf
                     @method('PUT')

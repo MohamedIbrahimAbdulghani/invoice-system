@@ -87,9 +87,6 @@
                             <label for="inputName" class="control-label">المنتج</label>
                             <select id="product" name="product" class="form-control">
                                 <option selected disabled>حدد المنتج</option>
-                                @foreach($products as $product):
-                                <option value="{{$product->id}}">{{$product->product_name}}</option>
-                                @endforeach
                             </select>
                         </div>
 
@@ -107,8 +104,8 @@
 
                         <div class="col">
                             <label for="inputName" class="control-label">مبلغ العمولة</label>
-                            <input type="text" class="form-control form-control-lg" id="Amount_Commission"
-                                name="Amount_Commission" title="يرجي ادخال مبلغ العمولة "
+                            <input type="text" class="form-control form-control-lg" id="Commission" name="Commission"
+                                title="يرجي ادخال مبلغ العمولة "
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                 required>
                         </div>
@@ -123,7 +120,8 @@
 
                         <div class="col">
                             <label for="inputName" class="control-label">نسبة ضريبة القيمة المضافة</label>
-                            <select name="Rate_VAT" id="Rate_VAT" class="form-control" onchange="myFunction()">
+                            <select name="Percentage_Rate_Value_Added" id="Percentage_Rate_Value_Added"
+                                class="form-control" onchange="myFunction()">
                                 <!--placeholder-->
                                 <option value="" selected disabled>حدد نسبة الضريبة</option>
                                 <option value=" 5%">5%</option>
@@ -138,7 +136,8 @@
                     <div class="row">
                         <div class="col">
                             <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
-                            <input type="text" class="form-control" id="Value_VAT" name="Value_VAT" readonly>
+                            <input type="text" class="form-control" id="Rate_Value_Added" name="Rate_Value_Added"
+                                readonly>
                         </div>
 
                         <div class="col">
@@ -214,6 +213,7 @@ var date = $('.fc-datepicker').datepicker({
 }).val();
 </script>
 
+<!-- this is ajax for make product by section related  -->
 <script>
 $(document).ready(function() {
     $('select[name="Section"]').on('change', function() {
@@ -241,38 +241,40 @@ $(document).ready(function() {
 </script>
 
 
+<!-- this function to calc commission -->
 <script>
 function myFunction() {
 
-    var Amount_Commission = parseFloat(document.getElementById("Amount_Commission").value);
+    var Commission = parseFloat(document.getElementById("Commission").value);
     var Discount = parseFloat(document.getElementById("Discount").value);
-    var Rate_VAT = parseFloat(document.getElementById("Rate_VAT").value);
-    var Value_VAT = parseFloat(document.getElementById("Value_VAT").value);
+    var Percentage_Rate_Value_Added = parseFloat(document.getElementById("Percentage_Rate_Value_Added").value);
+    var Rate_Value_Added = parseFloat(document.getElementById("Rate_Value_Added").value);
 
-    var Amount_Commission2 = Amount_Commission - Discount;
+    var Amount_Commission2 = Commission - Discount;
 
 
-    if (typeof Amount_Commission === 'undefined' || !Amount_Commission) {
+    if (typeof Commission === 'undefined' || !Commission) {
 
         alert('يرجي ادخال مبلغ العمولة ');
 
     } else {
-        var intResults = Amount_Commission2 * Rate_VAT / 100;
+        var intResults = Amount_Commission2 * Percentage_Rate_Value_Added / 100;
 
         var intResults2 = parseFloat(intResults + Amount_Commission2);
 
-        sumq = parseFloat(intResults).toFixed(2);
+        sumCommission = parseFloat(intResults).toFixed(2);
 
-        sumt = parseFloat(intResults2).toFixed(2);
+        sumTotal = parseFloat(intResults2).toFixed(2);
 
-        document.getElementById("Value_VAT").value = sumq;
+        document.getElementById("Rate_Value_Added").value = sumCommission;
 
-        document.getElementById("Total").value = sumt;
+        document.getElementById("Total").value = sumTotal;
 
     }
 
 }
 </script>
+
 
 
 @endsection
