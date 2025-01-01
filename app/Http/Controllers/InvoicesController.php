@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\invoice_attachments;
 use App\Models\invoices;
 use App\Models\invoices_details;
 use App\Models\Products;
@@ -71,6 +72,25 @@ class InvoicesController extends Controller
             "note" => $request->note,
             "user" => Auth::user()->name,
         ]);
+
+        if($request->hasFile('file')) {
+            $this->validate($request, ['file' => 'required|mimes:pdf|max:10000'], ['file.mimes' => ' pdf خطأ : تم حفظ الفاتورة ولم يتم حفظ المرفق لابد ان يكون ']);
+            $invoice_id = invoices::latest()->first()->id;
+            $file = $request->file('file');
+            $file_name = $file->getClientOriginalName();
+            $invoice_number = $request->invoice_number;
+
+            $attachments = new invoice_attachments();
+            $attachments->file_name = $file_name;
+            $attachments->invoice_number = $invoice_number;
+            $attachments->created_by = Auth::user()->name;
+            $attachments->invoice_attachment_id = $invoice_id;
+            $attachments->save();
+            $fileName = $request->file->getClientOriginalName();
+            $request->file->move(public_path('Attachments/'.$invoice_number), $fileName);
+        }
+        session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
+        return back();
     }
 
     /**
