@@ -213,7 +213,7 @@ var date = $('.fc-datepicker').datepicker({
 }).val();
 </script>
 
-<!-- this is ajax for make product by section related  -->
+<!-- this is code about ajax code for make product by section related  -->
 <script>
 $(document).ready(function() {
     $('select[name="Section"]').on('change', function() {
