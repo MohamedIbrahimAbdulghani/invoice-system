@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoices_details', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
+            $table->bigIncrements('id');
             $table->string("invoice_number", 50);
             $table->foreignId("invoice_detail_id")->constrained("invoices")->cascadeOnDelete();
             $table->string("product", 50);

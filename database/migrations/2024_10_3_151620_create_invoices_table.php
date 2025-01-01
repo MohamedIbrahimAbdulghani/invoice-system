@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('invoice_number');
             $table->date('invoice_date');
             $table->date('due_date'); // تاريخ الاستحقاق
+            // $table->string('section');
+            $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
             $table->string('product');
-            $table->string('section');
+            $table->decimal('Amount_collection', 8, 2)->nullable();
+            $table->decimal('Amount_commission', 8, 2);
             $table->string('discount');
             $table->string('rate_vat'); // نسبة الضريبة
             $table->decimal('value_vat',8,2); // قيمة الضريبة

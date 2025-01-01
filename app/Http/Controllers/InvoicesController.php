@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\invoices;
+use App\Models\invoices_details;
 use App\Models\Products;
 use App\Models\sections;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class InvoicesController extends Controller
@@ -39,7 +41,36 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        invoices::create([
+            "invoice_number" => $request->invoice_number,
+            "invoice_date" => $request->invoice_Date,
+            "due_date" => $request->Due_date,
+            "section_id" => $request->Section,
+            "product" => $request->product,
+            "Amount_collection" => $request->Amount_collection,
+            "Amount_commission" => $request->Commission,
+            "discount" => $request->Discount,
+            "rate_vat" => $request->Percentage_Rate_Value_Added,
+            "value_vat" => $request->Rate_Value_Added,
+            "Total" => $request->Total,
+            "Status" => 'غير مدفوعة',
+            "value_status" => 2,
+            "note" => $request->note,
+            "user" => Auth::user()->name,
+        ]);
+
+        // this codes to insert the same data to invoice_details table
+        $invoice_id = invoices::latest()->first()->id;
+        invoices_details::create([
+            "invoice_number" => $request->invoice_number,
+            "invoice_detail_id" => $invoice_id,
+            "product" => $request->product,
+            "section" => $request->Section,
+            "status" => 'غير مدفوعة',
+            "value_status" => 2,
+            "note" => $request->note,
+            "user" => Auth::user()->name,
+        ]);
     }
 
     /**

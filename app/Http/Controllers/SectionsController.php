@@ -28,7 +28,7 @@ class SectionsController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
