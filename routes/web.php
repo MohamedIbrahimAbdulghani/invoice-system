@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::resource("sections", SectionsController::class);
 Route::resource("products", ProductsController::class);
 Route::get("section/{id}", [InvoicesController::class, "getProducts"]);
 Route::get('/{page}', [AdminController::class, "index"]);
+
+Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
+
 
 Route::middleware([
     'auth:sanctum',

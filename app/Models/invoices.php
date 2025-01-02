@@ -9,4 +9,8 @@ class invoices extends Model
 {
     protected $guarded  = [];
     use HasFactory;
+
+    public function sections() {
+        return $this->belongsTo(sections::class, 'section_id');
+    }
 }

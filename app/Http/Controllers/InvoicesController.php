@@ -20,7 +20,8 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        return view("invoices/invoices");
+        $invoices = invoices::all();
+        return view("invoices/invoices", compact("invoices"));
     }
 
     /**
@@ -73,8 +74,10 @@ class InvoicesController extends Controller
             "user" => Auth::user()->name,
         ]);
 
+
+        // this codes to insert the same data to invoice_attachment table
         if($request->hasFile('file')) {
-            $this->validate($request, ['file' => 'required|mimes:pdf|max:10000'], ['file.mimes' => ' pdf خطأ : تم حفظ الفاتورة ولم يتم حفظ المرفق لابد ان يكون ']);
+            // $this->validate($request, ['file' => 'required|mimes:pdf|max:10000'], ['file.mimes' => ' pdf خطأ : تم حفظ الفاتورة ولم يتم حفظ المرفق لابد ان يكون ']);
             $invoice_id = invoices::latest()->first()->id;
             $file = $request->file('file');
             $file_name = $file->getClientOriginalName();

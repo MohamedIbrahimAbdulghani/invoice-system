@@ -37,39 +37,57 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table key-buttons text-md-nowrap">
+                    <table id="example" class="table key-buttons text-nowrap ">
                         <thead>
                             <tr>
-                                <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">رقم الفاتورة</th>
-                                <th class="border-bottom-0">تاريخ الفاتورة</th>
-                                <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                <th class="border-bottom-0">المنتج</th>
-                                <th class="border-bottom-0">القسم</th>
-                                <th class="border-bottom-0">الخصم</th>
-                                <th class="border-bottom-0">نسبة الضريبة</th>
-                                <th class="border-bottom-0">قيمة الضريبة</th>
-                                <th class="border-bottom-0">الاجمالي</th>
-                                <th class="border-bottom-0">الحالة</th>
-                                <th class="border-bottom-0">الملاحظات</th>
+                                <th>#</th>
+                                <th>رقم الفاتورة</th>
+                                <th>تاريخ الفاتورة</th>
+                                <th>تاريخ الاستحقاق</th>
+                                <th>القسم</th>
+                                <th>المنتج</th>
+                                <th>مبلغ التحصيل</th>
+                                <th>مبلغ العمولة</th>
+                                <th>الخصم</th>
+                                <th>نسبة الضريبة</th>
+                                <th>قيمة الضريبة</th>
+                                <th>الاجمالي</th>
+                                <th>الحالة</th>
+                                <th>الملاحظات</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td>59</td>
-                                <td>2012/08/06</td>
-                                <td>$137,500</td>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td>59</td>
-                                <td>2012/08/06</td>
-                                <td>$137,500</td>
+                            <?php $counter = 1; ?>
+                            @foreach($invoices as $invoice)
+                            <tr style="text-wrap: auto !important;">
+                                <td><?php echo $counter++; ?></td>
+                                <td>{{$invoice->invoice_number}}</td>
+                                <td>{{$invoice->invoice_date}}</td>
+                                <td>{{$invoice->due_date}}</td>
+                                <td>
+                                    <a href="{{ url('invoices_details', $invoice->id) }}"
+                                        style="color: #22252f;">{{$invoice->sections->section_name}}
+                                    </a>
+                                </td>
+                                <td>{{$invoice->product}}</td>
+                                <td>{{$invoice->Amount_collection}}</td>
+                                <td>{{$invoice->Amount_commission}}</td>
+                                <td>{{$invoice->discount}}</td>
+                                <td>{{$invoice->rate_vat}}</td>
+                                <td>{{$invoice->value_vat}}</td>
+                                <td>{{$invoice->Total}}</td>
+                                <td>
+                                    @if($invoice->value_status == 1)
+                                    <span class="text-success">{{$invoice->Status}}</span>
+                                    @elseif($invoice->value_status == 2)
+                                    <span class="text-danger">{{$invoice->Status}}</span>
+                                    @else
+                                    <span class="text-warning">{{$invoice->Status}}</span>
+                                    @endif
+                                </td>
+                                <td>{{$invoice->note}}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
