@@ -28,114 +28,112 @@
 <div class="col-xl-12">
     <!-- div -->
     <div class="card" id="tabs-style4">
-        <div class="card-body">
-            <div class="main-content-label mg-b-5">
-                Vertical Tabs
-            </div>
-            <p class="mg-b-20">It is Very Easy to Customize and it uses in your website apllication.</p>
-            <div class="text-wrap">
-                <div class="example">
-                    <div class="d-md-flex">
-                        <div class="">
-                            <div class="panel panel-primary tabs-style-4">
-                                <div class="tab-menu-heading">
-                                    <div class="tabs-menu ">
-                                        <!-- Tabs -->
-                                        <ul class="nav panel-tabs ml-3">
-                                            <li class=""><a href="#tab1" class="active" data-toggle="tab"><i
-                                                        class="fa fa-laptop"></i> تفاصيل الفاتورة</a></li>
-                                            <li><a href="#tab2" data-toggle="tab"><i class="fa fa-cube"></i> حالات
-                                                    الدفع</a></li>
-                                            <li><a href="#tab3" data-toggle="tab"><i class="fa fa-cogs"></i>
-                                                    المرفقات</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tabs-style-4 ">
-                            <div class="panel-body tabs-menu-body">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab1">
-                                        @foreach($invoices as $invoices )
-
-                                        <table id="" class="table key-buttons  ">
-                                            <thead>
-                                                <tr>
-                                                    <th>رقم الفاتورة</th>
-                                                    <th>تاريخ الفاتورة</th>
-                                                    <th>تاريخ الاستحقاق</th>
-                                                    <th>القسم</th>
-                                                    <th>المنتج</th>
-                                                    <th>مبلغ التحصيل</th>
-                                                    <th>مبلغ العمولة</th>
-                                                    <th>الخصم</th>
-                                                    <th>نسبة الضريبة</th>
-                                                    <th>قيمة الضريبة</th>
-                                                    <th>الاجمالي</th>
-                                                    <th>الحالة</th>
-                                                    <th>الملاحظات</th>
-                                                    <th>المستخدم</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>{{$invoices->invoice_number}}</td>
-                                                    <td>{{$invoices->invoice_date}}</td>
-                                                    <td>{{$invoices->due_date}}</td>
-                                                    <td>{{$invoices->sections->section_name }}</td>
-                                                    <td>{{$invoices->product}}</td>
-                                                    <td>{{$invoices->Amount_collection}}</td>
-                                                    <td>{{$invoices->Amount_commission}}</td>
-                                                    <td>{{$invoices->discount}}</td>
-                                                    <td>{{$invoices->rate_vat}}</td>
-                                                    <td>{{$invoices->value_vat}}</td>
-                                                    <td>{{$invoices->Total}}</td>
-                                                    <td>
-                                                        @if($invoices->value_status == 1)
-                                                        <span class="text-success">{{$invoices->Status}}</span>
-                                                        @elseif($invoices->value_status == 2)
-                                                        <span class="text-danger">{{$invoices->Status}}</span>
-                                                        @else
-                                                        <span class="text-warning">{{$invoices->Status}}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{$invoices->note}}</td>
-                                                    <td>{{$invoices->user}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    @endforeach
-                                    @foreach($invoices_details as $invoices_details )
-                                    <div class="tab-pane" id="tab2">
-                                        <p>
-                                            @if($invoices_details->value_status == 1)
-                                            <span class="text-success">{{$invoices_details->status}}</span>
-                                            @elseif($invoices_details->value_status == 2)
-                                            <span class="text-danger">{{$invoices_details->status}}</span>
-                                            @else
-                                            <span class="text-warning">{{$invoices_details->status}}</span>
-                                            @endif
-                                        </p>
-                                    </div>
-                                    @endforeach
-                                    @foreach($invoices_attachment as $invoices_attachment)
-                                    <div class="tab-pane" id="tab3">
-                                        <p>{{ $invoices_attachment->file_name }}</p>
-                                    </div>
-                                    @endforeach
+        <div class="text-wrap">
+            <div class="example">
+                <div class="d-md-flex">
+                    <div class="">
+                        <div class="panel panel-primary tabs-style-4">
+                            <div class="tab-menu-heading">
+                                <div class="tabs-menu ">
+                                    <!-- Tabs -->
+                                    <ul class="nav panel-tabs ml-3">
+                                        <li class=""><a href="#tab1" class="active" data-toggle="tab"><i
+                                                    class="fa fa-laptop"></i> تفاصيل الفاتورة</a></li>
+                                        <li><a href="#tab2" data-toggle="tab"><i class="fa fa-cube"></i> حالات
+                                                الدفع</a></li>
+                                        <li><a href="#tab3" data-toggle="tab"><i class="fa fa-cogs"></i>
+                                                المرفقات</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="tabs-style-4 ">
+                        <div class="panel-body tabs-menu-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1">
 
-                <!---Prism Pre code-->
+                                    <table id="" class="table key-buttons  ">
+                                        <thead>
+                                            <tr>
+                                                <th>رقم الفاتورة</th>
+                                                <th>تاريخ الفاتورة</th>
+                                                <th>تاريخ الاستحقاق</th>
+                                                <th>القسم</th>
+                                                <th>المنتج</th>
+                                                <th>مبلغ التحصيل</th>
+                                                <th>مبلغ العمولة</th>
+                                                <th>الخصم</th>
+                                                <th>نسبة الضريبة</th>
+                                                <th>قيمة الضريبة</th>
+                                                <th>الاجمالي</th>
+                                                <th>الحالة</th>
+                                                <th>الملاحظات</th>
+                                                <th>المستخدم</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{$invoices->invoice_number}}</td>
+                                                <td>{{$invoices->invoice_date}}</td>
+                                                <td>{{$invoices->due_date}}</td>
+                                                <td>{{$invoices->sections->section_name }}</td>
+                                                <td>{{$invoices->product}}</td>
+                                                <td>{{$invoices->Amount_collection}}</td>
+                                                <td>{{$invoices->Amount_commission}}</td>
+                                                <td>{{$invoices->discount}}</td>
+                                                <td>{{$invoices->rate_vat}}</td>
+                                                <td>{{$invoices->value_vat}}</td>
+                                                <td>{{$invoices->Total}}</td>
+                                                <td>
+                                                    @if($invoices->value_status == 1)
+                                                    <span
+                                                        class="badge badge-pill badge-success ">{{$invoices->Status}}</span>
+                                                    @elseif($invoices->value_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-danger ">{{$invoices->Status}}</span>
+                                                    @else
+                                                    <span
+                                                        class="badge badge-pill badge-warning ">{{$invoices->Status}}</span>
+                                                    @endif
+                                                </td>
+                                                <td>{{$invoices->note}}</td>
+                                                <td>{{$invoices->user}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                @foreach($invoices_details as $invoices_details )
+                                <div class="tab-pane" id="tab2">
+                                    <p>
+                                        @if($invoices->value_status == 1)
+                                        <span class="badge badge-pill badge-success ">{{$invoices->Status}}</span>
+                                        @elseif($invoices->value_status == 2)
+                                        <span class="badge badge-pill badge-danger ">{{$invoices->Status}}</span>
+                                        @else
+                                        <span class="badge badge-pill badge-warning ">{{$invoices->Status}}</span>
+                                        @endif
+                                    </p>
+                                </div>
+                                @endforeach
+                                @foreach($invoices_attachment as $invoices_attachment)
+                                <div class="tab-pane" id="tab3">
+                                    <p>{{ $invoices_attachment->file_name }}</p>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!---Prism Pre code-->
         </div>
-        <!-- /div -->
     </div>
+    <!-- /div -->
+</div>
 </div>
 
 

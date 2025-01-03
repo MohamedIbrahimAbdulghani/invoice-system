@@ -78,11 +78,11 @@
                                 <td>{{$invoice->Total}}</td>
                                 <td>
                                     @if($invoice->value_status == 1)
-                                    <span class="text-success">{{$invoice->Status}}</span>
+                                    <span class="badge badge-pill badge-success ">{{$invoice->Status}}</span>
                                     @elseif($invoice->value_status == 2)
-                                    <span class="text-danger">{{$invoice->Status}}</span>
+                                    <span class="badge badge-pill badge-danger">{{$invoice->Status}}</span>
                                     @else
-                                    <span class="text-warning">{{$invoice->Status}}</span>
+                                    <span class="badge badge-pill badge-warning">{{$invoice->Status}}</span>
                                     @endif
                                 </td>
                                 <td>{{$invoice->note}}</td>
