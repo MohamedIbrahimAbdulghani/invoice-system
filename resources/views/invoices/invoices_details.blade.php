@@ -52,8 +52,7 @@
                         <div class="panel-body tabs-menu-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1">
-
-                                    <table id="" class="table key-buttons  ">
+                                    <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>رقم الفاتورة</th>

@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table key-buttons text-nowrap ">
+                    <table id="example" class="table table-striped key-buttons text-nowrap">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -54,6 +54,7 @@
                                 <th>الاجمالي</th>
                                 <th>الحالة</th>
                                 <th>الملاحظات</th>
+                                <th>المستخدم</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -86,6 +87,7 @@
                                     @endif
                                 </td>
                                 <td>{{$invoice->note}}</td>
+                                <td>{{$invoice->user}}</td>
                             </tr>
                             @endforeach
                         </tbody>
