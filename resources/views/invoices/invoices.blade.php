@@ -60,7 +60,7 @@
                         <tbody>
                             <?php $counter = 1; ?>
                             @foreach($invoices as $invoice)
-                            <tr style="text-wrap: auto !important;">
+                            <tr style="text-wrap: auto !important; ">
                                 <td><?php echo $counter++; ?></td>
                                 <td>{{$invoice->invoice_number}}</td>
                                 <td>{{$invoice->invoice_date}}</td>
@@ -86,8 +86,8 @@
                                     <span class="badge badge-pill badge-warning">{{$invoice->Status}}</span>
                                     @endif
                                 </td>
-                                <td>{{$invoice->note}}</td>
-                                <td>{{$invoice->user}}</td>
+                                <td>{{ $invoice->note }}</td>
+                                <td>{{ $invoice->user }}</td>
                             </tr>
                             @endforeach
                         </tbody>
