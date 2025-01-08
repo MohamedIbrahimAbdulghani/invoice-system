@@ -32,6 +32,7 @@ Route::get('/{page}', [AdminController::class, "index"]);
 Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

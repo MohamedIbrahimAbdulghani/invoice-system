@@ -17,7 +17,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                الفواتير</span>
+                تفاصيل الفاتورة</span>
         </div>
     </div>
 </div>
@@ -66,7 +66,7 @@
                                                 <th>نسبة الضريبة</th>
                                                 <th>قيمة الضريبة</th>
                                                 <th>الاجمالي</th>
-                                                <th>الحالة</th>
+                                                <th> الحالة الحالية</th>
                                                 <th>الملاحظات</th>
                                                 <th>المستخدم</th>
                                             </tr>
@@ -106,22 +106,84 @@
 
                                 @foreach($invoices_details as $invoices_details )
                                 <div class="tab-pane" id="tab2">
-                                    <p>
-                                        @if($invoices->value_status == 1)
-                                        <span class="badge badge-pill badge-success ">{{$invoices->Status}}</span>
-                                        @elseif($invoices->value_status == 2)
-                                        <span class="badge badge-pill badge-danger ">{{$invoices->Status}}</span>
-                                        @else
-                                        <span class="badge badge-pill badge-warning ">{{$invoices->Status}}</span>
-                                        @endif
-                                    </p>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <?php $counter = 1; ?>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>رقم الفاتورة</th>
+                                                <th>نوع المنتج</th>
+                                                <th>القسم</th>
+                                                <th>حالة الدفع</th>
+                                                <th>تاريخ الدفع</th>
+                                                <th>ملاحظات</th>
+                                                <th>تاريخ الاضافة</th>
+                                                <th>المستخدم</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><?php echo $counter; ?></td>
+                                                <td>{{$invoices_details->invoice_number}}</td>
+                                                <td>{{$invoices_details->product}}</td>
+                                                <td>{{$invoices->sections->section_name}}</td>
+                                                <td>
+                                                    @if($invoices->value_status == 1)
+                                                    <span
+                                                        class="badge badge-pill badge-success ">{{$invoices->Status}}</span>
+                                                    @elseif($invoices->value_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-danger ">{{$invoices->Status}}</span>
+                                                    @else
+                                                    <span
+                                                        class="badge badge-pill badge-warning ">{{$invoices->Status}}</span>
+                                                    @endif
+                                                </td>
+                                                <td>{{$invoices_details->Payment_Date}}</td>
+                                                <td>{{$invoices_details->note}}</td>
+                                                <td>{{$invoices_details->created_at}}</td>
+                                                <td>{{$invoices_details->user}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 @endforeach
+
                                 @foreach($invoices_attachment as $invoices_attachment)
                                 <div class="tab-pane" id="tab3">
-                                    <p>{{ $invoices_attachment->file_name }}</p>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <?php $counter = 1; ?>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>رقم الملف</th>
+                                                <th>قم بالاضافة</th>
+                                                <th>تاريخ الاضافة</th>
+                                                <th>العمليات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><?php  echo $counter++; ?></td>
+                                                <td>{{ $invoices_attachment->file_name }}</td>
+                                                <td>{{ $invoices_attachment->created_by }}</td>
+                                                <td>{{ $invoices_attachment->created_at }}</td>
+                                                <td>
+                                                    <a href="" role="button" class="btn btn-outline-success btn-sm"><i
+                                                            class="fas fa-eye ml-2"></i>عرض</a>
+
+                                                    <a href="" class="btn btn-outline-info btn-sm" role="button"><i
+                                                            class="fas fa-download ml-2"></i>تحميل</a>
+                                                    <a href="" class="btn btn-outline-danger btn-sm" role="button"><i
+                                                            class="fas fa-eye ml-2"></i>حذف</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
                                 </div>
                                 @endforeach
+
                             </div>
                         </div>
                     </div>
