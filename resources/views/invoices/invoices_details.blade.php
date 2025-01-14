@@ -169,13 +169,15 @@
                                                 <td>{{ $invoices_attachment->created_by }}</td>
                                                 <td>{{ $invoices_attachment->created_at }}</td>
                                                 <td>
-                                                    <a href="" role="button" class="btn btn-outline-success btn-sm"><i
+                                                    <a href="{{url('view_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" role="button" class="btn btn-outline-success btn-sm"><i
                                                             class="fas fa-eye ml-2"></i>عرض</a>
 
                                                     <a href="" class="btn btn-outline-info btn-sm" role="button"><i
                                                             class="fas fa-download ml-2"></i>تحميل</a>
-                                                    <a href="" class="btn btn-outline-danger btn-sm" role="button"><i
-                                                            class="fas fa-eye ml-2"></i>حذف</a>
+
+                                                    <a href="" class="btn btn-outline-info btn-sm" role="button"><i
+                                                            class="fas fa-download ml-2"></i>حذف</a>
+
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -190,13 +192,12 @@
                 </div>
             </div>
 
-            <!---Prism Pre code-->
         </div>
-    </div>
-    <!-- /div -->
-</div>
-</div>
 
+        <!---Prism Pre code-->
+    </div>
+</div>
+<!-- /div -->
 
 @endsection
 @section('js')

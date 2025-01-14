@@ -6,7 +6,6 @@ use App\Models\invoice_attachments;
 use App\Models\invoices;
 use App\Models\invoices_details;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class InvoicesDetailsController extends Controller
 {
@@ -66,6 +65,12 @@ class InvoicesDetailsController extends Controller
         return  view('invoices.invoices_details', compact('invoices', 'invoices_details', 'invoices_attachment'));
     }
 
+    public function view_file($invoice_number, $file_name) {
+        $file = Storage::disk('public_uploads')->get($invoice_number.'/'.$file_name);
+        return $file;
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -84,8 +89,8 @@ class InvoicesDetailsController extends Controller
      * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoices_details $invoices_details)
+    public function destroy(Request $request)
     {
-        //
+
     }
 }

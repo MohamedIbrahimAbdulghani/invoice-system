@@ -77,10 +77,10 @@ class InvoicesController extends Controller
 
         // this codes to insert the same data to invoice_attachment table
         if($request->hasFile('file')) {
-            // $this->validate($request, ['file' => 'required|mimes:pdf|max:10000'], ['file.mimes' => ' pdf خطأ : تم حفظ الفاتورة ولم يتم حفظ المرفق لابد ان يكون ']);
             $invoice_id = invoices::latest()->first()->id;
             $file = $request->file('file');
             $file_name = $file->getClientOriginalName();
+            // return $file_name;
             $invoice_number = $request->invoice_number;
 
             $attachments = new invoice_attachments();
@@ -89,8 +89,9 @@ class InvoicesController extends Controller
             $attachments->created_by = Auth::user()->name;
             $attachments->invoice_attachment_id = $invoice_id;
             $attachments->save();
-            $fileName = $request->file->getClientOriginalName();
-            $request->file->move(public_path('Attachments/'.$invoice_number), $fileName);
+
+            $imageName = $request->file->getClientOriginalName();
+            $request->file->move(public_path('Attachments/'.$invoice_number), $imageName);
         }
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();
@@ -115,7 +116,7 @@ class InvoicesController extends Controller
      */
     public function edit(invoices $invoices)
     {
-        //
+        
     }
 
     /**
