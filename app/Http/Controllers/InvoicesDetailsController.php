@@ -67,9 +67,16 @@ class InvoicesDetailsController extends Controller
     }
 
     public function view_file($invoice_number, $file_name) {
-        $dir="Attachments/";
-        $file = public_path($dir.$invoice_number.'/'.$file_name);
+        $file = public_path("Attachments/".$invoice_number.'/'.$file_name);
         return response()->file($file);
+    }
+
+    public function download_file($invoice_number, $file_name) {
+        $pathToFile = public_path('Attachments/'.$invoice_number.'/'.$file_name);
+        return response()->download($pathToFile);
+    }
+    public function delete_file() {
+
     }
 
 
@@ -93,6 +100,12 @@ class InvoicesDetailsController extends Controller
      */
     public function destroy(Request $request)
     {
-
+        $invoices = invoice_attachments::findOrFail($request->id);
+        $invoices->delete();
+        public_path('Attachments/'.$request->invoice_number.'/'.$request->file_name)::delete();
+        session()->flash('Delete', 'تم حذف الفاتورة بنجاح');
+        return back();
+        // $pathToFile = public_path('Attachments/'.$request->invoice_number.'/'.$request->file_name);
+        // return response()->delete($pathToFile);
     }
 }

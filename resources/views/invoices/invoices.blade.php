@@ -65,9 +65,9 @@
                                 <td>{{$invoice->invoice_number}}</td>
                                 <td>{{$invoice->invoice_date}}</td>
                                 <td>{{$invoice->due_date}}</td>
-                                <td>
+                                <td style="">
                                     <a href="{{ url('invoices_details', $invoice->id) }}"
-                                        style="color: #22252f;">{{$invoice->sections->section_name}}
+                                        style="color: #22252f; font-weight: bolder;">{{$invoice->sections->section_name}}
                                     </a>
                                 </td>
                                 <td>{{$invoice->product}}</td>

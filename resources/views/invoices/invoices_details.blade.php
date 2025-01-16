@@ -108,7 +108,6 @@
                                 <div class="tab-pane" id="tab2">
                                     <table class="table table-striped">
                                         <thead>
-                                            <?php $counter = 1; ?>
                                             <tr>
                                                 <th>#</th>
                                                 <th>رقم الفاتورة</th>
@@ -122,8 +121,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $counter = 1; ?>
                                             <tr>
-                                                <td><?php echo $counter; ?></td>
+                                                <td><?php echo $counter++; ?></td>
                                                 <td>{{$invoices_details->invoice_number}}</td>
                                                 <td>{{$invoices_details->product}}</td>
                                                 <td>{{$invoices->sections->section_name}}</td>
@@ -153,7 +153,6 @@
                                 <div class="tab-pane" id="tab3">
                                     <table class="table table-striped">
                                         <thead>
-                                            <?php $counter = 1; ?>
                                             <tr>
                                                 <th>#</th>
                                                 <th>رقم الملف</th>
@@ -163,6 +162,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $counter = 1; ?>
                                             <tr>
                                                 <td><?php  echo $counter++; ?></td>
                                                 <td>{{ $invoices_attachment->file_name }}</td>
@@ -172,11 +172,11 @@
                                                     <a href="{{url('view_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" role="button" class="btn btn-outline-success btn-sm"><i
                                                             class="fas fa-eye ml-2"></i>عرض</a>
 
-                                                    <a href="" class="btn btn-outline-info btn-sm" role="button"><i
+                                                    <a href="{{url('download_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" class="btn btn-outline-info btn-sm" role="button"><i
                                                             class="fas fa-download ml-2"></i>تحميل</a>
 
-                                                    <a href="" class="btn btn-outline-info btn-sm" role="button"><i
-                                                            class="fas fa-download ml-2"></i>حذف</a>
+
+                                                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-file_name="{{$invoices_attachment->file_name}}" data-invoice_number="{{$invoices_attachment->invoice_number}}" data-id="{{$invoices_attachment->id}}" data-target="#delete_file" role="button">حذف</button>
 
                                                 </td>
                                             </tr>
@@ -191,6 +191,39 @@
                     </div>
                 </div>
             </div>
+
+                <!-- delete -->
+    <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+                <form action="{{url('delete_file')}}" method="post">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <p class="text-center">
+                    <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
+                    </p>
+
+                    <input type="hidden" name="id" id="id" value="">
+                    <input type="hidden" name="file_name" id="file_name" value="">
+                    <input type="hidden" name="invoice_number" id="invoice_number" value="">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-danger">تاكيد</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
         </div>
 
@@ -220,4 +253,18 @@
 <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
+{{-- this script to make modal use it in delete invoice --}}
+<script>
+    $('#delete_file').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data("id")
+        var file_name = button.data("file_name")
+        var invoice_number = button.data("invoice_number")
+        var modal = $(this)
+
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #file_name').val(file_name);
+        modal.find('.modal-body #invoice_number').val(invoice_number);
+    })
+</script>
 @endsection
