@@ -6,6 +6,7 @@ use App\Models\invoice_attachments;
 use App\Models\invoices;
 use App\Models\invoices_details;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesDetailsController extends Controller
 {
@@ -66,8 +67,9 @@ class InvoicesDetailsController extends Controller
     }
 
     public function view_file($invoice_number, $file_name) {
-        $file = Storage::disk('public_uploads')->get($invoice_number.'/'.$file_name);
-        return $file;
+        $dir="Attachments/";
+        $file = public_path($dir.$invoice_number.'/'.$file_name);
+        return response()->file($file);
     }
 
 

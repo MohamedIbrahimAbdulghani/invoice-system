@@ -80,7 +80,6 @@ class InvoicesController extends Controller
             $invoice_id = invoices::latest()->first()->id;
             $file = $request->file('file');
             $file_name = $file->getClientOriginalName();
-            // return $file_name;
             $invoice_number = $request->invoice_number;
 
             $attachments = new invoice_attachments();
@@ -91,7 +90,7 @@ class InvoicesController extends Controller
             $attachments->save();
 
             $imageName = $request->file->getClientOriginalName();
-            $request->file->move(public_path('Attachments/'.$invoice_number), $imageName);
+            $request->file->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();
@@ -116,7 +115,7 @@ class InvoicesController extends Controller
      */
     public function edit(invoices $invoices)
     {
-        
+
     }
 
     /**
