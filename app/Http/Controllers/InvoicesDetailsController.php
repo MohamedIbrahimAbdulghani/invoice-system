@@ -102,10 +102,8 @@ class InvoicesDetailsController extends Controller
     {
         $invoices = invoice_attachments::findOrFail($request->id);
         $invoices->delete();
-        public_path('Attachments/'.$request->invoice_number.'/'.$request->file_name)::delete();
-        session()->flash('Delete', 'تم حذف الفاتورة بنجاح');
+        Storage::disk('public_uploads')->delete($request->invoice_number.'/'.$request->file_name);
+        session()->flash('Delete', 'تم حذف المرفق بنجاح');
         return back();
-        // $pathToFile = public_path('Attachments/'.$request->invoice_number.'/'.$request->file_name);
-        // return response()->delete($pathToFile);
     }
 }

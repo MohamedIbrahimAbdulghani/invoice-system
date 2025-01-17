@@ -45,10 +45,10 @@ return [
         ],
 
         // public_uploads   =>  make it to use inside InvoicesDetailsController
-        // 'public_uploads' => [
-        //     'driver' => 'local',
-        //     'root' => public_path('/Attachments/'),
-        // ],
+        'public_uploads' => [
+            'driver' => 'local',
+            'root' => public_path('/Attachments/'),
+        ],
 
         's3' => [
             'driver' => 's3',
