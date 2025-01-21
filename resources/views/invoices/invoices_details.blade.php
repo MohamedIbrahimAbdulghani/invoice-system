@@ -58,11 +58,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tabs-style-4 ">
+                    <div class="tabs-style-4 table-responsive">
                         <div class="panel-body tabs-menu-body">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tab1">
-                                    <table class="table table-striped">
+                            <div class="tab-content ">
+                                <div class="tab-pane active " id="tab1">
+
+                                    <table class="table table-striped table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>رقم الفاتورة</th>
@@ -111,12 +112,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+
+                                    </div>
 
 
-                                @foreach($invoices_details as $invoices_details )
                                 <div class="tab-pane" id="tab2">
-                                    <table class="table table-striped">
+                                    @foreach($invoices_details as $invoices_details )
+                                    <table class="table table-striped  table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -156,12 +158,12 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    @endforeach
                                 </div>
-                                @endforeach
 
-                                @foreach($invoices_attachment as $invoices_attachment)
                                 <div class="tab-pane" id="tab3">
-                                    <table class="table table-striped">
+                                    @foreach($invoices_attachment as $invoices_attachment)
+                                    <table class="table table-striped  table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -192,9 +194,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
+                                    @endforeach
                                 </div>
-                                @endforeach
 
                             </div>
                         </div>
