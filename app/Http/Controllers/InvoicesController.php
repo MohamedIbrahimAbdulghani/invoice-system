@@ -138,7 +138,7 @@ class InvoicesController extends Controller
      */
     public function destroy(invoices $invoices)
     {
-        //
+
     }
 
     // this function to make product from select in add invoice

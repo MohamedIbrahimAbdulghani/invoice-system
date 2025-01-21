@@ -66,11 +66,13 @@ class InvoicesDetailsController extends Controller
         return  view('invoices.invoices_details', compact('invoices', 'invoices_details', 'invoices_attachment'));
     }
 
+    // this function to show file will uploaded it in invoice_attachment
     public function view_file($invoice_number, $file_name) {
         $file = public_path("Attachments/".$invoice_number.'/'.$file_name);
         return response()->file($file);
     }
 
+    // this function to download file will uploaded it in invoice_attachment
     public function download_file($invoice_number, $file_name) {
         $pathToFile = public_path('Attachments/'.$invoice_number.'/'.$file_name);
         return response()->download($pathToFile);
@@ -101,8 +103,8 @@ class InvoicesDetailsController extends Controller
     public function destroy(Request $request)
     {
         $invoices = invoice_attachments::findOrFail($request->id);
-        $invoices->delete();
-        Storage::disk('public_uploads')->delete($request->invoice_number.'/'.$request->file_name);
+        $invoices->delete(); // this is to delete invoice_attachment from database
+        Storage::disk('public_uploads')->delete($request->invoice_number.'/'.$request->file_name);  // this is to delete attachment from file or from public folder
         session()->flash('Delete', 'تم حذف المرفق بنجاح');
         return back();
     }
