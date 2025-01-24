@@ -187,7 +187,6 @@
                                                     <a href="{{url('download_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" class="btn btn-outline-info btn-sm" role="button"><i
                                                             class="fas fa-download ml-2"></i>تحميل</a>
 
-
                                                     <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-file_name="{{$invoices_attachment->file_name}}" data-invoice_number="{{$invoices_attachment->invoice_number}}" data-id="{{$invoices_attachment->id}}" data-target="#delete_file" role="button">حذف</button>
 
                                                 </td>
