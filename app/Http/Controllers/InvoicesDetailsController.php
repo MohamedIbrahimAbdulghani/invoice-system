@@ -6,6 +6,7 @@ use App\Models\invoice_attachments;
 use App\Models\invoices;
 use App\Models\invoices_details;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class InvoicesDetailsController extends Controller
@@ -38,7 +39,24 @@ class InvoicesDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->file('file');
+        $file_name = $file->getClientOriginalName();
+
+        $attachments = new invoice_attachments();
+        $attachments->file_name = $file_name;
+        $attachments->invoice_number = $request->invoice_number;
+        $attachments->created_by = Auth::user()->name;
+        $attachments->invoice_attachment_id = $request->invoice_id;
+        $attachments->save();
+        // return $file;
+
+        $fileName = $request->file->getClientOriginalName();
+
+        $request->file->move(public_path('Attachments/' . $request->invoice_number), $fileName);
+
+
+        session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
+        return back();
     }
 
     /**

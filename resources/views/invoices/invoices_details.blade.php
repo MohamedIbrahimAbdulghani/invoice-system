@@ -161,9 +161,25 @@
                                     @endforeach
                                 </div>
 
-                                <div class="tab-pane" id="tab3">
-                                    @foreach($invoices_attachment as $invoices_attachment)
+                                <div class="tab-pane" id="tab3"><form action="{{route('invoices_details.store')}}" method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                <h5 class="card-title">المرفقات</h5>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="file" name="file" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"data-height="70" />
+                                    <input type="hidden" name="invoice_number" value="{{$invoices->invoice_number}}">
+                                    <input type="hidden" name="invoice_id" value="{{$invoices->id}}">
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary mt-3 mb-3">حفظ البيانات</button>
+                                </div>
+
+                                </form>
+
+
                                     <table class="table table-striped  table-responsive">
+
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -175,6 +191,7 @@
                                         </thead>
                                         <tbody>
                                             <?php $counter = 1; ?>
+                                            @foreach($invoices_attachment as $invoices_attachment)
                                             <tr>
                                                 <td><?php  echo $counter++; ?></td>
                                                 <td>{{ $invoices_attachment->file_name }}</td>
@@ -191,9 +208,10 @@
 
                                                 </td>
                                             </tr>
+
+                                    @endforeach
                                         </tbody>
                                     </table>
-                                    @endforeach
                                 </div>
 
                             </div>

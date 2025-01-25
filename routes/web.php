@@ -33,9 +33,7 @@ Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 Route::get("view_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'view_file']);
 Route::get("download_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'download_file']);
 Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name('delete_file');
-
-
-
+Route::resource("invoices_details", InvoicesDetailsController::class);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
