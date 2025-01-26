@@ -25,6 +25,14 @@
 @endsection
 @section('content')
 
+@if (session()->has('Add'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ session()->get('Add') }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 
 @if (session()->has('Delete'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -160,26 +168,9 @@
                                     </table>
                                     @endforeach
                                 </div>
-
-                                <div class="tab-pane" id="tab3"><form action="{{route('invoices_details.store')}}" method="POST" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                <h5 class="card-title">المرفقات</h5>
-                                <div class="col-sm-12 col-md-12">
-                                    <input type="file" name="file" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"data-height="70" />
-                                    <input type="hidden" name="invoice_number" value="{{$invoices->invoice_number}}">
-                                    <input type="hidden" name="invoice_id" value="{{$invoices->id}}">
-                                </div>
-
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary mt-3 mb-3">حفظ البيانات</button>
-                                </div>
-
+                                <div class="tab-pane" id="tab3">
                                 </form>
-
-
                                     <table class="table table-striped  table-responsive">
-
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -198,13 +189,13 @@
                                                 <td>{{ $invoices_attachment->created_by }}</td>
                                                 <td>{{ $invoices_attachment->created_at }}</td>
                                                 <td>
-                                                    <a href="{{url('view_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" role="button" class="btn btn-outline-success btn-sm"><i
+                                                    <a href="{{url('view_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" role="button" class="btn btn-outline-success btn-sm mb-1"><i
                                                             class="fas fa-eye ml-2"></i>عرض</a>
 
-                                                    <a href="{{url('download_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" class="btn btn-outline-info btn-sm" role="button"><i
+                                                    <a href="{{url('download_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" class="btn btn-outline-info btn-sm mb-1" role="button"><i
                                                             class="fas fa-download ml-2"></i>تحميل</a>
 
-                                                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-file_name="{{$invoices_attachment->file_name}}" data-invoice_number="{{$invoices_attachment->invoice_number}}" data-id="{{$invoices_attachment->id}}" data-target="#delete_file" role="button">حذف</button>
+                                                    <button class="btn btn-outline-danger btn-sm mb-1" data-toggle="modal" data-file_name="{{$invoices_attachment->file_name}}" data-invoice_number="{{$invoices_attachment->invoice_number}}" data-id="{{$invoices_attachment->id}}" data-target="#delete_file" role="button">حذف</button>
 
                                                 </td>
                                             </tr>
