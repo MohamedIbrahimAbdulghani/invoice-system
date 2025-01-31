@@ -170,6 +170,20 @@
                                 </div>
                                 <div class="tab-pane" id="tab3">
                                 </form>
+
+                                <form action="{{url('invoices_attachments')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                    <h5 class="card-title">المرفقات</h5>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input type="file" name="file" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                                            data-height="70" />
+                                    </div><br>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary mb-2">حفظ البيانات</button>
+                                    </div>
+                                </form>
+
                                     <table class="table table-striped  table-responsive">
                                         <thead>
                                             <tr>

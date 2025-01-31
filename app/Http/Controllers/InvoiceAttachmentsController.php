@@ -35,7 +35,9 @@ class InvoiceAttachmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('file')) {
+
+        }
     }
 
     /**

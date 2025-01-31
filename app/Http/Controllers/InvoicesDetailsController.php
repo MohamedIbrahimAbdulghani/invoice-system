@@ -42,6 +42,7 @@ class InvoicesDetailsController extends Controller
 
     }
 
+
     /**
      * Display the specified resource.
      *

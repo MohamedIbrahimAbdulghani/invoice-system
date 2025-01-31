@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
@@ -35,6 +36,7 @@ Route::get("view_file/{invoice_number}/{file_name}", [InvoicesDetailsController:
 Route::get("download_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'download_file']);
 Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name('delete_file');
 Route::resource("invoices_details", InvoicesDetailsController::class);
+Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
