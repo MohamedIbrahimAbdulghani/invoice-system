@@ -40,21 +40,19 @@ class InvoiceAttachmentsController extends Controller
         if($request->hasFile('file')) {
             $file = $request->file('file');
             $file_name = $file->getClientOriginalName();
+            $invoice_number = $request->invoice_number;
             $attachment = new invoice_attachments();
             $attachment->file_name = $file_name;
-            $attachment->invoice_number = $request->invoice_number;
+            $attachment->invoice_number = $invoice_number;
             $attachment->created_by = Auth::user()->name;
             $attachment->invoice_attachment_id = $request->invoice_id;
-
             $attachment->save();
-
             // this code to move file
             $fileName = $request->file->getClientOriginalName();
-            $request->file->move(public_path('Attachments/' . $request->invoice_number), $fileName);
-
+            $request->file->move(public_path('Attachments/' . $invoice_number), $fileName);
         }
-
-
+        session()->flash('Add', 'تم أضافة المرفق بنجاح');
+        return back();
 
     }
 
