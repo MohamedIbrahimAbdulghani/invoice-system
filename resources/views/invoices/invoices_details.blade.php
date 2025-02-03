@@ -171,24 +171,29 @@
                                 <div class="tab-pane" id="tab3">
                                 </form>
 
-                                <form action="{{url('invoices_attachments')}}" method="post" enctype="multipart/form-data">
+                                <form action="{{route('invoice_attachment.store')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
                                     <h5 class="card-title">المرفقات</h5>
+
                                     <div class="col-sm-12 col-md-12">
                                         <input type="file" name="file" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
                                             data-height="70" />
+                                            <input type="hidden" name="invoice_id" id="invoice_id" value="{{$invoices->id}}">
+                                            <input type="hidden" name="invoice_number" id="invoice_number" value="{{$invoices->invoice_number}}">
                                     </div><br>
+
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary mb-2">حفظ البيانات</button>
+                                        <button type="submit" class="btn btn-primary mb-3">حفظ البيانات</button>
                                     </div>
                                 </form>
+
 
                                     <table class="table table-striped  table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>رقم الملف</th>
+                                                <th>اسم الملف</th>
                                                 <th>قم بالاضافة</th>
                                                 <th>تاريخ الاضافة</th>
                                                 <th>العمليات</th>

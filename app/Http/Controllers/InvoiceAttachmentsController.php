@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\invoice_attachments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceAttachmentsController extends Controller
 {
@@ -35,9 +36,26 @@ class InvoiceAttachmentsController extends Controller
      */
     public function store(Request $request)
     {
+
         if($request->hasFile('file')) {
+            $file = $request->file('file');
+            $file_name = $file->getClientOriginalName();
+            $attachment = new invoice_attachments();
+            $attachment->file_name = $file_name;
+            $attachment->invoice_number = $request->invoice_number;
+            $attachment->created_by = Auth::user()->name;
+            $attachment->invoice_attachment_id = $request->invoice_id;
+
+            $attachment->save();
+
+            // this code to move file
+            $fileName = $request->file->getClientOriginalName();
+            $request->file->move(public_path('Attachments/' . $request->invoice_number), $fileName);
 
         }
+
+
+
     }
 
     /**
