@@ -144,7 +144,23 @@ class InvoicesController extends Controller
             "value_vat" => $request->Rate_Value_Added,
             "Total" => $request->Total,
             "note" => $request->note,
+            // "user" => Auth::user()->name,
         ]);
+
+        $details = invoices_details::where("invoice_detail_id", $invoice_id)->first();
+        $details->invoice_number = $request->invoice_number;
+        $details->section = $request->Section;
+        $details->product = $request->product;
+        $details->note = $request->note;
+        // $details->user = Auth::user()->name;
+        $details->update();
+
+
+        $attachment = invoice_attachments::where("invoice_attachment_id", $invoice_id)->first();
+        $attachment->invoice_number = $request->invoice_number;
+        $attachment->update();
+
+
         session()->flash('Edit', 'تم تعديل الفاتورة بنجاح');
         return back();
     }

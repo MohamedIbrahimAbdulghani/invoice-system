@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\invoice_attachments;
+use App\Models\invoices;
+use App\Models\sections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,7 +77,7 @@ class InvoiceAttachmentsController extends Controller
      */
     public function edit(invoice_attachments $invoice_attachments)
     {
-        //
+
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\invoice_attachments;
 use App\Models\invoices;
 use App\Models\invoices_details;
+use App\Models\sections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -67,6 +68,7 @@ class InvoicesDetailsController extends Controller
         $invoices_attachment = invoice_attachments::all()->where("invoice_attachment_id", $id);
         return  view('invoices.invoices_details', compact('invoices', 'invoices_details', 'invoices_attachment'));
     }
+
 
     // this function to show file will uploaded it in invoice_attachment
     public function view_file($invoice_number, $file_name) {
