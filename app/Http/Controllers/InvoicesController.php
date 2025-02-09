@@ -147,6 +147,7 @@ class InvoicesController extends Controller
             // "user" => Auth::user()->name,
         ]);
 
+        // this code to update invoice_detail when make update in invoice table
         $details = invoices_details::where("invoice_detail_id", $invoice_id)->first();
         $details->invoice_number = $request->invoice_number;
         $details->section = $request->Section;
@@ -155,11 +156,10 @@ class InvoicesController extends Controller
         // $details->user = Auth::user()->name;
         $details->update();
 
-
+        // this code to update invoice_attachment when make update in invoice table
         $attachment = invoice_attachments::where("invoice_attachment_id", $invoice_id)->first();
         $attachment->invoice_number = $request->invoice_number;
         $attachment->update();
-
 
         session()->flash('Edit', 'تم تعديل الفاتورة بنجاح');
         return back();
