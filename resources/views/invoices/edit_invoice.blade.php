@@ -63,21 +63,23 @@
                         <div class="col">
                             <label for="inputName" class="control-label">رقم الفاتورة</label>
                             <input type="hidden" name="invoice_id" id="invoice_id" value="{{$invoices->id}}">
-                            <input type="text" class="form-control" id="inputName" name="invoice_number" value="{{$invoices->invoice_number}}"
-                                title="يرجي ادخال رقم الفاتورة" required>
+                            <input type="text" class="form-control" id="inputName" name="invoice_number"
+                                value="{{$invoices->invoice_number}}" title="يرجي ادخال رقم الفاتورة" required>
                         </div>
 
                         <div class="col">
                             <label>تاريخ الفاتورة</label>
                             <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD"
-                                type="text"  value="{{$invoices->invoice_date}}" required>
+                                type="text" value="{{$invoices->invoice_date}}" required>
                         </div>
+
 
                         <div class="col">
                             <label>تاريخ الاستحقاق</label>
                             <input class="form-control fc-datepicker" name="Due_date" placeholder="YYYY-MM-DD"
-                                type="text" required  value="{{$invoices->due_date}}">
+                                type="text" required value="{{$invoices->due_date}}">
                         </div>
+
 
                     </div>
 
@@ -97,14 +99,15 @@
                         <div class="col">
                             <label for="inputName" class="control-label">المنتج</label>
                             <select id="product" name="product" class="form-control">
-                                <option selected disabled  value="{{$invoices->product}}">{{$invoices->product}}</option>
+                                <option selected disabled value="{{$invoices->product}}">{{$invoices->product}}</option>
                             </select>
                         </div>
 
                         <div class="col">
                             <label for="inputName" class="control-label">مبلغ التحصيل</label>
                             <input type="text" class="form-control" id="inputName" name="Amount_collection"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$invoices->Amount_collection}}">
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                value="{{$invoices->Amount_collection}}">
                         </div>
                     </div>
 
@@ -118,7 +121,7 @@
                             <input type="text" class="form-control form-control-lg" id="Commission" name="Commission"
                                 title="يرجي ادخال مبلغ العمولة "
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                required  value="{{$invoices->Amount_commission}}">
+                                required value="{{$invoices->Amount_commission}}">
                         </div>
 
                         <div class="col">
@@ -153,7 +156,8 @@
 
                         <div class="col">
                             <label for="inputName" class="control-label">الاجمالي شامل الضريبة</label>
-                            <input type="text" class="form-control" id="Total" name="Total" readonly value="{{$invoices->Total}}">
+                            <input type="text" class="form-control" id="Total" name="Total" readonly
+                                value="{{$invoices->Total}}">
                         </div>
                     </div>
 
@@ -161,7 +165,8 @@
                     <div class="row">
                         <div class="col">
                             <label for="exampleTextarea">ملاحظات</label>
-                            <textarea class="form-control" id="exampleTextarea" name="note" rows="3" >{{$invoices->note}}</textarea>
+                            <textarea class="form-control" id="exampleTextarea" name="note"
+                                rows="3">{{$invoices->note}}</textarea>
                         </div>
                     </div><br>
 

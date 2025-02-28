@@ -121,7 +121,7 @@
                                         </tbody>
                                     </table>
 
-                                    </div>
+                                </div>
 
 
                                 <div class="tab-pane" id="tab2">
@@ -169,24 +169,27 @@
                                     @endforeach
                                 </div>
                                 <div class="tab-pane" id="tab3">
-                                </form>
+                                    </form>
 
-                                <form action="{{route('invoice_attachment.store')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                    <h5 class="card-title">المرفقات</h5>
+                                    <form action="{{route('invoice_attachment.store')}}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                        <h5 class="card-title">المرفقات</h5>
 
-                                    <div class="col-sm-12 col-md-12">
-                                        <input type="file" name="file" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
-                                            data-height="70" />
-                                            <input type="hidden" name="invoice_id" id="invoice_id" value="{{$invoices->id}}">
-                                            <input type="hidden" name="invoice_number" id="invoice_number" value="{{$invoices->invoice_number}}">
-                                    </div><br>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="file" name="file" class="dropify"
+                                                accept=".pdf,.jpg, .png, image/jpeg, image/png" data-height="70" />
+                                            <input type="hidden" name="invoice_id" id="invoice_id"
+                                                value="{{$invoices->id}}">
+                                            <input type="hidden" name="invoice_number" id="invoice_number"
+                                                value="{{$invoices->invoice_number}}">
+                                        </div><br>
 
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary mb-3">حفظ البيانات</button>
-                                    </div>
-                                </form>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-primary mb-3">حفظ البيانات</button>
+                                        </div>
+                                    </form>
 
 
                                     <table class="table table-striped table-responsive ">
@@ -208,18 +211,25 @@
                                                 <td>{{ $invoices_attachment->created_by }}</td>
                                                 <td>{{ $invoices_attachment->created_at }}</td>
                                                 <td>
-                                                    <a href="{{url('view_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" role="button" class="btn btn-outline-success btn-sm mb-1"><i
+                                                    <a href="{{url('view_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}"
+                                                        role="button" class="btn btn-outline-success btn-sm mb-1"><i
                                                             class="fas fa-eye ml-2"></i>عرض</a>
 
-                                                    <a href="{{url('download_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}" class="btn btn-outline-info btn-sm mb-1" role="button"><i
+                                                    <a href="{{url('download_file')}}/{{$invoices->invoice_number}}/{{$invoices_attachment->file_name}}"
+                                                        class="btn btn-outline-info btn-sm mb-1" role="button"><i
                                                             class="fas fa-download ml-2"></i>تحميل</a>
 
-                                                    <button class="btn btn-outline-danger btn-sm mb-1" data-toggle="modal" data-file_name="{{$invoices_attachment->file_name}}" data-invoice_number="{{$invoices_attachment->invoice_number}}" data-id="{{$invoices_attachment->id}}" data-target="#delete_file" role="button">حذف</button>
+                                                    <button class="btn btn-outline-danger btn-sm mb-1"
+                                                        data-toggle="modal"
+                                                        data-file_name="{{$invoices_attachment->file_name}}"
+                                                        data-invoice_number="{{$invoices_attachment->invoice_number}}"
+                                                        data-id="{{$invoices_attachment->id}}"
+                                                        data-target="#delete_file" role="button">حذف</button>
 
                                                 </td>
                                             </tr>
 
-                                    @endforeach
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -230,38 +240,38 @@
                 </div>
             </div>
 
-                <!-- delete -->
-    <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <!-- delete -->
+            <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form action="{{url('delete_file')}}" method="post">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                <p class="text-center">
+                                <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
+                                </p>
+
+                                <input type="hidden" name="id" id="id" value="">
+                                <input type="hidden" name="file_name" id="file_name" value="">
+                                <input type="hidden" name="invoice_number" id="invoice_number" value="">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
+                                <button type="submit" class="btn btn-danger">تاكيد</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-                <form action="{{url('delete_file')}}" method="post">
-                {{ csrf_field() }}
-                <div class="modal-body">
-                    <p class="text-center">
-                    <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
-                    </p>
-
-                    <input type="hidden" name="id" id="id" value="">
-                    <input type="hidden" name="file_name" id="file_name" value="">
-                    <input type="hidden" name="invoice_number" id="invoice_number" value="">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-danger">تاكيد</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
         </div>
 
@@ -293,16 +303,16 @@
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 {{-- this script to make modal use it in delete invoice --}}
 <script>
-    $('#delete_file').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var id = button.data("id")
-        var file_name = button.data("file_name")
-        var invoice_number = button.data("invoice_number")
-        var modal = $(this)
+$('#delete_file').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var id = button.data("id")
+    var file_name = button.data("file_name")
+    var invoice_number = button.data("invoice_number")
+    var modal = $(this)
 
-        modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #file_name').val(file_name);
-        modal.find('.modal-body #invoice_number').val(invoice_number);
-    })
+    modal.find('.modal-body #id').val(id);
+    modal.find('.modal-body #file_name').val(file_name);
+    modal.find('.modal-body #invoice_number').val(invoice_number);
+})
 </script>
 @endsection
