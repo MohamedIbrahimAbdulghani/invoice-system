@@ -171,9 +171,18 @@ class InvoicesController extends Controller
      * @param  \App\Models\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoices $invoices)
+    public function destroy(invoices $invoices, Request $request)
     {
+        $id = $request->invoice_id;
+        $invoices = invoices::where('id', $id)->first();
+        $invoices->delete();
+        session()->flash('delete_invoice');
+        return redirect('invoices');
+    }
 
+    public function delete($id)
+    {
+        return $id;
     }
 
     // this function to make product from select in add invoice
