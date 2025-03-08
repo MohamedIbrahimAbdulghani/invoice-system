@@ -10,6 +10,7 @@ use App\Models\sections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesController extends Controller
 {
@@ -175,15 +176,19 @@ class InvoicesController extends Controller
     {
         $id = $request->invoice_id;
         $invoices = invoices::where('id', $id)->first();
+        $invoice_attachments = invoice_attachments::where('invoice_attachment_id', $id)->first();
+
+        if(!empty($invoice_attachments->invoice_number)) {
+            Storage::disk('public_uploads')->delete($invoice_attachments->invoice_number . "/" . $invoice_attachments->file_name);  /////  this code if i want delete file inside folder
+            // Storage::disk('public_uploads')->deleteDirectory($invoice_attachments->invoice_number); ///// this code if i want delete all folder
+        }
+        // i used delete() function because i want delete this invoice from table but i want make copy in database (soft delete)
         $invoices->delete();
         session()->flash('delete_invoice');
         return redirect('invoices');
     }
 
-    public function delete($id)
-    {
-        return $id;
-    }
+
 
     // this function to make product from select in add invoice
     public function getProducts($id) {

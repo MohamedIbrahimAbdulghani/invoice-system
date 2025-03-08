@@ -33,7 +33,6 @@ Route::get('/{page}', [AdminController::class, "index"]);
 
 Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 Route::get("edit_invoice/{id}", [InvoicesController::class, 'edit']);
-Route::get("delete_invoice/{id}", [InvoicesController::class, 'delete']);
 Route::get("view_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'view_file']);
 Route::get("download_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'download_file']);
 Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name('delete_file');

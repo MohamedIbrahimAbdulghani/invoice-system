@@ -113,9 +113,8 @@ window.onload = function() {
                                                 href="{{url('edit_invoice')}}/{{ $invoice->id }}"><i
                                                     class="text-primary fas fa-pen-alt"></i>&nbsp;&nbsp;تعديل
                                                 الفاتورة</a>
-                                            <a class="dropdown-item" href="{{url('delete_invoice')}}/{{ $invoice->id }}"
-                                                data-invoice_id="{{ $invoice->id }}" data-toggle="modal"
-                                                data-target="#delete_invoice"><i
+                                            <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
+                                                data-toggle="modal" data-target="#delete_invoice"><i
                                                     class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                 الفاتورة</a>
                                             <!-- <a href="{{url('delete_invoice')}}/{{ $invoice->id }}">Edit</a> -->
