@@ -224,7 +224,8 @@
                                                         data-file_name="{{$invoices_attachment->file_name}}"
                                                         data-invoice_number="{{$invoices_attachment->invoice_number}}"
                                                         data-id="{{$invoices_attachment->id}}"
-                                                        data-target="#delete_file" role="button">حذف</button>
+                                                        data-target="#delete_file" role="button"><i
+                                                            class=" fas fa-trash-alt"></i>&nbsp;&nbsp;حذف</button>
 
                                                 </td>
                                             </tr>

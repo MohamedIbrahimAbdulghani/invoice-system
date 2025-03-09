@@ -117,7 +117,6 @@ window.onload = function() {
                                                 data-toggle="modal" data-target="#delete_invoice"><i
                                                     class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                 الفاتورة</a>
-                                            <!-- <a href="{{url('delete_invoice')}}/{{ $invoice->id }}">Edit</a> -->
                                         </div>
                                     </div>
                                 </td>
