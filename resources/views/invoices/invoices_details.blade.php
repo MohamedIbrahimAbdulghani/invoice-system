@@ -148,15 +148,15 @@
                                                 <td>{{$invoices_details->product}}</td>
                                                 <td>{{$invoices->sections->section_name}}</td>
                                                 <td>
-                                                    @if($invoices->value_status == 1)
+                                                    @if($invoices_details->value_status == 1)
                                                     <span
-                                                        class="badge badge-pill badge-success ">{{$invoices->status}}</span>
-                                                    @elseif($invoices->value_status == 2)
+                                                        class="badge badge-pill badge-success ">{{$invoices_details->status}}</span>
+                                                    @elseif($invoices_details->value_status == 2)
                                                     <span
-                                                        class="badge badge-pill badge-danger ">{{$invoices->status}}</span>
+                                                        class="badge badge-pill badge-danger ">{{$invoices_details->status}}</span>
                                                     @else
                                                     <span
-                                                        class="badge badge-pill badge-warning ">{{$invoices->status}}</span>
+                                                        class="badge badge-pill badge-warning ">{{$invoices_details->status}}</span>
                                                     @endif
                                                 </td>
                                                 <td>{{$invoices_details->payment_date}}</td>

@@ -209,10 +209,36 @@ class InvoicesController extends Controller
                 'status' => $request->status,
                 'payment_date' => $request->payment_date
             ]);
-
-            
-
+            invoices_details::create([
+                'invoice_number'=>$request->invoice_number,
+                'invoice_detail_id'=>$request->invoice_id,
+                'product'=>$request->product,
+                'section'=>$request->section,
+                'status'=>$request->status,
+                'value_status'=> 1,
+                'payment_date'=>$request->payment_date,
+                'note'=>$request->note,
+                'user'=>Auth::user()->name,
+            ]);
+        } else {
+            $invoices->update([
+                'value_status' => 3,
+                'status' => $request->status,
+                'payment_date' => $request->payment_date
+            ]);
+            invoices_details::create([
+                'invoice_number'=>$request->invoice_number,
+                'invoice_detail_id'=>$request->invoice_id,
+                'product'=>$request->product,
+                'section'=>$request->section,
+                'status'=>$request->status,
+                'value_status'=> 3,
+                'payment_date'=>$request->payment_date,
+                'note'=>$request->note,
+                'user'=>Auth::user()->name,
+            ]);
         }
+        return redirect('invoices');
         // return $request;
     }
 }

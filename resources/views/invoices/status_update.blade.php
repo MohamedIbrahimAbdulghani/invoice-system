@@ -64,18 +64,18 @@
                     <div class="row">
                         <div class="col">
                             <label for="inputName" class="control-label">القسم</label>
-                            <select name="Section" class="form-control SelectBox" onclick="console.log($(this).val())"
+                            <select name="section" class="form-control SelectBox" onclick="console.log($(this).val())"
                                 onchange="console.log('change is firing')" readonly>
                                 <!--placeholder-->
-                                <option value=" ">
+                                <option value=" {{ $invoices->sections->id }}">
                                     {{ $invoices->sections->section_name }}
                                 </option>
                             </select>
                         </div>
                         <div class="col">
                             <label for="inputName" class="control-label">المنتج</label>
-                            <select id="product" name="product" class="form-control" readonly>
-                                <option selected disabled value="{{$invoices->product}}">{{$invoices->product}}
+                            <select id="product" class="form-control" name="product" readonly>
+                                <option value="{{$invoices->product}}">{{$invoices->product}}
                                 </option>
                             </select>
                         </div>
