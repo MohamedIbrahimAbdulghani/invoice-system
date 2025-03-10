@@ -26,9 +26,10 @@ return new class extends Migration
             $table->string('discount');
             $table->string('rate_vat'); // نسبة الضريبة
             $table->decimal('value_vat',8,2); // قيمة الضريبة
-            $table->decimal('Total',8,2);
-            $table->string('Status', 50);
+            $table->decimal('total',8,2);
+            $table->string('status', 50);
             $table->integer('value_status');
+            $table->date('payment_date')->nullable();
             $table->text('note')->nullable();
             $table->string('user');
             $table->softDeletes();

@@ -102,17 +102,17 @@
                                                 <td>{{$invoices->discount}}</td>
                                                 <td>{{$invoices->rate_vat}}</td>
                                                 <td>{{$invoices->value_vat}}</td>
-                                                <td>{{$invoices->Total}}</td>
+                                                <td>{{$invoices->total}}</td>
                                                 <td>
                                                     @if($invoices->value_status == 1)
                                                     <span
-                                                        class="badge badge-pill badge-success ">{{$invoices->Status}}</span>
+                                                        class="badge badge-pill badge-success ">{{$invoices->status}}</span>
                                                     @elseif($invoices->value_status == 2)
                                                     <span
-                                                        class="badge badge-pill badge-danger ">{{$invoices->Status}}</span>
+                                                        class="badge badge-pill badge-danger ">{{$invoices->status}}</span>
                                                     @else
                                                     <span
-                                                        class="badge badge-pill badge-warning ">{{$invoices->Status}}</span>
+                                                        class="badge badge-pill badge-warning ">{{$invoices->status}}</span>
                                                     @endif
                                                 </td>
                                                 <td>{{$invoices->note}}</td>
@@ -150,16 +150,16 @@
                                                 <td>
                                                     @if($invoices->value_status == 1)
                                                     <span
-                                                        class="badge badge-pill badge-success ">{{$invoices->Status}}</span>
+                                                        class="badge badge-pill badge-success ">{{$invoices->status}}</span>
                                                     @elseif($invoices->value_status == 2)
                                                     <span
-                                                        class="badge badge-pill badge-danger ">{{$invoices->Status}}</span>
+                                                        class="badge badge-pill badge-danger ">{{$invoices->status}}</span>
                                                     @else
                                                     <span
-                                                        class="badge badge-pill badge-warning ">{{$invoices->Status}}</span>
+                                                        class="badge badge-pill badge-warning ">{{$invoices->status}}</span>
                                                     @endif
                                                 </td>
-                                                <td>{{$invoices_details->Payment_Date}}</td>
+                                                <td>{{$invoices_details->payment_date}}</td>
                                                 <td>{{$invoices_details->note}}</td>
                                                 <td>{{$invoices_details->created_at}}</td>
                                                 <td>{{$invoices_details->user}}</td>

@@ -156,8 +156,8 @@
 
                         <div class="col">
                             <label for="inputName" class="control-label">الاجمالي شامل الضريبة</label>
-                            <input type="text" class="form-control" id="Total" name="Total" readonly
-                                value="{{$invoices->Total}}">
+                            <input type="text" class="form-control" id="total" name="total" readonly
+                                value="{{$invoices->total}}">
                         </div>
                     </div>
 

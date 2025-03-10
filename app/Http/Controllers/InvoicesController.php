@@ -55,8 +55,8 @@ class InvoicesController extends Controller
             "discount" => $request->Discount,
             "rate_vat" => $request->Percentage_Rate_Value_Added,
             "value_vat" => $request->Rate_Value_Added,
-            "Total" => $request->Total,
-            "Status" => 'غير مدفوعة',
+            "total" => $request->total,
+            "status" => 'غير مدفوعة',
             "value_status" => 2,
             "note" => $request->note,
             "user" => Auth::user()->name,
@@ -103,9 +103,11 @@ class InvoicesController extends Controller
      * @param  \App\Models\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function show(invoices $invoices)
+    public function show($id)
     {
-        //
+        // return view('invoices.status_update');
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.status_update', compact('invoices'));
     }
 
     /**
@@ -143,7 +145,7 @@ class InvoicesController extends Controller
             "discount" => $request->Discount,
             "rate_vat" => $request->Percentage_Rate_Value_Added,
             "value_vat" => $request->Rate_Value_Added,
-            "Total" => $request->Total,
+            "total" => $request->total,
             "note" => $request->note,
             // "user" => Auth::user()->name,
         ]);
@@ -188,11 +190,29 @@ class InvoicesController extends Controller
         return redirect('invoices');
     }
 
-
-
     // this function to make product from select in add invoice
     public function getProducts($id) {
         $products = DB::table('products')->where("section_id", $id)->pluck("product_name", "id");
         return json_encode($products);
+    }
+    
+    public function status_show(Request $request, $id) {
+        $sections = sections::all();
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.status_update', compact('invoices', 'sections'));
+    }
+    public function status_update(Request $request, $id) {
+        $invoices = invoices::findOrFail($id);
+        if($request->status === 'مدفوعة') {
+            $invoices->update([
+                'value_status' => 1,
+                'status' => $request->status,
+                'payment_date' => $request->payment_date
+            ]);
+
+            
+
+        }
+        // return $request;
     }
 }

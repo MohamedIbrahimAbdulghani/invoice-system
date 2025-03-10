@@ -33,6 +33,9 @@ Route::get('/{page}', [AdminController::class, "index"]);
 
 Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 Route::get("edit_invoice/{id}", [InvoicesController::class, 'edit']);
+Route::get("status_show/{id}", [InvoicesController::class, 'show']);
+Route::get("status_show/{id}", [InvoicesController::class, 'status_show']);
+Route::post("status_update/{id}", [InvoicesController::class, 'status_update'])->name('invoices.status_update');
 Route::get("view_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'view_file']);
 Route::get("download_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'download_file']);
 Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name('delete_file');

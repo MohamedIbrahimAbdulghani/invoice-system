@@ -91,14 +91,14 @@ window.onload = function() {
                                 <td>{{$invoice->discount}}</td>
                                 <td>{{$invoice->rate_vat}}</td>
                                 <td>{{$invoice->value_vat}}</td>
-                                <td>{{$invoice->Total}}</td>
+                                <td>{{$invoice->total}}</td>
                                 <td>
                                     @if($invoice->value_status == 1)
-                                    <span class="badge badge-pill badge-success ">{{$invoice->Status}}</span>
+                                    <span class="badge badge-pill badge-success ">{{$invoice->status}}</span>
                                     @elseif($invoice->value_status == 2)
-                                    <span class="badge badge-pill badge-danger">{{$invoice->Status}}</span>
+                                    <span class="badge badge-pill badge-danger">{{$invoice->status}}</span>
                                     @else
-                                    <span class="badge badge-pill badge-warning">{{$invoice->Status}}</span>
+                                    <span class="badge badge-pill badge-warning">{{$invoice->status}}</span>
                                     @endif
                                 </td>
                                 <td>{{ $invoice->note }}</td>
@@ -117,6 +117,9 @@ window.onload = function() {
                                                 data-toggle="modal" data-target="#delete_invoice"><i
                                                     class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                 الفاتورة</a>
+                                            <a class="dropdown-item" href="{{url('status_show')}}/{{ $invoice->id }}"><i
+                                                    class="text-success fas fa-money-bill"></i>&nbsp;&nbsp;تغير حالة
+                                                الدفع</a>
                                         </div>
                                     </div>
                                 </td>
