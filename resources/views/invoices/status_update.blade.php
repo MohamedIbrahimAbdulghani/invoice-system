@@ -6,8 +6,6 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
-<!--Internal   Notify -->
-<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet" />
 @endsection
 
 @section('title')
@@ -26,6 +24,9 @@
 <!-- breadcrumb -->
 @endsection
 @section('content')
+
+
+
 <!-- row -->
 <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -197,7 +198,6 @@
 <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
 <!-- Internal form-elements js -->
 <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
-
 <script>
 var date = $('.fc-datepicker').datepicker({
     dateFormat: 'yy-mm-dd'

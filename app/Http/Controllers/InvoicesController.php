@@ -238,6 +238,7 @@ class InvoicesController extends Controller
                 'user'=>Auth::user()->name,
             ]);
         }
+        session()->flash('update_invoice');
         return redirect('invoices');
         // return $request;
     }

@@ -40,6 +40,19 @@ window.onload = function() {
 @endif
 <!-- this code to show message when delete invoice -->
 
+<!-- this code to show message when update invoice -->
+@if(session()->has('update_invoice'))
+<script>
+window.onload = function() {
+    notif({
+        msg: "تم تحديث الفاتورة بنجاح",
+        type: "success"
+    })
+}
+</script>
+@endif
+<!-- this code to show message when update invoice -->
+
 <!-- row -->
 <div class="row row-sm">
 
