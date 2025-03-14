@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -27,11 +28,13 @@ Route::get('/', function () {
 Route::get("invoices_paid", [InvoicesController::class, 'invoices_paid']);
 Route::get("invoices_unpaid", [InvoicesController::class, 'invoices_unpaid']);
 Route::get("invoices_partail", [InvoicesController::class, 'invoices_partail']);
-Route::get("archive_invoice", [InvoicesController::class, 'archive_invoice']);
+
 Route::resource('invoices', InvoicesController::class);
 Route::resource("sections", SectionsController::class);
 Route::resource("products", ProductsController::class);
 Route::resource("invoice_attachment", InvoiceAttachmentsController::class);
+// Route::post("invoice_archive", [ArchiveController::class, 'destroy'])->name('invoices_archive.destroy');
+Route::resource('invoices_archive', ArchiveController::class);
 Route::get("section/{id}", [InvoicesController::class, "getProducts"]);
 Route::get('/{page}', [AdminController::class, "index"]);
 

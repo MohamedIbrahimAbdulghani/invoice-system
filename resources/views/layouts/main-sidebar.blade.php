@@ -56,7 +56,7 @@
                     <li><a class="slide-item" href="{{ url('/' . $page='invoices_partail') }}">الفواتير المدفوعة
                             جزئيآ</a>
                     </li>
-                    <li><a class="slide-item" href="{{ url('/' . $page='chart-chartjs') }}">أرشيف الفواتير</a>
+                    <li><a class="slide-item" href="{{ url('/' . $page='invoices_archive') }}">أرشيف الفواتير</a>
                     </li>
                 </ul>
             </li>

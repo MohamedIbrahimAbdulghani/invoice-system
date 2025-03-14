@@ -11,7 +11,7 @@
 @endsection
 
 @section('title')
-الفواتير
+الفواتير المؤرشفة
 @stop
 @section('page-header')
 <!-- breadcrumb -->
@@ -19,7 +19,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                الفواتير</span>
+                الفواتير المؤرشفة</span>
         </div>
     </div>
 </div>
@@ -133,11 +133,10 @@ window.onload = function() {
                                             <a class="dropdown-item" href="{{url('status_show')}}/{{ $invoice->id }}"><i
                                                     class="text-success fas fa-money-bill"></i>&nbsp;&nbsp;تغير حالة
                                                 الدفع</a>
-                                            <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
+                                            <a class="dropdown-item" href="#" data-invoice_id="{{$invoice->id}}"
                                                 data-toggle="modal" data-target="#archive_invoice"><i
                                                     class="text-warning fa fa-exchange-alt"></i>&nbsp;&nbsp;
                                                 نقل الي الارشيف</a>
-
                                         </div>
                                     </div>
                                 </td>
@@ -186,11 +185,11 @@ window.onload = function() {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ارشفت الفاتورة</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">حذف الفاتورة</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <form action="{{route('invoices.destroy', 'test')}}" method="post">
+                    <form action="{{ route('invoices.destroy', 'test') }}" method="post">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
                 </div>
@@ -247,17 +246,6 @@ $('#delete_invoice').on('show.bs.modal', function(event) {
 })
 </script>
 <!-- Delete Invoice Script -->
-
-<!-- Archive Invoice Script -->
-<script>
-$('#archive_invoice').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var invoice_id = button.data('invoice_id')
-    var modal = $(this)
-    modal.find('.modal-body #invoice_id').val(invoice_id);
-})
-</script>
-<!-- Archive Invoice Script -->
 <!--Internal  Notify js -->
 <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
