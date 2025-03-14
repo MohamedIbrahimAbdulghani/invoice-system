@@ -242,4 +242,20 @@ class InvoicesController extends Controller
         return redirect('invoices');
         // return $request;
     }
+    public function invoices_paid() {
+        $invoices = invoices::where('value_status', 1)->get();
+        return view('invoices.invoices_paid', compact('invoices'));
+    }
+    public function invoices_unpaid() {
+        $invoices = invoices::where('value_status', 2)->get();
+        return view('invoices.invoices_unpaid', compact('invoices'));
+    }
+    public function invoices_partail() {
+        $invoices = invoices::where('value_status', 3)->get();
+        return view('invoices.invoices_partail', compact('invoices'));
+    }
+    public function archive_invoice($id) {
+        return $id;
+    }
+    
 }

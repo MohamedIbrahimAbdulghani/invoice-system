@@ -48,9 +48,15 @@
                         class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ url('/' . $page='invoices') }}">الفواتير </a></li>
-                    <li><a class="slide-item" href="{{ url('/' . $page='chart-morris') }}">الفواتير المدفوعة</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . $page='chart-flot') }}">الفواتير الغير مدفوعة</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . $page='chart-chartjs') }}">الفواتير المدفوعة جزئيآ</a>
+                    <li><a class="slide-item" href="{{ url('/' . $page='invoices_paid') }}">الفواتير
+                            المدفوعة</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='invoices_unpaid') }}">الفواتير الغير
+                            مدفوعة</a>
+                    </li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='invoices_partail') }}">الفواتير المدفوعة
+                            جزئيآ</a>
+                    </li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='chart-chartjs') }}">أرشيف الفواتير</a>
                     </li>
                 </ul>
             </li>

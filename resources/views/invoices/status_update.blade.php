@@ -115,9 +115,7 @@
                             <select name="Percentage_Rate_Value_Added" id="Percentage_Rate_Value_Added"
                                 class="form-control" onchange="myFunction()" readonly>
                                 <!--placeholder-->
-                                <option value="" selected disabled>{{$invoices->rate_vat}}</option>
-                                <option value=" 5%">5%</option>
-                                <option value="10%">10%</option>
+                                <option value="" selected readonly>{{$invoices->rate_vat}}</option>
                             </select>
                         </div>
 

@@ -11,7 +11,7 @@
 @endsection
 
 @section('title')
-الفواتير
+الفواتير المدفوعة
 @stop
 @section('page-header')
 <!-- breadcrumb -->
@@ -19,7 +19,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                الفواتير</span>
+                الفواتير المدفوعة</span>
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@ window.onload = function() {
                                             <a class="dropdown-item" href="{{url('status_show')}}/{{ $invoice->id }}"><i
                                                     class="text-success fas fa-money-bill"></i>&nbsp;&nbsp;تغير حالة
                                                 الدفع</a>
-                                            <a class="dropdown-item"
+                                                <a class="dropdown-item"
                                                 href="{{url('archive_invoice')}}/{{ $invoice->id }}"><i
                                                     class="text-warning fa fa-exchange-alt"></i>&nbsp;&nbsp;
                                                 نقل الي الارشيف</a>
