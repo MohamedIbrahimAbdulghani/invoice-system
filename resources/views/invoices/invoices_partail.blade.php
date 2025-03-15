@@ -189,9 +189,8 @@ window.onload = function() {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <form action="{{route('invoices.destroy', 'test')}}" method="post">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
+                    <form action="{{route('invoices.invoices_archive')}}" method="post">
+                        @csrf
                 </div>
                 <div class="modal-body">
                     هل انت متاكد من الارشفة ؟

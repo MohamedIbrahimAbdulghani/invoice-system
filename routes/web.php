@@ -30,6 +30,8 @@ Route::get("invoices_unpaid", [InvoicesController::class, 'invoices_unpaid']);
 Route::get("invoices_partail", [InvoicesController::class, 'invoices_partail']);
 
 Route::resource('invoices', InvoicesController::class);
+
+
 Route::resource("sections", SectionsController::class);
 Route::resource("products", ProductsController::class);
 Route::resource("invoice_attachment", InvoiceAttachmentsController::class);
@@ -42,7 +44,7 @@ Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 Route::get("edit_invoice/{id}", [InvoicesController::class, 'edit']);
 Route::get("status_show/{id}", [InvoicesController::class, 'show']);
 Route::get("status_show/{id}", [InvoicesController::class, 'status_show']);
-
+Route::post("invoices_archive", [InvoicesController::class, 'invoices_archive'])->name('invoices.invoices_archive');
 
 Route::post("status_update/{id}", [InvoicesController::class, 'status_update'])->name('invoices.status_update');
 Route::get("view_file/{invoice_number}/{file_name}", [InvoicesDetailsController::class, 'view_file']);

@@ -133,21 +133,16 @@ window.onload = function() {
                                             class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
                                             type="button">العمليات <i class="fas fa-caret-down ml-1"></i></button>
                                         <div class="dropdown-menu tx-13 ">
-                                            <a class="dropdown-item"
-                                                href="{{url('edit_invoice')}}/{{ $invoice->id }}"><i
-                                                    class="text-primary fas fa-pen-alt"></i>&nbsp;&nbsp;تعديل
-                                                الفاتورة</a>
+
+                                            <a class="dropdown-item" href="#" data-invoice_id="{{$invoice->id}}"
+                                                data-toggle="modal" data-target="#restore_invoice"><i
+                                                    class="text-warning fa fa-exchange-alt"></i>&nbsp;&nbsp;
+                                                نقل الي الفواتير</a>
                                             <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
                                                 data-toggle="modal" data-target="#delete_invoice"><i
                                                     class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                 الفاتورة</a>
-                                            <a class="dropdown-item" href="{{url('status_show')}}/{{ $invoice->id }}"><i
-                                                    class="text-success fas fa-money-bill"></i>&nbsp;&nbsp;تغير حالة
-                                                الدفع</a>
-                                            <a class="dropdown-item" href="#" data-invoice_id="{{$invoice->id}}"
-                                                data-toggle="modal" data-target="#archive_invoice"><i
-                                                    class="text-warning fa fa-exchange-alt"></i>&nbsp;&nbsp;
-                                                نقل الي الارشيف</a>
+
                                         </div>
                                     </div>
                                 </td>
@@ -172,13 +167,14 @@ window.onload = function() {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <form action="{{ route('invoices.destroy', 'test') }}" method="post">
+                    <form action="{{ route('invoices_archive.destroy', 'test') }}" method="post">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
                 </div>
                 <div class="modal-body">
                     هل انت متاكد من عملية الحذف ؟
                     <input type="hidden" name="invoice_id" id="invoice_id" value="">
+                    <input type="hidden" name="id_page" id="id_page" value="1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -190,22 +186,22 @@ window.onload = function() {
     </div>
     <!-- حذف الفاتورة -->
 
-    <!-- ارشفت الفاتورة -->
-    <div class="modal fade" id="archive_invoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- استعادة الفاتورة -->
+    <div class="modal fade" id="restore_invoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">حذف الفاتورة</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> الغاء ارشفة الفاتورة</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <form action="{{ route('invoices.destroy', 'test') }}" method="post">
-                        {{ method_field('delete') }}
+                    <form action="{{ route('invoices_archive.update', 'test') }}" method="post">
+                        {{ method_field('patch') }}
                         {{ csrf_field() }}
                 </div>
                 <div class="modal-body">
-                    هل انت متاكد من الارشفة ؟
+                    هل انت متاكد من عملية الغاء الارشفة ؟
                     <input type="hidden" name="invoice_id" id="invoice_id" value="">
                 </div>
                 <div class="modal-footer">
@@ -216,7 +212,7 @@ window.onload = function() {
             </div>
         </div>
     </div>
-    <!-- ارشفت الفاتورة -->
+    <!-- استعادة الفاتورة -->
 
 
 </div>
@@ -257,6 +253,17 @@ $('#delete_invoice').on('show.bs.modal', function(event) {
 })
 </script>
 <!-- Delete Invoice Script -->
+
+<!-- Restore Invoice Script -->
+<script>
+$('#restore_invoice').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var invoice_id = button.data('invoice_id')
+    var modal = $(this)
+    modal.find('.modal-body #invoice_id').val(invoice_id);
+})
+</script>
+<!-- Restore Invoice Script -->
 <!--Internal  Notify js -->
 <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
