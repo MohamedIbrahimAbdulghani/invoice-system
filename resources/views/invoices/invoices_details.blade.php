@@ -92,6 +92,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+
                                                 <td>{{$invoices->invoice_number}}</td>
                                                 <td>{{$invoices->invoice_date}}</td>
                                                 <td>{{$invoices->due_date}}</td>

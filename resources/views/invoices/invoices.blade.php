@@ -40,6 +40,8 @@ window.onload = function() {
 @endif
 <!-- this code to show message when delete invoice -->
 
+
+
 <!-- this code to show message when update invoice -->
 @if(session()->has('update_invoice'))
 <script>
@@ -52,6 +54,8 @@ window.onload = function() {
 </script>
 @endif
 <!-- this code to show message when update invoice -->
+
+
 
 <!-- row -->
 <div class="row row-sm">
@@ -169,6 +173,7 @@ window.onload = function() {
                 <div class="modal-body">
                     هل انت متاكد من عملية الحذف ؟
                     <input type="hidden" name="invoice_id" id="invoice_id" value="">
+                    <input type="hidden" name="id_page" id="id_page" value="1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>

@@ -26,7 +26,18 @@
 <!-- breadcrumb -->
 @endsection
 @section('content')
-
+<!-- this code to show message when archive invoice -->
+@if(session()->has('archive_invoice'))
+<script>
+window.onload = function() {
+    notif({
+        msg: "تم ارشفة الفاتورة بنجاح",
+        type: "success"
+    })
+}
+</script>
+@endif
+<!-- this code to show message when archive invoice -->
 <!-- this code to show message when delete invoice -->
 @if(session()->has('delete_invoice'))
 <script>
