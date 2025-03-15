@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\invoice_attachments;
 use App\Models\invoices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArchiveController extends Controller
 {
@@ -86,11 +88,18 @@ class ArchiveController extends Controller
     {
         $id = $request->invoice_id;
         $invoices = invoices::withTrashed()->where('id', $id)->first();
+        $invoice_attachments = invoice_attachments::where('invoice_attachment_id', $id)->first();
+
+        if(!empty($invoice_attachments->invoice_number)) {
+            // Storage::disk('public_uploads')->delete($invoice_attachments->invoice_number . "/" . $invoice_attachments->file_name);  /////  this code if i want delete file inside folder
+            Storage::disk('public_uploads')->deleteDirectory($invoice_attachments->invoice_number); ///// this code if i want delete all folder
+        }
         $invoices->forceDelete();
         session()->flash('delete_invoice');
         return redirect('invoices_archive');
 
 
     }
+    
 
 }
