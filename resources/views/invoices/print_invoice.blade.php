@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('css')
-
+<style>
+@media print {
+    #print_button {
+        display: none;
+    }
+}
+</style>
 @endsection
 
 @section('title')
@@ -84,7 +90,7 @@
                                 <tr>
                                     <td class="tx-right tx-uppercase tx-bold tx-inverse">الاجمالي شامل الضريبة </td>
                                     <td class="tx-right" colspan="2">
-                                        <h4 class="tx-primary tx-bold">{{$invoice->total}}</h4>
+                                        <h4 class="tx-primary tx-bold">{{number_format($invoice->total, 2)}}</h4>
                                     </td>
                                 </tr>
                             </tbody>
@@ -115,8 +121,7 @@ function printInvoice() {
         window.print();
         location.reload();
     }, 500); // تأخير بسيط لضمان تحميل الصفحة بالكامل قبل الطباعة
-    document.body.innerHTML = originalContents;
-
+    document.body.innerHTML = printContents;
 }
 </script>
 @endsection
