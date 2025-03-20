@@ -120,7 +120,7 @@ function printInvoice() {
     setTimeout(() => {
         window.print();
         location.reload();
-    }, 500); // تأخير بسيط لضمان تحميل الصفحة بالكامل قبل الطباعة
+    }, 50); // تأخير بسيط لضمان تحميل الصفحة بالكامل قبل الطباعة
     document.body.innerHTML = printContents;
 }
 </script>

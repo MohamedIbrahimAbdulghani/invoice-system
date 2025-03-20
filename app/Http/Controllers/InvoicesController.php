@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AddInvoice as MailAddInvoice;
+use App\Mail\AddInvoiceTesting;
 use App\Models\invoice_attachments;
 use App\Models\invoices;
 use App\Models\invoices_details;
 use App\Models\Products;
 use App\Models\sections;
+use App\Models\User;
+use App\Notifications\AddInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class InvoicesController extends Controller
@@ -93,11 +99,17 @@ class InvoicesController extends Controller
             $imageName = $request->file->getClientOriginalName();
             $request->file->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
+        // this code to send mail in mailtrap website
+        $user = User::first();
+        Mail::to($user)->send(new MailAddInvoice('Mohamed'));
+
+
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();
     }
 
     /**
+
      * Display the specified resource.
      *
      * @param  \App\Models\invoices  $invoices
