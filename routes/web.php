@@ -31,6 +31,7 @@ Route::get("invoices_partail", [InvoicesController::class, 'invoices_partail']);
 
 Route::resource('invoices', InvoicesController::class);
 
+Route::get("export", [InvoicesController::class, 'export'])->name('invoices.export');
 
 Route::resource("sections", SectionsController::class);
 Route::resource("products", ProductsController::class);
@@ -45,6 +46,7 @@ Route::get("edit_invoice/{id}", [InvoicesController::class, 'edit']);
 Route::get("status_show/{id}", [InvoicesController::class, 'show']);
 Route::get("status_show/{id}", [InvoicesController::class, 'status_show']);
 Route::get("print_invoice/{id}", [InvoicesController::class, 'print_invoice']);
+
 Route::post("invoices_archive", [InvoicesController::class, 'invoices_archive'])->name('invoices.invoices_archive');
 
 Route::post("status_update/{id}", [InvoicesController::class, 'status_update'])->name('invoices.status_update');
@@ -53,6 +55,7 @@ Route::get("download_file/{invoice_number}/{file_name}", [InvoicesDetailsControl
 Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name('delete_file');
 Route::resource("invoices_details", InvoicesDetailsController::class);
 Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

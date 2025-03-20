@@ -75,7 +75,12 @@ window.onload = function() {
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
-                <a href="{{route('invoices.create')}}"><button class="btn btn-primary">إضافة فاتورة</button></a>
+                <a href="{{route('invoices.create')}}"><button class="btn btn-primary"><i
+                            class="fas fa-plus"></i>&nbsp;إضافة
+                        فاتورة</button></a>
+                <a href="{{route('invoices.export')}}"><button class="btn btn-success"><i
+                            class="fas fa-file-download"></i>&nbsp;تصدير الي
+                        إكسيل</button></a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
