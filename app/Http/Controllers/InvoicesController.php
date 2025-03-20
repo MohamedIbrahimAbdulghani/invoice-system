@@ -264,5 +264,12 @@ class InvoicesController extends Controller
         session()->flash('archive_invoice');
         return redirect('invoices_archive');
     }
+    // this function to print invoice
+    public function print_invoice(Request $request, $id) {
+        // $invoice = invoices::where('id', $id)->first();
+        $invoice = invoices::findOrFail($id);
+        return view('invoices.print_invoice', compact('invoice'));
+        // return $invoice;
+    }
     
 }

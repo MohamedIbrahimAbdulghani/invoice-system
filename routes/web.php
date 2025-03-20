@@ -44,6 +44,7 @@ Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 Route::get("edit_invoice/{id}", [InvoicesController::class, 'edit']);
 Route::get("status_show/{id}", [InvoicesController::class, 'show']);
 Route::get("status_show/{id}", [InvoicesController::class, 'status_show']);
+Route::get("print_invoice/{id}", [InvoicesController::class, 'print_invoice']);
 Route::post("invoices_archive", [InvoicesController::class, 'invoices_archive'])->name('invoices.invoices_archive');
 
 Route::post("status_update/{id}", [InvoicesController::class, 'status_update'])->name('invoices.status_update');
