@@ -6,7 +6,9 @@ use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,11 @@ Route::get('/', function () {
     return view('welcome');
     // return view('auth.login');
 });
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    });
 
 Route::get("invoices_paid", [InvoicesController::class, 'invoices_paid']);
 Route::get("invoices_unpaid", [InvoicesController::class, 'invoices_unpaid']);
@@ -56,6 +63,8 @@ Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name(
 Route::resource("invoices_details", InvoicesDetailsController::class);
 Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
 
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -64,10 +73,4 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
-
-
-Route::group(['middleware' => ['auth']], function() {
-Route::resource('roles','RoleController');
-Route::resource('users','UserController');
 });
