@@ -282,7 +282,6 @@ class InvoicesController extends Controller
         // $invoice = invoices::where('id', $id)->first();
         $invoice = invoices::findOrFail($id);
         return view('invoices.print_invoice', compact('invoice'));
-        // return $invoice;
     }
     // this function to export invoice in excel sheet
     public function export() {

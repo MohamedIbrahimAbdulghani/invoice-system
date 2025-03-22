@@ -65,3 +65,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::group(['middleware' => ['auth']], function() {
+Route::resource('roles','RoleController');
+Route::resource('users','UserController');
+});

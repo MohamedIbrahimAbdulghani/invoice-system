@@ -61,6 +61,7 @@ window.onload = function() {
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <a href="{{route('invoices.create')}}"><button class="btn btn-primary">إضافة فاتورة</button></a>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -137,7 +138,7 @@ window.onload = function() {
                                                 data-toggle="modal" data-target="#archive_invoice"><i
                                                     class="text-warning fa fa-exchange-alt"></i>&nbsp;&nbsp;
                                                 نقل الي الارشيف</a>
-                                                <a class="dropdown-item"
+                                            <a class="dropdown-item"
                                                 href="{{url('print_invoice')}}/{{ $invoice->id }}"><i
                                                     class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعة
                                                 الفاتورة</a>
