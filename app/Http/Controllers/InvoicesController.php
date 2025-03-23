@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\InvoiceExport;
+use App\Mail\AddedInvoice;
 use App\Mail\AddInvoice as MailAddInvoice;
 use App\Mail\AddInvoiceTesting;
 use App\Models\invoice_attachments;
@@ -15,6 +16,7 @@ use App\Notifications\AddInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -102,8 +104,10 @@ class InvoicesController extends Controller
         }
 
         // this code to send mail in mailtrap website
-        // $user = User::first();
-        // Notification::send($user, new AddInvoice($invoice_id));
+        $user = User::first();
+        Mail::to($user)->send(new AddedInvoice($invoice_id));
+
+
     
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();
