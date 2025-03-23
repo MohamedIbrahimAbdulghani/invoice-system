@@ -86,8 +86,8 @@
                     </svg><span class="side-menu__label">قائمة المستخدمين</span><i
                         class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="{{ url('/' . $page='users') }}"> المستخدمين</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . $page='roles') }}">صلاحيات المستخدمين</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='mail') }}"> المستخدمين</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='mail') }}">صلاحيات المستخدمين</a></li>
                 </ul>
             </li>
             <li class="side-item side-item-category"> الاعدادات</li>

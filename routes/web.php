@@ -27,10 +27,6 @@ Route::get('/', function () {
     // return view('auth.login');
 });
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    });
 
 Route::get("invoices_paid", [InvoicesController::class, 'invoices_paid']);
 Route::get("invoices_unpaid", [InvoicesController::class, 'invoices_unpaid']);
