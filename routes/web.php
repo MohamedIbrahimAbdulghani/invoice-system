@@ -6,9 +6,9 @@ use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SectionsController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +28,14 @@ Route::get('/', function () {
 });
 
 
+Route::group(['middleware' => ['auth']], function() {
+    // Route::resource('roles','RoleController');
+    Route::resource("roles", RolesController::class);
+    Route::resource("users", UsersController::class);
+    // Route::resource('users','UserController');
+    });
+
+    
 Route::get("invoices_paid", [InvoicesController::class, 'invoices_paid']);
 Route::get("invoices_unpaid", [InvoicesController::class, 'invoices_unpaid']);
 Route::get("invoices_partail", [InvoicesController::class, 'invoices_partail']);
@@ -61,6 +69,8 @@ Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
 
 
 
+
+    
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
