@@ -84,7 +84,6 @@ class InvoicesController extends Controller
             "user" => Auth::user()->name,
         ]);
 
-
         // this codes to insert the same data to invoice_attachment table
         if($request->hasFile('file')) {
             $invoice_id = invoices::latest()->first()->id;
@@ -102,12 +101,9 @@ class InvoicesController extends Controller
             $imageName = $request->file->getClientOriginalName();
             $request->file->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
-
         // this code to send mail in mailtrap website
         $user = User::first();
         Mail::to($user)->send(new AddedInvoice($invoice_id));
-
-
     
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();
