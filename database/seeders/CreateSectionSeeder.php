@@ -25,8 +25,8 @@ class CreateSectionSeeder extends Seeder
         ]);
 
         $product = Products::create([
-            'product_name' => 'First Section',
-            'description' => 'Description For First Section',
+            'product_name' => 'First Product',
+            'description' => 'Description For First Product',
             'section_id' => $section->id
         ]);
     }

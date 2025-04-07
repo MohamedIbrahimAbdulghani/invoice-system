@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-المستخدمين
+المستخدمين - مورا سوفت للادارة الفواتير
 @stop
 
 <!-- Internal Data table css -->
@@ -43,9 +43,11 @@
         <div class="card">
             <div class="card-header pb-0">
                 <div class="col-sm-1 col-md-2">
-                    @can('اضافة مستخدم')
                     <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">اضافة مستخدم</a>
-                    @endcan
+
+                    <!-- @if (Gate::allows('اضافة مستخدم'))
+                    <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">اضافة مستخدم</a>
+                    @endif -->
                 </div>
             </div>
             <div class="card-body">

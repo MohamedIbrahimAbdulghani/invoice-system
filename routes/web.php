@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('roles','RoleController');
     Route::resource("roles", RolesController::class);
     Route::resource("users", UsersController::class);
+    Route::get("users/edit/{id}", [UsersController::class, 'edit'])->name('users.edit');
     // Route::resource('users','UserController');
     });
 
