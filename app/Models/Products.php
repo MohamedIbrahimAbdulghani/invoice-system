@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
 {
-    protected $fillable = [
-        "product_name",
-        "section_id",
-        "description"
-    ];
+    // protected $fillable = [
+    //     "product_name",
+    //     "section_id",
+    //     "description"
+    // ];
+    protected $guarded  = [];
     use HasFactory;
 
     public function sections() {
