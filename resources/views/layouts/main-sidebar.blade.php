@@ -53,7 +53,6 @@
                     @can('الفواتير المدفوعة')
                     <li><a class="slide-item" href="{{ url('/' . $page='invoices_paid') }}">الفواتير
                             المدفوعة</a></li>
-
                     @endcan
 
                     @can('الفواتير الغير مدفوعة')
