@@ -87,8 +87,12 @@
                     </svg><span class="side-menu__label">قائمة التقارير</span><i
                         class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
+                    @can('تقرير الفواتير')
                     <li><a class="slide-item" href="{{ url('/' . $page='cards') }}">تقارير الفواتير</a></li>
+                    @endcan
+                    @can('تقرير العملاء')
                     <li><a class="slide-item" href="{{ url('/' . $page='darggablecards') }}">تقرير العملاء</a></li>
+                    @endcan
                 </ul>
             </li>
             @can('المستخدمين')
