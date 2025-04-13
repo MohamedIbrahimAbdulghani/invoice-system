@@ -75,7 +75,8 @@ Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+    'check.status'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
