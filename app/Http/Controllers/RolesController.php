@@ -76,8 +76,10 @@ class RolesController extends Controller
     ->with('success','Role updated successfully');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-    
+        DB::table("roles")->where('id',$id)->delete();
+        return redirect()->route('roles.index')
+        ->with('delete','Role deleted successfully');
     }
 }
