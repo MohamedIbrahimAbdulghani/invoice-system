@@ -13,5 +13,6 @@ class InvoiceExport implements FromCollection
     public function collection()
     {
         return invoices::all();
+        // return invoices::select('invoice_number', 'status')->get();    //// i use this case when i just want to choose the items i need to show up in the file
     }
 }

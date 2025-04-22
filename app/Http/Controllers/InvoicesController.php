@@ -104,7 +104,7 @@ class InvoicesController extends Controller
         // this code to send mail in mailtrap website
         $user = User::first();
         Mail::to($user)->send(new AddedInvoice($invoice_id));
-    
+
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();
     }
@@ -208,7 +208,7 @@ class InvoicesController extends Controller
         $products = DB::table('products')->where("section_id", $id)->pluck("product_name", "id");
         return json_encode($products);
     }
-    
+
     public function status_show(Request $request, $id) {
         $sections = sections::all();
         $invoices = invoices::where('id', $id)->first();
@@ -267,7 +267,7 @@ class InvoicesController extends Controller
         $invoices = invoices::where('value_status', 3)->get();
         return view('invoices.invoices_partail', compact('invoices'));
     }
-    
+
     // this function made to use softDelete and archive invoices
     public function invoices_archive(Request $request) {
         $id = $request->invoice_id;
