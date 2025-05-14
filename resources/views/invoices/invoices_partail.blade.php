@@ -18,7 +18,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+            <h4 class="my-auto mb-0 content-title">قائمة الفواتير</h4><span class="mt-1 mb-0 mr-2 text-muted tx-13">/
                 الفواتير المدفوعة جزئيا</span>
         </div>
     </div>
@@ -59,7 +59,7 @@ window.onload = function() {
     <!--div-->
     <div class="col-xl-12">
         <div class="card mg-b-20">
-            <div class="card-header pb-0">
+            <div class="pb-0 card-header">
                 <a href="{{route('invoices.create')}}"><button class="btn btn-primary">إضافة فاتورة</button></a>
             </div>
             <div class="card-body">
@@ -120,7 +120,7 @@ window.onload = function() {
                                     <div class="dropdown">
                                         <button aria-expanded="true" aria-haspopup="true"
                                             class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
-                                            type="button">العمليات <i class="fas fa-caret-down ml-1"></i></button>
+                                            type="button">العمليات <i class="ml-1 fas fa-caret-down"></i></button>
                                         <div class="dropdown-menu tx-13 ">
                                             <a class="dropdown-item"
                                                 href="{{url('edit_invoice')}}/{{ $invoice->id }}"><i
