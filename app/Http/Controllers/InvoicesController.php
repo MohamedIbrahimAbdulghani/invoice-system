@@ -287,4 +287,5 @@ class InvoicesController extends Controller
     public function export() {
         return Excel::download(new InvoiceExport, 'Invoices.xlsx');
     }
+
 }
