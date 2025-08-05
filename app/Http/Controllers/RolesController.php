@@ -32,17 +32,16 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
-    $this->validate($request, [
-    'name' => 'required|unique:roles,name',
-    'permission' => 'required',
-    ]);
-    $role = Role::create(['name' => $request->input('name')]);
-    $role->permissions()->sync($request->input('permission'));
-    return redirect()->route('roles.index')
-    ->with('success','Role created successfully');
-    
+        $this->validate($request, [
+        'name' => 'required|unique:roles,name',
+        'permission' => 'required',
+        ]);
+        $role = Role::create(['name' => $request->input('name')]);
+        $role->permissions()->sync($request->input('permission'));
+        return redirect()->route('roles.index')
+        ->with('success','Role created successfully');
     }
-    
+
 
     public function show($id)
     {
@@ -64,16 +63,16 @@ class RolesController extends Controller
     }
     public function update(Request $request, $id)
     {
-    $this->validate($request, [
-    'name' => 'required',
-    'permission' => 'required',
-    ]);
-    $role = Role::find($id);
-    $role->name = $request->input('name');
-    $role->save();
-    $role->permissions()->sync($request->input('permission'));
-    return redirect()->route('roles.index')
-    ->with('success','Role updated successfully');
+        $this->validate($request, [
+        'name' => 'required',
+        'permission' => 'required',
+        ]);
+        $role = Role::find($id);
+        $role->name = $request->input('name');
+        $role->save();
+        $role->permissions()->sync($request->input('permission'));
+        return redirect()->route('roles.index')
+        ->with('success','Role updated successfully');
     }
 
     public function destroy($id)

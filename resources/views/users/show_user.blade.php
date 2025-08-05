@@ -21,7 +21,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
+            <h4 class="my-auto mb-0 content-title">المستخدمين</h4><span class="mt-1 mb-0 mr-2 text-muted tx-13">/ قائمة
                 المستخدمين</span>
         </div>
     </div>
@@ -41,7 +41,7 @@
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header pb-0">
+            <div class="pb-0 card-header">
                 <div class="col-sm-1 col-md-2">
                     @can('اضافة مستخدم')
                     <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">اضافة مستخدم</a>
@@ -71,11 +71,11 @@
                                 <td>
                                     @if ($user->status == 'مفعل')
                                     <span class="label text-success d-flex">
-                                        <div class="dot-label bg-success ml-1"></div>{{ $user->status }}
+                                        <div class="ml-1 dot-label bg-success"></div>{{ $user->status }}
                                     </span>
                                     @else
                                     <span class="label text-danger d-flex">
-                                        <div class="dot-label bg-danger ml-1"></div>{{ $user->status }}
+                                        <div class="ml-1 dot-label bg-danger"></div>{{ $user->status }}
                                     </span>
                                     @endif
                                 </td>
