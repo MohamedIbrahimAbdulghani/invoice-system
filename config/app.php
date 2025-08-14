@@ -184,6 +184,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
 
         /*
          * Package Service Providers...

@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
@@ -50,4 +51,9 @@ class CreateNewUser implements CreatesNewUsers
             'personal_team' => true,
         ]));
     }
+
+    /*******************************    Use This Function When I Don't Use Jetstream UI Design ******************************************/
+    // protected function credentials(Request $request) {
+    //     return ['email'=>$request->email, 'password'=>$request->password, 'status'=>'مفعل'];
+    // }
 }

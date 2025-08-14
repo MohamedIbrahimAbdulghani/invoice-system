@@ -9,6 +9,10 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsersController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +40,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('users','UserController');
     });
 
-    
+
 Route::get("invoices_paid", [InvoicesController::class, 'invoices_paid']);
 Route::get("invoices_unpaid", [InvoicesController::class, 'invoices_unpaid']);
 Route::get("invoices_partail", [InvoicesController::class, 'invoices_partail']);
@@ -68,10 +72,31 @@ Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name(
 Route::resource("invoices_details", InvoicesDetailsController::class);
 Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
 
+/**************************     this route to make login and validation about status of user when he want make a login in home ************* ************* */
+
+Route::post('/login', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        return back()->withErrors(['email' => 'البريد الإلكتروني أو كلمة المرور غير صحيحة.']);
+    }
+
+    if ($user->status !== 'مفعل') {
+        return back()->withErrors(['email' => 'حسابك غير مفعل، يرجى التواصل مع الدعم.']);
+    }
+
+    Auth::login($user);
+    return redirect()->intended('/dashboard');
+})->name('login.custom');
 
 
+/**************************     this route to make login and validation about status of user when he want make a login in home ************* ************* */
 
-    
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

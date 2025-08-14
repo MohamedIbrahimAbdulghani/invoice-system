@@ -9,6 +9,7 @@ use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
@@ -31,40 +32,21 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Fortify::authenticateUsing(function (Request $request) {
-            // البحث عن المستخدم
-            $user = User::where('email', $request->email)->first();
-    
-            if ($user && Hash::check($request->password, $user->password)) {
-                Log::info("User: {$user->email}, Status: {$user->status}");
-            
-                if ($user->status === 'مفعل') {
-                    return $user;
-                } else {
-                    return back()->withErrors([
-                        'email' => 'حسابك غير مفعل، يرجى التواصل مع الدعم.',
-                    ]);
-                }
-            }
-    
-            // لو مفيش مستخدم أو الباسورد غلط
-            return null;
-        });
-        
-        Fortify::createUsersUsing(CreateNewUser::class);
-        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
-        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
-        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
-            return Limit::perMinute(5)->by($throttleKey);
-        });
-        
-        RateLimiter::for('two-factor', function (Request $request) {
-            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        /************************************    This To Check If Status Was مفعل  or  غير مفعل  ******************************************** */
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+            if (! $user || ! Hash::check($request->password, $user->password)) {
+                return null; // بيانات الدخول غلط
+            }
+            if ($user->status !== 'مفعل') {
+                throw ValidationException::withMessages([
+                    Fortify::username() => 'حسابك غير مفعل، يرجى التواصل مع الدعم.',
+                ]);
+            }
+            return $user; // تسجيل الدخول ناجح
         });
     }
 
-    
+
 }
