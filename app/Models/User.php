@@ -12,7 +12,7 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
@@ -52,7 +52,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'roles_name' => 'array', ///////////////    this is to enter roles_name as array 
+        'roles_name' => 'array', ///////////////    this is to make roles_name as array in database not string
     ];
 
     /**

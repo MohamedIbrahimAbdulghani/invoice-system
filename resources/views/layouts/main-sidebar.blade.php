@@ -76,6 +76,7 @@
 
                 </ul>
             </li>
+            @can('التقارير')
             <li class="side-item side-item-category"> التقارير</li>
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg
@@ -95,6 +96,9 @@
                     @endcan
                 </ul>
             </li>
+
+
+            @endcan
             @can('المستخدمين')
             <li class="side-item side-item-category"> المستخدمين</li>
             <li class="slide">
@@ -112,6 +116,7 @@
                 </ul>
             </li>
             @endcan
+            @can('الاعدادات')
             <li class="side-item side-item-category"> الاعدادات</li>
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg
@@ -145,6 +150,9 @@
                     <li><a class="slide-item" href="{{ url('/' . $page='products') }}">إضافة منتج</a></li>
                 </ul>
             </li>
+
+
+            @endcan
         </ul>
     </div>
 </aside>
