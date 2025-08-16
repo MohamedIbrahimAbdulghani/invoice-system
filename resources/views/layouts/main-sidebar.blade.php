@@ -12,7 +12,7 @@
                 src="{{URL::asset('assets/img/brand/favicon-white.png')}}" class="logo-icon dark-theme" alt="logo"></a>
     </div>
     <div class="main-sidemenu">
-        <div class="app-sidebar__user clearfix">
+        <div class="clearfix app-sidebar__user">
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
@@ -20,7 +20,7 @@
                         class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
-                    <h4 class="font-weight-semibold mt-3 mb-0">{{Auth::user()->name}}</h4>
+                    <h4 class="mt-3 mb-0 font-weight-semibold">{{Auth::user()->name}}</h4>
                     <span class="mb-0 text-muted">{{Auth::user()->email}}</span>
                 </div>
             </div>
@@ -97,7 +97,6 @@
                 </ul>
             </li>
 
-
             @endcan
             @can('المستخدمين')
             <li class="side-item side-item-category"> المستخدمين</li>
@@ -111,6 +110,9 @@
                     </svg><span class="side-menu__label">قائمة المستخدمين</span><i
                         class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
+                    @can('')
+
+                    @endcan
                     <li><a class="slide-item" href="{{ url('/' . $page='users') }}"> المستخدمين</a></li>
                     <li><a class="slide-item" href="{{ url('/' . $page='roles') }}">صلاحيات المستخدمين</a></li>
                 </ul>
