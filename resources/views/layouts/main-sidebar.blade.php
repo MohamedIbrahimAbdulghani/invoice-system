@@ -89,7 +89,7 @@
                         class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     @can('تقرير الفواتير')
-                    <li><a class="slide-item" href="{{ url('/' . $page='cards') }}">تقارير الفواتير</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='invoices_report') }}">تقارير الفواتير</a></li>
                     @endcan
                     @can('تقرير العملاء')
                     <li><a class="slide-item" href="{{ url('/' . $page='darggablecards') }}">تقرير العملاء</a></li>

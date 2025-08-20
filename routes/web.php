@@ -5,6 +5,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
+use App\Http\Controllers\InvoicesReport;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SectionsController;
@@ -31,6 +32,8 @@ Route::get('/', function () {
     // return view('auth.login');
 });
 
+Route::get('invoices_report', [InvoicesReport::class, 'index']);
+Route::post('Search_invoices', [InvoicesReport::class, 'Search_invoices'])->name('invoices_report.Search_invoices');
 
 Route::group(['middleware' => ['auth']], function() {
     // Route::resource('roles','RoleController');
@@ -72,6 +75,10 @@ Route::post("delete_file", [InvoicesDetailsController::class, 'destroy'])->name(
 Route::resource("invoices_details", InvoicesDetailsController::class);
 Route::resource("invoices_attachments", InvoiceAttachmentsController::class);
 
+
+
+
+
 /**************************     this route to make login and validation about status of user when he want make a login in home ************* ************* */
 
 Route::post('/login', function (Request $request) {
@@ -96,6 +103,9 @@ Route::post('/login', function (Request $request) {
 
 
 /**************************     this route to make login and validation about status of user when he want make a login in home ************* ************* */
+
+
+
 
 Route::middleware([
     'auth:sanctum',
