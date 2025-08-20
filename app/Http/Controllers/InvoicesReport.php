@@ -20,7 +20,7 @@ class InvoicesReport extends Controller
             // if user choose invoice type only and don't choose start_at and end_at
             if($type && $request->start_at=='' && $request->end_at=='') {
                 if($type == 'كل الفواتير') {
-                    $invoices = Invoices::all();
+                    $invoices = invoices::all();
                     return view('reports.invoices_report', compact('invoices'));
                 }
                 $invoices = invoices::where('status', $type)->get();
@@ -29,14 +29,15 @@ class InvoicesReport extends Controller
                 $start_at = date($request->start_at);
                 $end_at = date($request->end_at);
 
-                $invoices = Invoices::whereBetween('invoice_date', [$start_at, $end_at])->where('status', $type)->get();
+                $invoices = invoices::whereBetween('invoice_date', [$start_at, $end_at])->where('status', $type)->get();
                 return view('reports.invoices_report', compact('type', 'invoices'));
             }
 
         }
         // this case if you want to search about invoice by invoice number
         else {
-            return $request->type;
+            $invoices = invoices::where('invoice_number', $request->invoice_number)->get();
+            return view('reports.invoices_report', compact('invoices'));
         }
     }
 }
