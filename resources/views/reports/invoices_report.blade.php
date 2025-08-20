@@ -127,7 +127,7 @@
                 </form>
 
             </div>
-            <div class="card-body">
+            <div class="card-body" id="table">
                 <div class="table-responsive">
                     @if (isset($invoices))
                         <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
@@ -250,11 +250,13 @@
                 $('#invoices_type').show();
                 $('#start_at').show();
                 $('#end_at').show();
+                $('#table').show();
             } else {
                 $('#invoice_number').show();
                 $('#invoices_type').hide();
                 $('#start_at').hide();
                 $('#end_at').hide();
+                $('#table').hide();
             }
         });
     });
