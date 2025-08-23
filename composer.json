@@ -14,6 +14,7 @@
         "laravelcollective/html": "^6.4",
         "livewire/livewire": "^2.11",
         "maatwebsite/excel": "^3.1",
+        "mpdf/mpdf": "^8.2",
         "spatie/laravel-permission": "^6.16",
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0"

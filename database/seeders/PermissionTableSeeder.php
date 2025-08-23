@@ -60,13 +60,17 @@ class PermissionTableSeeder extends Seeder
         'اضافة قسم',
         'تعديل قسم',
         'حذف قسم',
-        'الاشعارات'
+        'الاشعارات',
+
+
+        'بحث بنوع الفاتورة',
 
 
     ];
 
+
     foreach ($permissions as $permission) {
-        Permission::create(['name' => $permission]);
+        Permission::firstOrCreate(['name' => $permission]);
     }
     }
 }

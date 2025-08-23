@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\CustomersReport;
 use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -33,7 +34,11 @@ Route::get('/', function () {
 });
 
 Route::get('invoices_report', [InvoicesReport::class, 'index']);
-Route::post('Search_invoices', [InvoicesReport::class, 'Search_invoices'])->name('invoices_report.Search_invoices');
+Route::post('search_invoices_report', [InvoicesReport::class, 'search_invoices_report'])->name('search_invoices_report');
+
+Route::get('customers_report', [CustomersReport::class, 'index']);
+Route::post('search_customers_report', [CustomersReport::class, 'search_customers_report'])->name('search_customers_report');
+
 
 Route::group(['middleware' => ['auth']], function() {
     // Route::resource('roles','RoleController');

@@ -16,7 +16,7 @@
 
 
 @section('title')
-    تقرير الفواتير
+    تقرير العملاء
 @stop
 @endsection
 @section('page-header')
@@ -25,7 +25,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="my-auto mb-0 content-title">التقارير</h4><span class="mt-1 mb-0 mr-2 text-muted tx-13">/ تقرير
-                الفواتير</span>
+                العملاء</span>
         </div>
     </div>
 </div>
@@ -33,70 +33,53 @@
 @endsection
 @section('content')
 
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>خطا</strong>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>خطا</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-<!-- row -->
+    <!-- row -->
 <div class="row">
 
     <div class="col-xl-12">
         <div class="card mg-b-20">
+
+
             <div class="pb-0 card-header">
-                <form action="{{ route('search_invoices_report') }}" method="POST" role="search" autocomplete="off">
+
+                <form action="{{ route('search_customers_report') }}" method="POST" role="search" autocomplete="off">
                     {{ csrf_field() }}
 
-                    @can('بحث بنوع الفاتورة')
-                        <div class="col-lg-3">
-                            <label class="rdiobox">
-                            <input checked name="rdio" type="radio" value="1" id="search_about_invoice_type"> <span>بحث بنوع
-                                الفاتورة</span></label>
-                        </div>
-                    @endcan
-
-
-
-                    <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                        <label class="rdiobox"><input name="rdio" value="2" type="radio"><span>بحث برقم الفاتورة
-                            </span></label>
-                    </div><br><br>
-
                     <div class="row">
-                        @can('بحث بنوع الفاتورة')
-                        <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoices_type">
-                            <p class="mg-b-10">تحديد نوع الفواتير</p><select class="form-control select2" name="type"
-                                required>
-                                <option value="{{ $type ?? 'حدد نوع الفواتير' }}" selected>
-                                    {{ $type ?? 'حدد نوع الفواتير' }}
-                                </option>
-                                <option value="كل الفواتير">كل الفواتير</option>
-                                <option value="مدفوعة">الفواتير المدفوعة</option>
-                                <option value="غير مدفوعة">الفواتير الغير مدفوعة</option>
-                                <option value="مدفوعة جزئيا">الفواتير المدفوعة جزئيا</option>
-
+                        <div class="col">
+                            <label for="inputName" class="control-label">القسم</label>
+                            <select name="Section" class="form-control SelectBox" onclick="console.log($(this).val())"
+                                onchange="console.log('change is firing')">
+                                <!--placeholder-->
+                                <option selected disabled>حدد القسم</option>
+                                @foreach($sections as $section):
+                                <option value="{{$section->id}}">{{$section->section_name}}</option>
+                                @endforeach
                             </select>
-                        </div><!-- col-4 -->
-                        @endcan
+                        </div>
+
+                        <div class="col">
+                            <label for="inputName" class="control-label">المنتج</label>
+                            <select id="product" name="product" class="form-control">
+                                <option selected disabled>حدد المنتج</option>
+                            </select>
+                        </div>
 
 
-
-                        <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoice_number">
-                            <p class="mg-b-10">البحث برقم الفاتورة</p>
-                            <input type="text" class="form-control" id="invoice_number" name="invoice_number">
-
-                        </div><!-- col-4 -->
-
-                        @can('بحث بنوع الفاتورة')
                         <div class="col-lg-3" id="start_at">
                             <label for="exampleFormControlSelect1">من تاريخ</label>
                             <div class="input-group">
@@ -108,9 +91,7 @@
                                     name="start_at" placeholder="YYYY-MM-DD" type="text">
                             </div><!-- input-group -->
                         </div>
-                    @endcan
 
-                    @can('بحث بنوع الفاتورة')
                         <div class="col-lg-3" id="end_at">
                             <label for="exampleFormControlSelect1">الي تاريخ</label>
                             <div class="input-group">
@@ -122,19 +103,17 @@
                                     value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="text">
                             </div><!-- input-group -->
                         </div>
-                        @endcan
-                    </div>
-
+                    </div><br>
 
                     <div class="row">
                         <div class="col-sm-1 col-md-1">
-                            <button class="mt-3 btn btn-primary btn-block">بحث</button>
+                            <button class="btn btn-primary btn-block">بحث</button>
                         </div>
                     </div>
                 </form>
 
             </div>
-            <div class="card-body" id="table">
+            <div class="card-body">
                 <div class="table-responsive">
                     @if (isset($invoices))
                         <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
@@ -199,6 +178,9 @@
 <!-- Container closed -->
 </div>
 <!-- main-content closed -->
+
+
+<!-- main-content closed -->
 @endsection
 @section('js')
 <!-- Internal Data tables -->
@@ -245,30 +227,31 @@
     }).val();
 
 </script>
-
 <script>
     $(document).ready(function() {
+        $('select[name="Section"]').on('change', function() {
+            var SectionId = $(this).val();
+            if (SectionId) {
+                $.ajax({
+                    url: "{{ URL::to('section') }}/" + SectionId,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="product"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="product"]').append('<option value="' +
+                                value + '">' + value + '</option>');
+                        });
+                    },
+                });
 
-        $('#invoice_number').hide();
-
-        $('input[type="radio"]').click(function() {
-            if ($(this).attr('id') == 'search_about_invoice_type') {
-                $('#invoice_number').hide();
-                $('#invoices_type').show();
-                $('#start_at').show();
-                $('#end_at').show();
-                $('#table').show();
             } else {
-                $('#invoice_number').show();
-                $('#invoices_type').hide();
-                $('#start_at').hide();
-                $('#end_at').hide();
-                $('#table').hide();
+                console.log('AJAX load did not work');
             }
         });
+
     });
 
 </script>
-
 
 @endsection
