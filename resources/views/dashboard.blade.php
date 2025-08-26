@@ -82,8 +82,18 @@
                             </p>
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="text-white fas fa-arrow-circle-down"></i>
-                            <span class="text-white op-7"> -23.09%</span>
+                            @php
+                                $percentage = round((App\Models\invoices::where('value_status','2')->count() / App\Models\invoices::count()) * 100, 2);
+                            @endphp
+
+                            @if($percentage > 50)
+                                <i class="text-white fas fa-arrow-circle-up"></i>
+                            @elseif($percentage < 50)
+                                <i class="text-white fas fa-arrow-circle-down"></i>
+                            @endif
+                            <span class="text-white op-7">
+                                <!-- Implement percentage calculation for invoices in dashboard -->
+                                {{ round((App\Models\invoices::where('value_status','2')->count() / App\Models\invoices::count()) * 100, 2) }}%</span>
                         </span>
                     </div>
                 </div>
@@ -108,8 +118,18 @@
                             </p>
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="text-white fas fa-arrow-circle-up"></i>
-                            <span class="text-white op-7"> 52.09%</span>
+                            @php
+                                $percentage = round((App\Models\invoices::where('value_status','1')->count() / App\Models\invoices::count()) * 100, 2);
+                            @endphp
+                             @if($percentage > 50)
+                                <i class="text-white fas fa-arrow-circle-up"></i>
+                            @elseif($percentage < 50)
+                                <i class="text-white fas fa-arrow-circle-down"></i>
+                            @endif
+                            <span class="text-white op-7">
+                                <!-- Implement percentage calculation for invoices in dashboard -->
+                                {{ round( (App\Models\invoices::where('value_status', '1')->count() / App\Models\invoices::count() * 100),2 )}}%
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -134,8 +154,18 @@
                             </p>
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="text-white fas fa-arrow-circle-down"></i>
-                            <span class="text-white op-7"> -152.3</span>
+                            @php
+                                $percentage = round((App\Models\invoices::where('value_status','3')->count() / App\Models\invoices::count()) * 100, 2);
+                            @endphp
+                            @if($percentage > 50)
+                                <i class="text-white fas fa-arrow-circle-up"></i>
+                            @elseif($percentage < 50)
+                                <i class="text-white fas fa-arrow-circle-down"></i>
+                            @endif
+                            <span class="text-white op-7">
+                                <!-- Implement percentage calculation for invoices in dashboard -->
+                                {{ round((App\Models\invoices::where('value_status','3')->count() / App\Models\invoices::count() * 100), 2) }}%
+                            </span>
                         </span>
                     </div>
                 </div>
