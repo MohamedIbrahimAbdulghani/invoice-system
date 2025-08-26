@@ -13,8 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="left-content">
         <div>
-            <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-            <p class="mg-b-0">Sales monitoring dashboard template.</p>
+            <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">مرحبا بك !</h2>
         </div>
     </div>
     <div class="main-dashboard-header-right">
@@ -42,20 +41,23 @@
 <!-- row -->
 <div class="row row-sm">
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-        <div class="card overflow-hidden sales-card bg-primary-gradient">
-            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+        <div class="overflow-hidden card sales-card bg-primary-gradient">
+            <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                 <div class="">
-                    <h6 class="mb-3 tx-12 text-white">TODAY ORDERS</h6>
+                    <h6 class="mb-3 text-white tx-12">اجمالي الفواتير</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
-                            <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                            <h4 class="mb-1 text-white tx-20 font-weight-bold">
+                                {{-- {{ $invoice_count }} --}}
+                                {{ number_format(App\Models\invoices::sum('total'), 2) }} <!-- To Get Total Sum For Invoices -->
+                            </h4>
+                            <p class="mb-0 text-white tx-12 op-7">عدد الفواتير : {{ App\Models\invoices::count() }}</p> <!--  To Get Count Invoices -->
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="fas fa-arrow-circle-up text-white"></i>
-                            <span class="text-white op-7"> +427</span>
+                            <i class="text-white fas fa-arrow-circle-up"></i>
+                            <span class="text-white op-7">100%</span>
                         </span>
                     </div>
                 </div>
@@ -64,19 +66,23 @@
         </div>
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-        <div class="card overflow-hidden sales-card bg-danger-gradient">
-            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+        <div class="overflow-hidden card sales-card bg-danger-gradient">
+            <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                 <div class="">
-                    <h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
+                    <h6 class="mb-3 text-white tx-12">الفواتير الغير مدفوعة</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">$1,230.17</h4>
-                            <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                            <h4 class="mb-1 text-white tx-20 font-weight-bold">
+                                {{ number_format(App\Models\invoices::where('value_status','2')->sum('total'), 2) }} <!-- To Get Total Sum For Invoices -->
+                            </h4>
+                            <p class="mb-0 text-white tx-12 op-7">
+                                عدد الفواتير الغير مدفوعة : {{ App\Models\invoices::where('value_status','2')->count() }}
+                            </p>
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="fas fa-arrow-circle-down text-white"></i>
+                            <i class="text-white fas fa-arrow-circle-down"></i>
                             <span class="text-white op-7"> -23.09%</span>
                         </span>
                     </div>
@@ -86,19 +92,23 @@
         </div>
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-        <div class="card overflow-hidden sales-card bg-success-gradient">
-            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+        <div class="overflow-hidden card sales-card bg-success-gradient">
+            <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                 <div class="">
-                    <h6 class="mb-3 tx-12 text-white">TOTAL EARNINGS</h6>
+                    <h6 class="mb-3 text-white tx-12">الفواتير المدفوعة</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">$7,125.70</h4>
-                            <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                            <h4 class="mb-1 text-white tx-20 font-weight-bold">
+                                {{ number_format(App\Models\invoices::where('value_status','1')->sum('total'), 2) }} <!-- To Get Total Sum For Invoices -->
+                            </h4>
+                            <p class="mb-0 text-white tx-12 op-7">
+                                عدد الفواتير مدفوعة : {{ App\Models\invoices::where('value_status','1')->count() }}
+                            </p>
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="fas fa-arrow-circle-up text-white"></i>
+                            <i class="text-white fas fa-arrow-circle-up"></i>
                             <span class="text-white op-7"> 52.09%</span>
                         </span>
                     </div>
@@ -108,19 +118,23 @@
         </div>
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-        <div class="card overflow-hidden sales-card bg-warning-gradient">
-            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+        <div class="overflow-hidden card sales-card bg-warning-gradient">
+            <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                 <div class="">
-                    <h6 class="mb-3 tx-12 text-white">PRODUCT SOLD</h6>
+                    <h6 class="mb-3 text-white tx-12">الفواتير المدفوعة جزئيا</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">$4,820.50</h4>
-                            <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                            <h4 class="mb-1 text-white tx-20 font-weight-bold">
+                                {{ number_format(App\Models\invoices::where('value_status','3')->sum('total'), 2) }} <!-- To Get Total Sum For Invoices -->
+                            </h4>
+                            <p class="mb-0 text-white tx-12 op-7">
+                                عدد الفواتير المدفوعة جزئيا : {{ App\Models\invoices::where('value_status','3')->count() }}
+                            </p>
                         </div>
                         <span class="float-right my-auto mr-auto">
-                            <i class="fas fa-arrow-circle-down text-white"></i>
+                            <i class="text-white fas fa-arrow-circle-down"></i>
                             <span class="text-white op-7"> -152.3</span>
                         </span>
                     </div>
@@ -136,12 +150,12 @@
 <div class="row row-sm">
     <div class="col-md-12 col-lg-12 col-xl-7">
         <div class="card">
-            <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
+            <div class="bg-transparent card-header pd-b-0 pd-t-20 bd-b-0">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title mb-0">Order status</h4>
+                    <h4 class="mb-0 card-title">Order status</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
                 </div>
-                <p class="tx-12 text-muted mb-0">Order Status and Tracking. Track your order from ship date to arrival.
+                <p class="mb-0 tx-12 text-muted">Order Status and Tracking. Track your order from ship date to arrival.
                     To begin, enter your order number.</p>
             </div>
             <div class="card-body">
@@ -159,7 +173,7 @@
                         <label><span class="bg-warning"></span>Failed</label>
                     </div>
                 </div>
-                <div id="bar" class="sales-bar mt-4"></div>
+                <div id="bar" class="mt-4 sales-bar"></div>
             </div>
         </div>
     </div>
@@ -179,25 +193,25 @@
 <div class="row row-sm">
     <div class="col-xl-4 col-md-12 col-lg-12">
         <div class="card">
-            <div class="card-header pb-1">
-                <h3 class="card-title mb-2">Recent Customers</h3>
-                <p class="tx-12 mb-0 text-muted">A customer is an individual or business that purchases the goods
+            <div class="pb-1 card-header">
+                <h3 class="mb-2 card-title">Recent Customers</h3>
+                <p class="mb-0 tx-12 text-muted">A customer is an individual or business that purchases the goods
                     service has evolved to include real-time</p>
             </div>
-            <div class="card-body p-0 customers mt-1">
+            <div class="p-0 mt-1 card-body customers">
                 <div class="list-group list-lg-group list-group-flush">
                     <div class="list-group-item list-group-item-action" href="#">
-                        <div class="media mt-0">
-                            <img class="avatar-lg rounded-circle ml-3 my-auto"
+                        <div class="mt-0 media">
+                            <img class="my-auto ml-3 avatar-lg rounded-circle"
                                 src="{{URL::asset('assets/img/faces/3.jpg')}}" alt="Image description">
                             <div class="media-body">
                                 <div class="d-flex align-items-center">
                                     <div class="mt-0">
                                         <h5 class="mb-1 tx-15">Samantha Melon</h5>
                                         <p class="mb-0 tx-13 text-muted">User ID: #1234 <span
-                                                class="text-success ml-2">Paid</span></p>
+                                                class="ml-2 text-success">Paid</span></p>
                                     </div>
-                                    <span class="mr-auto wd-45p fs-16 mt-2">
+                                    <span class="mt-2 mr-auto wd-45p fs-16">
                                         <div id="spark1" class="wd-100p"></div>
                                     </span>
                                 </div>
@@ -205,17 +219,17 @@
                         </div>
                     </div>
                     <div class="list-group-item list-group-item-action" href="#">
-                        <div class="media mt-0">
-                            <img class="avatar-lg rounded-circle ml-3 my-auto"
+                        <div class="mt-0 media">
+                            <img class="my-auto ml-3 avatar-lg rounded-circle"
                                 src="{{URL::asset('assets/img/faces/11.jpg')}}" alt="Image description">
                             <div class="media-body">
                                 <div class="d-flex align-items-center">
                                     <div class="mt-1">
                                         <h5 class="mb-1 tx-15">Jimmy Changa</h5>
                                         <p class="mb-0 tx-13 text-muted">User ID: #1234 <span
-                                                class="text-danger ml-2">Pending</span></p>
+                                                class="ml-2 text-danger">Pending</span></p>
                                     </div>
-                                    <span class="mr-auto wd-45p fs-16 mt-2">
+                                    <span class="mt-2 mr-auto wd-45p fs-16">
                                         <div id="spark2" class="wd-100p"></div>
                                     </span>
                                 </div>
@@ -223,17 +237,17 @@
                         </div>
                     </div>
                     <div class="list-group-item list-group-item-action" href="#">
-                        <div class="media mt-0">
-                            <img class="avatar-lg rounded-circle ml-3 my-auto"
+                        <div class="mt-0 media">
+                            <img class="my-auto ml-3 avatar-lg rounded-circle"
                                 src="{{URL::asset('assets/img/faces/17.jpg')}}" alt="Image description">
                             <div class="media-body">
                                 <div class="d-flex align-items-center">
                                     <div class="mt-1">
                                         <h5 class="mb-1 tx-15">Gabe Lackmen</h5>
                                         <p class="mb-0 tx-13 text-muted">User ID: #1234<span
-                                                class="text-danger ml-2">Pending</span></p>
+                                                class="ml-2 text-danger">Pending</span></p>
                                     </div>
-                                    <span class="mr-auto wd-45p fs-16 mt-2">
+                                    <span class="mt-2 mr-auto wd-45p fs-16">
                                         <div id="spark3" class="wd-100p"></div>
                                     </span>
                                 </div>
@@ -241,17 +255,17 @@
                         </div>
                     </div>
                     <div class="list-group-item list-group-item-action" href="#">
-                        <div class="media mt-0">
-                            <img class="avatar-lg rounded-circle ml-3 my-auto"
+                        <div class="mt-0 media">
+                            <img class="my-auto ml-3 avatar-lg rounded-circle"
                                 src="{{URL::asset('assets/img/faces/15.jpg')}}" alt="Image description">
                             <div class="media-body">
                                 <div class="d-flex align-items-center">
                                     <div class="mt-1">
                                         <h5 class="mb-1 tx-15">Manuel Labor</h5>
                                         <p class="mb-0 tx-13 text-muted">User ID: #1234<span
-                                                class="text-success ml-2">Paid</span></p>
+                                                class="ml-2 text-success">Paid</span></p>
                                     </div>
-                                    <span class="mr-auto wd-45p fs-16 mt-2">
+                                    <span class="mt-2 mr-auto wd-45p fs-16">
                                         <div id="spark4" class="wd-100p"></div>
                                     </span>
                                 </div>
@@ -259,17 +273,17 @@
                         </div>
                     </div>
                     <div class="list-group-item list-group-item-action br-br-7 br-bl-7" href="#">
-                        <div class="media mt-0">
-                            <img class="avatar-lg rounded-circle ml-3 my-auto"
+                        <div class="mt-0 media">
+                            <img class="my-auto ml-3 avatar-lg rounded-circle"
                                 src="{{URL::asset('assets/img/faces/6.jpg')}}" alt="Image description">
                             <div class="media-body">
                                 <div class="d-flex align-items-center">
                                     <div class="mt-1">
                                         <h5 class="mb-1 tx-15">Sharon Needles</h5>
-                                        <p class="b-0 tx-13 text-muted mb-0">User ID: #1234<span
-                                                class="text-success ml-2">Paid</span></p>
+                                        <p class="mb-0 b-0 tx-13 text-muted">User ID: #1234<span
+                                                class="ml-2 text-success">Paid</span></p>
                                     </div>
-                                    <span class="mr-auto wd-45p fs-16 mt-2">
+                                    <span class="mt-2 mr-auto wd-45p fs-16">
                                         <div id="spark5" class="wd-100p"></div>
                                     </span>
                                 </div>
@@ -282,40 +296,40 @@
     </div>
     <div class="col-xl-4 col-md-12 col-lg-6">
         <div class="card">
-            <div class="card-header pb-1">
-                <h3 class="card-title mb-2">Sales Activity</h3>
-                <p class="tx-12 mb-0 text-muted">Sales activities are the tactics that salespeople use to achieve their
+            <div class="pb-1 card-header">
+                <h3 class="mb-2 card-title">Sales Activity</h3>
+                <p class="mb-0 tx-12 text-muted">Sales activities are the tactics that salespeople use to achieve their
                     goals and objective</p>
             </div>
-            <div class="product-timeline card-body pt-2 mt-1">
-                <ul class="timeline-1 mb-0">
-                    <li class="mt-0"> <i class="ti-pie-chart bg-primary-gradient text-white product-icon"></i> <span
-                            class="font-weight-semibold mb-4 tx-14 ">Total Products</span> <a href="#"
+            <div class="pt-2 mt-1 product-timeline card-body">
+                <ul class="mb-0 timeline-1">
+                    <li class="mt-0"> <i class="text-white ti-pie-chart bg-primary-gradient product-icon"></i> <span
+                            class="mb-4 font-weight-semibold tx-14 ">Total Products</span> <a href="#"
                             class="float-left tx-11 text-muted">3 days ago</a>
                         <p class="mb-0 text-muted tx-12">1.3k New Products</p>
                     </li>
-                    <li class="mt-0"> <i class="mdi mdi-cart-outline bg-danger-gradient text-white product-icon"></i>
-                        <span class="font-weight-semibold mb-4 tx-14 ">Total Sales</span> <a href="#"
+                    <li class="mt-0"> <i class="text-white mdi mdi-cart-outline bg-danger-gradient product-icon"></i>
+                        <span class="mb-4 font-weight-semibold tx-14 ">Total Sales</span> <a href="#"
                             class="float-left tx-11 text-muted">35 mins ago</a>
                         <p class="mb-0 text-muted tx-12">1k New Sales</p>
                     </li>
-                    <li class="mt-0"> <i class="ti-bar-chart-alt bg-success-gradient text-white product-icon"></i> <span
-                            class="font-weight-semibold mb-4 tx-14 ">Toatal Revenue</span> <a href="#"
+                    <li class="mt-0"> <i class="text-white ti-bar-chart-alt bg-success-gradient product-icon"></i> <span
+                            class="mb-4 font-weight-semibold tx-14 ">Toatal Revenue</span> <a href="#"
                             class="float-left tx-11 text-muted">50 mins ago</a>
                         <p class="mb-0 text-muted tx-12">23.5K New Revenue</p>
                     </li>
-                    <li class="mt-0"> <i class="ti-wallet bg-warning-gradient text-white product-icon"></i> <span
-                            class="font-weight-semibold mb-4 tx-14 ">Toatal Profit</span> <a href="#"
+                    <li class="mt-0"> <i class="text-white ti-wallet bg-warning-gradient product-icon"></i> <span
+                            class="mb-4 font-weight-semibold tx-14 ">Toatal Profit</span> <a href="#"
                             class="float-left tx-11 text-muted">1 hour ago</a>
                         <p class="mb-0 text-muted tx-12">3k New profit</p>
                     </li>
-                    <li class="mt-0"> <i class="si si-eye bg-purple-gradient text-white product-icon"></i> <span
-                            class="font-weight-semibold mb-4 tx-14 ">Customer Visits</span> <a href="#"
+                    <li class="mt-0"> <i class="text-white si si-eye bg-purple-gradient product-icon"></i> <span
+                            class="mb-4 font-weight-semibold tx-14 ">Customer Visits</span> <a href="#"
                             class="float-left tx-11 text-muted">1 day ago</a>
                         <p class="mb-0 text-muted tx-12">15% increased</p>
                     </li>
-                    <li class="mt-0 mb-0"> <i class="icon-note icons bg-primary-gradient text-white product-icon"></i>
-                        <span class="font-weight-semibold mb-4 tx-14 ">Customer Reviews</span> <a href="#"
+                    <li class="mt-0 mb-0"> <i class="text-white icon-note icons bg-primary-gradient product-icon"></i>
+                        <span class="mb-4 font-weight-semibold tx-14 ">Customer Reviews</span> <a href="#"
                             class="float-left tx-11 text-muted">1 day ago</a>
                         <p class="mb-0 text-muted tx-12">1.5k reviews</p>
                     </li>
@@ -325,14 +339,14 @@
     </div>
     <div class="col-xl-4 col-md-12 col-lg-6">
         <div class="card">
-            <div class="card-header pb-0">
-                <h3 class="card-title mb-2">Recent Orders</h3>
-                <p class="tx-12 mb-0 text-muted">An order is an investor's instructions to a broker or brokerage firm to
+            <div class="pb-0 card-header">
+                <h3 class="mb-2 card-title">Recent Orders</h3>
+                <p class="mb-0 tx-12 text-muted">An order is an investor's instructions to a broker or brokerage firm to
                     purchase or sell</p>
             </div>
-            <div class="card-body sales-info ot-0 pt-0 pb-0">
+            <div class="pt-0 pb-0 card-body sales-info ot-0">
                 <div id="chart" class="ht-150"></div>
-                <div class="row sales-infomation pb-0 mb-0 mx-auto wd-100p">
+                <div class="pb-0 mx-auto mb-0 row sales-infomation wd-100p">
                     <div class="col-md-6 col">
                         <p class="mb-0 d-flex"><span class="legend bg-primary brround"></span>Delivered</p>
                         <h3 class="mb-1">5238</h3>
@@ -354,20 +368,20 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="d-flex align-items-center pb-2">
+                        <div class="pb-2 d-flex align-items-center">
                             <p class="mb-0">Total Sales</p>
                         </div>
-                        <h4 class="font-weight-bold mb-2">$7,590</h4>
+                        <h4 class="mb-2 font-weight-bold">$7,590</h4>
                         <div class="progress progress-style progress-sm">
                             <div class="progress-bar bg-primary-gradient wd-80p" role="progressbar" aria-valuenow="78"
                                 aria-valuemin="0" aria-valuemax="78"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 mt-4 mt-md-0">
-                        <div class="d-flex align-items-center pb-2">
+                    <div class="mt-4 col-md-6 mt-md-0">
+                        <div class="pb-2 d-flex align-items-center">
                             <p class="mb-0">Active Users</p>
                         </div>
-                        <h4 class="font-weight-bold mb-2">$5,460</h4>
+                        <h4 class="mb-2 font-weight-bold">$5,460</h4>
                         <div class="progress progress-style progress-sm">
                             <div class="progress-bar bg-danger-gradient wd-75" role="progressbar" aria-valuenow="45"
                                 aria-valuemin="0" aria-valuemax="45"></div>
@@ -383,7 +397,7 @@
 <!-- row opened -->
 <div class="row row-sm row-deck">
     <div class="col-md-12 col-lg-4 col-xl-4">
-        <div class="card card-dashboard-eight pb-2">
+        <div class="pb-2 card card-dashboard-eight">
             <h6 class="card-title">Your Top Countries</h6><span class="d-block mg-b-10 text-muted tx-12">Sales
                 performance revenue based by country</span>
             <div class="list-group">
@@ -407,7 +421,7 @@
                     <i class="flag-icon flag-icon-in flag-icon-squared"></i>
                     <p>India</p><span>$1,930.12</span>
                 </div>
-                <div class="list-group-item border-bottom-0 mb-0">
+                <div class="mb-0 list-group-item border-bottom-0">
                     <i class="flag-icon flag-icon-au flag-icon-squared"></i>
                     <p>Australia</p><span>$1,042.00</span>
                 </div>
@@ -417,12 +431,12 @@
     <div class="col-md-12 col-lg-8 col-xl-8">
         <div class="card card-table-two">
             <div class="d-flex justify-content-between">
-                <h4 class="card-title mb-1">Your Most Recent Earnings</h4>
+                <h4 class="mb-1 card-title">Your Most Recent Earnings</h4>
                 <i class="mdi mdi-dots-horizontal text-gray"></i>
             </div>
-            <span class="tx-12 tx-muted mb-3 ">This is your most recent earnings for today's date.</span>
+            <span class="mb-3 tx-12 tx-muted ">This is your most recent earnings for today's date.</span>
             <div class="table-responsive country-table">
-                <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
+                <table class="table mb-0 table-striped table-bordered text-sm-nowrap text-lg-nowrap text-xl-nowrap">
                     <thead>
                         <tr>
                             <th class="wd-lg-25p">Date</th>

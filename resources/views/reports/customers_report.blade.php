@@ -131,7 +131,6 @@
                                     <th class="border-bottom-0">الاجمالي</th>
                                     <th class="border-bottom-0">الحالة</th>
                                     <th class="border-bottom-0">ملاحظات</th>
-
                                 </tr>
                             </thead>
                             <tbody>

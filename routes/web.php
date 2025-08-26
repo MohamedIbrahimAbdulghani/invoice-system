@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CustomersReport;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -32,6 +33,7 @@ Route::get('/', function () {
     return view('welcome');
     // return view('auth.login');
 });
+
 
 Route::get('invoices_report', [InvoicesReport::class, 'index']);
 Route::post('search_invoices_report', [InvoicesReport::class, 'search_invoices_report'])->name('search_invoices_report');
@@ -63,7 +65,7 @@ Route::resource("invoice_attachment", InvoiceAttachmentsController::class);
 // Route::post("invoice_archive", [ArchiveController::class, 'destroy'])->name('invoices_archive.destroy');
 Route::resource('invoices_archive', ArchiveController::class);
 Route::get("section/{id}", [InvoicesController::class, "getProducts"]);
-Route::get('/{page}', [AdminController::class, "index"]);
+
 
 Route::get("invoices_details/{id}", [InvoicesDetailsController::class, 'edit']);
 Route::get("edit_invoice/{id}", [InvoicesController::class, 'edit']);
@@ -118,7 +120,10 @@ Route::middleware([
     'verified',
     'check.status'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+Route::get('/{page}', [AdminController::class, "index"]);
