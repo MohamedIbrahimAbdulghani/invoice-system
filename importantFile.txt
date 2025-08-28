@@ -7,7 +7,7 @@ Step 1: Laravel 7.X Installation
 Step 2: Spatie Package Installation
 	composer require spatie/laravel-permission
 	composer require laravelcollective/html
-	
+
 	php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
 
 		1- php artisan config:clear
@@ -20,7 +20,12 @@ Step 2: Spatie Package Installation
 
 	php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 
-	=> if show error ( INFO  No publishable resources for tag [migrations]. ) 
+	=> if show error ( INFO  No publishable resources for tag [migrations]. )
 		use this command ( ls database/migrations | grep create_permission_tables )
 
 	php artisan migrate
+
+/*************************************************************************************************************************/
+
+To Install Package To Make ChartJs ( https://github.com/fxcosta/laravel-chartjs?tab=readme-ov-file )
+And This Is Website For The Package ( https://www.chartjs.org/docs/latest/samples/other-charts/pie.html )
