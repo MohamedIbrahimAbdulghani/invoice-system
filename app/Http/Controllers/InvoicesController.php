@@ -12,7 +12,7 @@ use App\Models\invoices_details;
 use App\Models\Products;
 use App\Models\sections;
 use App\Models\User;
-use App\Notifications\AddInvoice;
+use App\Notifications\addInvoiceNotifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Stringable;
 
 class InvoicesController extends Controller
 {
@@ -102,8 +103,15 @@ class InvoicesController extends Controller
             $request->file->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
         // this code to send mail in mailtrap website
-        $user = User::first();
+        $user = Auth::user();
         Mail::to($user)->send(new AddedInvoice($invoice_id));
+
+        // this code to send notification when user added a new invoice
+        // $user = Auth::user();
+        // $user = User::get();
+        $user = User::where('id', '!=', Auth::id())->get();
+        $invoice = invoices::latest()->first();
+        Notification::send($user, new addInvoiceNotifications($invoice));
 
         session()->flash('Add', 'تم أضافة الفاتورة بنجاح');
         return back();

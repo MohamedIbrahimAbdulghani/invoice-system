@@ -12,30 +12,30 @@ public function index() {
 
 //=================احصائية نسبة تنفيذ الحالات======================
 
-    $invoice_count =invoices::count();
-    $count_invoices1 = invoices::where('value_status', 1)->count();
-    $count_invoices2 = invoices::where('value_status', 2)->count();
-    $count_invoices3 = invoices::where('value_status', 3)->count();
+    $invoice_count =invoices::count(); //علشان تقدر تجيب عدد كل الفواتير عندك
+    $count_invoices1 = invoices::where('value_status', 1)->count(); // علشان تجيب عدد الفواتير الدفوعة
+    $count_invoices2 = invoices::where('value_status', 2)->count(); // علشان تجيب عدد الفواتير الغير مدفوعة
+    $count_invoices3 = invoices::where('value_status', 3)->count(); // علشان تجيب عدد الفواتير المدفوعة جزئيا
 
     if($count_invoices1 == 0){
         $present_invoice1 = 0;
     }
     else{
-        $present_invoice1 = round(($count_invoices1/ $invoice_count) * 100 ,2);
+        $present_invoice1 = round(($count_invoices1/ $invoice_count) * 100 ,2); // علشان تجيب النسبة المئوية للفواتير المدفوعة
     }
 
     if($count_invoices2 == 0){
         $present_invoice2 = 0;
     }
     else{
-        $present_invoice2 = round(($count_invoices2 / $invoice_count) * 100, 2);
+        $present_invoice2 = round(($count_invoices2 / $invoice_count) * 100, 2); // علشان تجيب النسبة المئوية للفواتير الغير مدفوعة
     }
 
     if($count_invoices3 == 0){
         $present_invoice3 = 0;
     }
     else{
-        $present_invoice3 = round(($count_invoices3/ $invoice_count) * 100 , 2);
+        $present_invoice3 = round(($count_invoices3/ $invoice_count) * 100 , 2); // علشان تجيب النسبة المئوية للفواتير المدفوعة جزئيا
     }
 
 
@@ -90,4 +90,6 @@ public function index() {
 
     return view('dashboard', compact('invoice_count', 'chartjs', 'chartjs_2'));
 }
+
+
 }

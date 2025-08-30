@@ -154,90 +154,33 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="dropdown nav-item main-header-notification">
 								<a class="new nav-link" href="#">
 								<svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class=" pulse"></span></a>
 								<div class="dropdown-menu">
 									<div class="text-right menu-header-content bg-primary">
 										<div class="d-flex">
-											<h6 class="mb-1 text-white dropdown-title tx-15 font-weight-semibold">Notifications</h6>
-											<span class="float-left my-auto mr-auto badge badge-pill badge-warning">Mark All Read</span>
+											<h6 class="mb-1 text-white dropdown-title tx-15 font-weight-semibold">الاشعارات</h6>
+											<span class="float-left my-auto mr-auto badge badge-pill badge-warning">جعل الكل مقروء</span>
 										</div>
-										<p class="pb-0 mb-0 text-white dropdown-title-text subtext op-6 tx-12 ">You have 4 unread Notifications</p>
+										<p class="pb-0 mb-0 text-white dropdown-title-text subtext op-6 tx-12 "> عدد الاشعارات الغير مقروءة : {{ Auth()->user()->unreadNotifications->count() }} <p>
 									</div>
 									<div class="main-notification-list Notification-scroll">
-										<a class="p-3 d-flex border-bottom" href="#">
+                                        @foreach(Auth()->user()->unreadNotifications as $notification)
+                                        	<a class="p-3 d-flex border-bottom" href="#">
 											<div class="notifyimg bg-pink">
 												<i class="text-white la la-file-alt"></i>
 											</div>
 											<div class="mr-3">
-												<h5 class="mb-1 notification-label">New files available</h5>
-												<div class="notification-subtext">10 hour ago</div>
+												<h5 class="mb-1 notification-label">{{ $notification->data['title'] }}{{ $notification->data['user'] }}</h5>
+												<div class="notification-subtext">{{ $notification->created_at }}</div>
 											</div>
 											<div class="mr-auto" >
 												<i class="text-left las la-angle-left text-muted"></i>
 											</div>
 										</a>
-										<a class="p-3 d-flex" href="#">
-											<div class="notifyimg bg-purple">
-												<i class="text-white la la-gem"></i>
-											</div>
-											<div class="mr-3">
-												<h5 class="mb-1 notification-label">Updates Available</h5>
-												<div class="notification-subtext">2 days ago</div>
-											</div>
-											<div class="mr-auto" >
-												<i class="text-left las la-angle-left text-muted"></i>
-											</div>
-										</a>
-										<a class="p-3 d-flex border-bottom" href="#">
-											<div class="notifyimg bg-success">
-												<i class="text-white la la-shopping-basket"></i>
-											</div>
-											<div class="mr-3">
-												<h5 class="mb-1 notification-label">New Order Received</h5>
-												<div class="notification-subtext">1 hour ago</div>
-											</div>
-											<div class="mr-auto" >
-												<i class="text-left las la-angle-left text-muted"></i>
-											</div>
-										</a>
-										<a class="p-3 d-flex border-bottom" href="#">
-											<div class="notifyimg bg-warning">
-												<i class="text-white la la-envelope-open"></i>
-											</div>
-											<div class="mr-3">
-												<h5 class="mb-1 notification-label">New review received</h5>
-												<div class="notification-subtext">1 day ago</div>
-											</div>
-											<div class="mr-auto" >
-												<i class="text-left las la-angle-left text-muted"></i>
-											</div>
-										</a>
-										<a class="p-3 d-flex border-bottom" href="#">
-											<div class="notifyimg bg-danger">
-												<i class="text-white la la-user-check"></i>
-											</div>
-											<div class="mr-3">
-												<h5 class="mb-1 notification-label">22 verified registrations</h5>
-												<div class="notification-subtext">2 hour ago</div>
-											</div>
-											<div class="mr-auto" >
-												<i class="text-left las la-angle-left text-muted"></i>
-											</div>
-										</a>
-										<a class="p-3 d-flex border-bottom" href="#">
-											<div class="notifyimg bg-primary">
-												<i class="text-white la la-check-circle"></i>
-											</div>
-											<div class="mr-3">
-												<h5 class="mb-1 notification-label">Project has been approved</h5>
-												<div class="notification-subtext">4 hour ago</div>
-											</div>
-											<div class="mr-auto" >
-												<i class="text-left las la-angle-left text-muted"></i>
-											</div>
-										</a>
+                                        @endforeach
 									</div>
 									<div class="dropdown-footer">
 										<a href="">VIEW ALL</a>
@@ -252,7 +195,7 @@
 								<div class="dropdown-menu" style="min-width: 295px !important">
 									<div class="p-3 main-header-profile bg-primary">
 										<div class="d-flex wd-100p">
-											<div class="main-img-user"><img alt="" src="{{URL::asset('assets/img/faces/6.jpg')}}" class=""></div>
+											<div class="main-img-user"><img alt="" src="{{URL::asset('assets/img/6606-male-user.png')}}" class=""></div>
 											<div class="my-auto mr-3">
 												<h6>{{ Auth::user()->name }}</h6><span> {{ Auth::user()->email }} </span>
 											</div>
