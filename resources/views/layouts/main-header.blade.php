@@ -155,22 +155,25 @@
 								</div>
 							</div>
 
-							<div class="dropdown nav-item main-header-notification">
+							@can('الاشعارات')
+                                <div class="dropdown nav-item main-header-notification">
 								<a class="new nav-link" href="#">
 								<svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class=" pulse"></span></a>
 								<div class="dropdown-menu">
 									<div class="text-right menu-header-content bg-primary">
 										<div class="d-flex">
 											<h6 class="mb-1 text-white dropdown-title tx-15 font-weight-semibold">الاشعارات</h6>
-											<span class="float-left my-auto mr-auto badge badge-pill badge-warning">جعل الكل مقروء</span>
+                                            <a href="{{ route('invoices.markAsReadAll') }}" class="float-left my-auto mr-auto badge badge-pill badge-warning">جعل الكل مقروء</a>
 										</div>
 										<p class="pb-0 mb-0 text-white dropdown-title-text subtext op-6 tx-12 "> عدد الاشعارات الغير مقروءة : {{ Auth()->user()->unreadNotifications->count() }} <p>
 									</div>
-									<div class="main-notification-list Notification-scroll">
+
+									<div class="main-notification-list Notification-scroll" >
+                                        {{-- start get notification from database notifications table --}}
                                         @foreach(Auth()->user()->unreadNotifications as $notification)
-                                        	<a class="p-3 d-flex border-bottom" href="#">
+                                        <a class="p-3 d-flex border-bottom"  href="{{ route('invoices.markAsRead', ['id' => $notification->id, 'invoiceId' => $notification->data['id']]) }}">
 											<div class="notifyimg bg-pink">
-												<i class="text-white la la-file-alt"></i>
+												<i class="text-white la la-file-alt" style="margin-top: 15%"></i>
 											</div>
 											<div class="mr-3">
 												<h5 class="mb-1 notification-label">{{ $notification->data['title'] }}{{ $notification->data['user'] }}</h5>
@@ -181,12 +184,16 @@
 											</div>
 										</a>
                                         @endforeach
+                                        {{-- end get notification from database notifications table --}}
 									</div>
+
 									<div class="dropdown-footer">
 										<a href="">VIEW ALL</a>
 									</div>
 								</div>
 							</div>
+                            @endcan
+
 							<div class="nav-item full-screen fullscreen-button">
 								<a class="new nav-link full-screen-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></a>
 							</div>
@@ -208,11 +215,11 @@
 									<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
 
 									<a class="dropdown-item" href="{{ route('logout') }}"
-                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                     class="bx bx-log-out"></i>تسجيل خروج</a>
-                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                     @csrf
-                                     </form>
+                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
+                                    class="bx bx-log-out"></i>تسجيل خروج</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
 								</div>
 							</div>
 							<div class="dropdown main-header-message right-toggle">

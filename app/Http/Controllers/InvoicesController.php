@@ -107,9 +107,13 @@ class InvoicesController extends Controller
         Mail::to($user)->send(new AddedInvoice($invoice_id));
 
         // this code to send notification when user added a new invoice
+
         // $user = Auth::user();
-        // $user = User::get();
-        $user = User::where('id', '!=', Auth::id())->get();
+        // $user = User::where(Auth()->user()->roles_name, ["Admin"])->get();
+        $user = User::whereJsonContains('roles_name', 'Admin')->get();  // store notifications in notifications table and will send this notifications to Admin User only
+        // $user = User::find(Auth()->user()->id);
+
+        // $user = User::where('id', '!=', Auth()->user()->id)->get();
         $invoice = invoices::latest()->first();
         Notification::send($user, new addInvoiceNotifications($invoice));
 
@@ -295,5 +299,25 @@ class InvoicesController extends Controller
     public function export() {
         return Excel::download(new InvoiceExport, 'Invoices.xlsx');
     }
+    // this function to read one notification by id
+    public function markAsRead($notificationId, $invoiceId)
+    {
+        // تعلم الإشعار كمقروء
+        $notification = Auth::user()->unreadNotifications()->where('id', $notificationId)->first();
+        if ($notification) {
+            $notification->markAsRead();
+        }
+
+        return redirect('invoices_details/' . $invoiceId);
+    }
+    // this function to read all notifications
+    public function markAsReadAll() {
+        $userUnreadNotification = Auth::user()->unreadNotifications;
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+            return back();
+        }
+    }
+
 
 }
