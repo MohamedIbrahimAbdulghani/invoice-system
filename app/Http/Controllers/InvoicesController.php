@@ -300,10 +300,10 @@ class InvoicesController extends Controller
         return Excel::download(new InvoiceExport, 'Invoices.xlsx');
     }
     // this function to read one notification by id
-    public function markAsRead($notificationId, $invoiceId)
+    public function markAsRead($id, $invoiceId)
     {
         // تعلم الإشعار كمقروء
-        $notification = Auth::user()->unreadNotifications()->where('id', $notificationId)->first();
+        $notification = Auth::user()->unreadNotifications()->where('id', $id)->first();
         if ($notification) {
             $notification->markAsRead();
         }

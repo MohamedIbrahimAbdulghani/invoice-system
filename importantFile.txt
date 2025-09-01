@@ -14,6 +14,7 @@ Step 2: Spatie Package Installation
 		2- php artisan config:clear
 		3- php artisan cache:clear
 		4- composer dump-autoload
+		
 
 	php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 

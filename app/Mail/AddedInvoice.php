@@ -13,9 +13,9 @@ class AddedInvoice extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $invoice_id; 
-    private $url; 
-    
+    private $invoice_id;
+    private $url;
+
     /**
      * Create a new message instance.
      *
@@ -24,8 +24,7 @@ class AddedInvoice extends Mailable
     public function __construct($invoice_id)
     {
         $this->invoice_id = $invoice_id;
-        $url = "http://127.0.0.1:8000/invoices_details/" . $invoice_id;
-        compact('url');
+        $this->url = "http://127.0.0.1:8000/invoices_details/" . $invoice_id;
     }
 
     /**
@@ -49,6 +48,10 @@ class AddedInvoice extends Mailable
     {
         return new Content(
             view: 'emails.added_invoice',
+            with: [
+                'invoice_id' => $this->invoice_id,
+                'url' => $this->url,
+            ]
         );
     }
 

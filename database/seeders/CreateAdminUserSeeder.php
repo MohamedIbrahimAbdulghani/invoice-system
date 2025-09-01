@@ -21,7 +21,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
-            'roles_name' => ['owner'],
+            'roles_name' => ['Admin'],
             'status' => 'مفعل',
         ]);
 

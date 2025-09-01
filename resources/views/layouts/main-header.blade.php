@@ -165,10 +165,10 @@
 											<h6 class="mb-1 text-white dropdown-title tx-15 font-weight-semibold">الاشعارات</h6>
                                             <a href="{{ route('invoices.markAsReadAll') }}" class="float-left my-auto mr-auto badge badge-pill badge-warning">جعل الكل مقروء</a>
 										</div>
-										<p class="pb-0 mb-0 text-white dropdown-title-text subtext op-6 tx-12 "> عدد الاشعارات الغير مقروءة : {{ Auth()->user()->unreadNotifications->count() }} <p>
+										<p class="pb-0 mb-0 text-white dropdown-title-text subtext op-6 tx-12 " id="notificationsCount"> عدد الاشعارات الغير مقروءة : {{ Auth()->user()->unreadNotifications->count() }} <p>
 									</div>
 
-									<div class="main-notification-list Notification-scroll" >
+									<div class="main-notification-list Notification-scroll unReadNotifications" >
                                         {{-- start get notification from database notifications table --}}
                                         @foreach(Auth()->user()->unreadNotifications as $notification)
                                         <a class="p-3 d-flex border-bottom"  href="{{ route('invoices.markAsRead', ['id' => $notification->id, 'invoiceId' => $notification->data['id']]) }}">

@@ -128,6 +128,8 @@ Route::middleware([
 
 Route::get('markAsRead/{id}/{invoiceId}', [InvoicesController::class, 'markAsRead'])->name('invoices.markAsRead');
 
+
+
 Route::get('markAsReadAll', [InvoicesController::class, 'markAsReadAll'])->name('invoices.markAsReadAll');
 
 Route::get('/{page}', [AdminController::class, "index"]);
