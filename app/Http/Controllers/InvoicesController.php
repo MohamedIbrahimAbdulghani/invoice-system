@@ -310,13 +310,14 @@ class InvoicesController extends Controller
 
         return redirect('invoices_details/' . $invoiceId);
     }
-    // this function to read all notifications
+
+    // this function to make read all notifications
     public function markAsReadAll() {
-        $userUnreadNotification = Auth::user()->unreadNotifications;
-        if($userUnreadNotification) {
-            $userUnreadNotification->markAsRead();
-            return back();
+        $userUnReadNotifications = Auth::user()->unreadNotifications;
+        if($userUnReadNotifications) {
+            $userUnReadNotifications->markAsRead();
         }
+        return back();
     }
 
 
